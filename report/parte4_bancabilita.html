@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bancabilità e Sostenibilità Debito - EDILCALCESTRUZZO SRL | SCAN V11</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/print.css" rel="stylesheet" media="print">
+     <style>
+        /* Stili IRP V6/V7 */
+        .irp-visual-section { background: linear-gradient(135deg, var(--white) 0%, #f0f4f8 100%); border-radius: 12px; padding: 2rem; box-shadow: var(--shadow); margin-bottom: 2.5rem; border: 1px solid var(--card-border); }
+        .irp-main-title { color: var(--primary); font-weight: 700; margin-bottom: 1.5rem; border-bottom: 2px solid var(--secondary); padding-bottom: 0.8rem; }
+        .irp-gradient-bar-container { margin-bottom: 0.5rem; }
+        .irp-gradient-bar { height: 20px; border-radius: 10px; overflow: hidden; position: relative; background: linear-gradient(to right, #d62246 0%, #d98c00 35%, #ffc107 55%, #4CAF50 80%, #191970 100%); border: 1px solid #bdc3c7; }
+        .irp-marker { position: absolute; top: -5px; bottom: -5px; width: 6px; background-color: #ffffff; border: 2px solid #343a40; transform: translateX(-50%); box-shadow: 0 0 8px rgba(0,0,0,0.5); z-index: 2; border-radius: 3px; }
+        .irp-marker::after { content: ''; position: absolute; bottom: -7px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 8px solid #343a40; }
+        .irp-scale-labels { font-size: 0.8rem; color: #6c757d; font-weight: 500; padding: 0 5px;}
+        .irp-score-circle { width: 140px; height: 140px; border-radius: 50%; color: white; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 0.5rem auto; box-shadow: 0 8px 20px rgba(0,0,0,0.25); background: var(--warning); border: 6px solid rgba(255, 255, 255, 0.5); }
+        .irp-score-circle.risk-low { background: radial-gradient(circle, #6bc571, #4CAF50); }
+        .irp-score-circle.risk-medium { background: radial-gradient(circle, #ffd54f, #FFC107); }
+        .irp-score-circle.risk-high { background: radial-gradient(circle, #f6685e, #F44336); }
+        .irp-score-value { font-size: 3.5rem; font-weight: 700; line-height: 1; text-shadow: 1px 1px 3px rgba(0,0,0,0.4);}
+        .irp-score-max { font-size: 0.9rem; opacity: 0.8; display: block; line-height: 1;}
+        .irp-category-text { font-size: 1.2rem; font-weight: 600; margin-top: 0.5rem; text-align: center; }
+        .irp-category-text .status-badge { font-size: 0.85rem; vertical-align: middle; margin-left: 8px;}
+        .other-ratings { font-size: 0.85rem; } .other-ratings strong { color: var(--dark); } .other-ratings .badge { margin-left: 5px; }
+        .stable-badge { background-color: var(--warning); color: var(--dark); border-radius: 8px; padding: 3px 8px; font-weight: 600; font-size: 0.8rem;} /* Adjusted name and color */
+        /* Stili Matching Card */
+        .matching-card { margin-bottom: 1rem; border-left-width: 4px; }
+        .matching-card-header { font-weight: 600; display: flex; align-items: center;}
+        .matching-card-header i { margin-right: 8px;}
+        .matching-card.adequate { border-left-color: var(--warning); }
+        .matching-card.good { border-left-color: var(--success); }
+        .matching-card.optimal { border-left-color: var(--primary); } /* Optimal changed to Primary color */
+        .matching-card.excellent { border-left-color: var(--success); } /* Added Excellent style */
+         /* Altri stili V9/V11 */
+         :root {
+            --primary: #191970; --secondary: #4a69bd; --success: #4CAF50;
+            --warning: #FFC107; --danger: #F44336; --info: #0dcaf0;
+            --light: #f8f9fa; --dark: #343a40; --white: #ffffff;
+            --text-primary: #212529; --text-secondary: #6c757d;
+            --card-bg: var(--white); --card-border: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        html, body { height: 100%; overflow-x: hidden; font-family: 'Titillium Web', sans-serif; background-color: #f4f8fb; }
+        body { display: flex; }
+        .sidebar { width: 250px; background-color: var(--primary); color: #e0e0e0; position: fixed; top: 0; bottom: 0; left: 0; z-index: 1031; display: flex; flex-direction: column; box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); transition: width 0.3s ease; overflow-y: auto; }
+        .main-wrapper { margin-left: 250px; width: calc(100% - 250px); display: flex; flex-direction: column; min-height: 100vh; position: relative; padding-top: 70px; }
+        .dashboard-header { background-color: var(--white); padding: 15px 30px; border-bottom: 1px solid var(--card-border); box-shadow: 0 2px 5px rgba(0,0,0,0.05); min-height: 70px; display: flex; align-items: center; justify-content: space-between; position: fixed; top: 0; left: 250px; right: 0; z-index: 1030; }
+        .dashboard-container { padding: 30px; flex-grow: 1; width: 100%; }
+        .footer { background-color: var(--primary); color: rgba(255, 255, 255, 0.7); padding: 15px 30px; font-size: 0.85rem; margin-top: auto; flex-shrink: 0; width: 100%; }
+        .footer img { max-height: 20px; width: auto; filter: brightness(0) invert(1); opacity: 0.8; vertical-align: middle;}
+        .sidebar-header { padding: 10px 20px; margin-bottom: 20px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .sidebar-header img { max-height: 40px; } .sidebar-header h5 { color: var(--white); margin-top: 10px; font-size: 1.1rem; font-weight: 600; }
+        .sidebar-nav { list-style: none; padding: 0; } .sidebar-nav .nav-item { margin: 0; }
+        .sidebar-nav .nav-link { color: #e0e0e0; padding: 12px 20px; display: flex; align-items: center; font-size: 0.95rem; font-weight: 500; border-left: 4px solid transparent; transition: all 0.2s ease; }
+        .sidebar-nav .nav-link:hover { background-color: rgba(255, 255, 255, 0.05); color: var(--white); border-left-color: var(--warning); }
+        .sidebar-nav .nav-link.active { background-color: rgba(255, 255, 255, 0.1); color: var(--white); font-weight: 600; border-left-color: var(--white); }
+        .sidebar-nav .nav-link i { margin-right: 15px; width: 20px; text-align: center; font-size: 1rem; }
+        .sidebar-nav .nav-title { padding: 10px 20px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; }
+        .sidebar-footer { margin-top: auto; padding: 15px 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.9rem; text-align: left; }
+        .section-title { color: var(--primary); font-weight: 600; margin-top: 2.5rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--secondary); font-size: 1.75rem; display: flex; align-items: center; } .section-title i { margin-right: 10px; }
+        .dashboard-card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow); transition: all 0.3s ease; height: 100%; }
+        .dashboard-card:hover { box-shadow: 0 8px 16px rgba(0,0,0,0.1); transform: translateY(-3px); }
+        .card-title-small { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .table { border: 1px solid var(--card-border); margin-bottom: 1rem; } .table thead th { background-color: var(--light); color: var(--primary); font-weight: 600; border-bottom: 2px solid var(--primary); font-size: 0.9rem; white-space: nowrap; } .table-hover tbody tr:hover { background-color: #eef2f7; } .table td, .table th { vertical-align: middle; padding: 0.6rem 0.75rem; font-size: 0.9rem;} .value-highlight { font-weight: 600; color: var(--primary); } .text-end { text-align: right !important;} .text-success { color: var(--success) !important; } .text-danger { color: var(--danger) !important; } .text-warning { color: var(--warning) !important; } .text-secondary { color: var(--text-secondary) !important; }
+        .alert-box { padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid; } .alert-box h5 { margin-bottom: 10px; font-size: 1.1rem; font-weight: 600;} .alert-box ul { padding-left: 20px; margin-bottom: 0; font-size: 0.9rem;} .alert-box.alert-success { background-color: #d1e7dd; border-color: #a3cfbb; color: #0a3622; } .alert-box.alert-warning { background-color: #fff3cd; border-color: #ffda6a; color: #664d03; } .alert-box.alert-danger { background-color: #f8d7da; border-color: #f1aeb5; color: #58151c; } .alert-box.alert-info { background-color: #cff4fc; border-color: #9eeaf9; color: #055160; }
+        .status-badge { font-size: .75em; font-weight: 700; line-height: 1; padding: .35em .65em; border-radius: .375rem; color: white; display: inline-block; } .status-badge.bg-success { background-color: var(--success) !important; } .status-badge.bg-warning { background-color: var(--warning) !important; color: var(--dark) !important;} .status-badge.bg-danger { background-color: var(--danger) !important; } .status-badge.bg-info { background-color: var(--info) !important; color: var(--dark) !important;}
+        .chart-container { height: 300px; margin-bottom: 20px; background-color: var(--white); padding: 15px; border-radius: 8px; border: 1px solid var(--card-border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: relative; }
+        .icon-circle { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; color: white; margin-right: 12px; font-size: 0.9rem; flex-shrink: 0; }
+        .bg-icon-success { background-color: var(--success); } .bg-icon-warning { background-color: var(--warning); } .bg-icon-danger { background-color: var(--danger); } .bg-icon-info { background-color: #4f6d7a; } .bg-icon-primary { background-color: var(--primary); } .bg-icon-secondary { background-color: var(--secondary); }
+        @media (max-width: 991.98px) { .sidebar { width: 0; border: none; box-shadow: none;} .main-wrapper { margin-left: 0; width: 100%; padding-top: 56px; } .dashboard-header { left: 0; width: 100%; min-height: 56px; padding: 5px 15px;} .header-title h5 { font-size: 1rem;} .header-title p { font-size: 0.75rem;} .dashboard-container { padding: 15px;} .footer { padding: 10px 15px;} }
+        @media print { body { display: block; } .main-wrapper { margin-left: 0; width: 100%; padding-top: 0; } .no-print { display: none !important; } .report-section { page-break-inside: avoid; } }
+     </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+    <aside class="sidebar no-print">
+        <div class="sidebar-header"> <img src="../assets/img/logo_scan.png" alt="SCAN Logo" style="max-height: 40px;"> <h5>EDILCALCESTRUZZO SRL</h5> </div>
+        <ul class="sidebar-nav flex-grow-1">
+            <li class="nav-item"> <a class="nav-link" href="../dashboard_v2.html"> <i class="fas fa-tachometer-alt fa-fw"></i> Dashboard </a> </li>
+            <li class="nav-title">Analisi Dettagliata</li>
+            <li class="nav-item"> <a class="nav-link" href="parte1_sintesi.html"> <i class="fas fa-file-alt fa-fw"></i> Sintesi e Profilo </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte2_economico.html"> <i class="fas fa-balance-scale fa-fw"></i> Analisi Economica </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte3_patrimoniale.html"> <i class="fas fa-landmark fa-fw"></i> Analisi Patrimoniale </a> </li>
+            <li class="nav-item"> <a class="nav-link active" href="parte4_bancabilita.html"> <i class="fas fa-university fa-fw"></i> Bancabilità </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte5_circolante-flussi.html"> <i class="fas fa-sync-alt fa-fw"></i> Circolante e Flussi </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte6_rischi-raccomandazioni.html"> <i class="fas fa-exclamation-triangle fa-fw"></i> Rischi e Azioni </a> </li>
+            <li class="nav-title">Approfondimenti</li>
+            <li class="nav-item"> <a class="nav-link" href="irp_dettaglio.html"> <i class="fas fa-shield-alt fa-fw"></i> Dettaglio IRP </a> </li>
+        </ul>
+        <div class="sidebar-footer"> <small>SCAN360 © <span id="currentYearSidebar"></span> Kitzanos</small> </div>
+    </aside>
+
+
+    <!-- Contenuto Principale Wrapper -->
+    <div class="main-wrapper">
+        <!-- Header Orizzontale -->
+        <header class="dashboard-header no-print">
+            <div class="header-title">
+                <h5 class="mb-0">Report Dettagliato: Bancabilità e Sostenibilità Debito</h5>
+                <p class="mb-0">EDILCALCESTRUZZO SRL | <span class="report-date">11 Agosto 2025</span></p>
+            </div>
+            <div class="header-controls d-flex align-items-center">
+                <span id="irp-header-badge" class="badge me-3"></span> <!-- Badge IRP -->
+                <button class="btn btn-sm btn-outline-secondary me-2 print-button" onclick="printDocument()"> <i class="fas fa-print"></i> Stampa </button>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-light border dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fas fa-user-circle me-1"></i> EDILCALCESTRUZZO SRL </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton"> <li><button class="dropdown-item" type="button" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</button></li> </ul>
+                </div>
+            </div>
+        </header>
+        <div class="container d-none d-print-block mt-4 mb-4">
+            <h1 class="text-center mb-0"><span class="company-name">EDILCALCESTRUZZO SRL</span></h1>
+            <p class="text-center mb-0">Report Dettagliato: Bancabilità e Sostenibilità Debito | <span class="report-date">11 Agosto 2025</span></p>
+            <hr>
+        </div>
+
+        <!-- Area Contenuto Specifico del Report -->
+        <div class="dashboard-container">
+
+            <!-- ================================================================ -->
+            <!-- CONTENUTO SPECIFICO PARTE 4 - V11 CON IRP e SINTESI FUSE - Updated for EDILCALCESTRUZZO SRL -->
+            <!-- ================================================================ -->
+
+            <h2 class="section-title" id="bankability"><i class="fas fa-university me-2"></i>4. BANCABILITÀ E SOSTENIBILITÀ DEL DEBITO</h2>
+
+            <!-- Sezione IRP Prominente -->
+           <section class="irp-visual-section risk-medium report-section" id="irp-summary-section">
+                <div class="row align-items-center">
+                    <div class="col-md-4 text-center mb-4 mb-md-0">
+                        <h6 class="card-title-small mb-3"><i class="fas fa-shield-alt me-1"></i> Indice Rischio Ponderato</h6>
+                        <div class="irp-score-circle risk-medium"> <span class="irp-score-value">64,28</span> <span class="irp-score-max">/ 100</span> </div>
+                        <div class="irp-category-text text-warning mt-2"> Rischio Medio <span class="status-badge bg-warning">C</span> </div>
+                        <a href="irp_dettaglio.html" class="btn btn-sm btn-outline-primary mt-3 btn-pill">Vedi Dettaglio IRP</a>
+                    </div>
+                    <div class="col-md-8">
+                        <h4 class="mb-3 fw-bold" style="color: var(--primary);">Valutazione Generale</h4>
+                        <p class="mb-3">Profilo di rischio <strong>medio con significative contraddizioni interne</strong>. L'azienda presenta un profilo di rischio medio (IRP 64,28 - categoria C) con una struttura finanziaria caratterizzata da elementi contrastanti. La buona capacità di generazione di cassa operativa (47,35% dei ricavi) e il miglioramento dell'EBITDA (+453,42%) sono controbilanciati da criticità nella liquidità (0,64% dei ricavi) e nella copertura delle immobilizzazioni (0,62).</p>
+                        <a href="#crisis-framework" class="btn btn-warning btn-sm mb-3 btn-pill"> <i class="fas fa-exclamation-triangle me-1"></i> Profilo di bancabilità con criticità </a>
+                        <div class="other-ratings border-top pt-3 mt-3">
+                            <h6 class="card-title-small mb-2">Altri Indicatori di Supporto:</h6>
+                            <ul class="list-unstyled mb-0 row gx-3 gy-2">
+                                <li class="col-sm-6 d-flex align-items-center"><span class="icon-circle icon-circle-sm bg-icon-danger me-2"><i class="fas fa-chart-bar"></i></span><strong>Leanus Score:</strong> 0,52 <span class="badge bg-danger ms-1">Negativo</span></li>
+                                <li class="col-sm-6 d-flex align-items-center"><span class="icon-circle icon-circle-sm bg-icon-warning me-2"><i class="fas fa-building"></i></span><strong>Business Cat.:</strong> <span class="stable-badge ms-1">RUNNERS</span></li>
+                                <li class="col-sm-6 d-flex align-items-center"><span class="icon-circle icon-circle-sm bg-icon-success me-2"><i class="fas fa-university"></i></span><strong>Rating MCC:</strong> 2,87% <span class="badge bg-success ms-1">Fascia 3</span></li>
+                                <li class="col-sm-6 d-flex align-items-center"><span class="icon-circle icon-circle-sm bg-icon-warning me-2"><i class="fas fa-calculator"></i></span><strong>Z-Score:</strong> 2,39 <span class="badge bg-warning ms-1">Zona grigia</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sezione 4.1 Valutazione Sintetica della Bancabilità -->
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">4.1 Valutazione Sintetica della Bancabilità e Sostenibilità del Debito</h5></div>
+                <div class="card-body">
+                    <p>L'analisi della bancabilità di EDILCALCESTRUZZO SRL mostra un quadro complessivamente <strong>caratterizzato da significative contraddizioni interne</strong>, con elementi di forza e criticità che necessitano di un'attenta valutazione. La società, attiva dal 2011 nel settore "Estrazione di ghiaia, sabbia, argilla e caolino", si configura come una media impresa (PMI) con un modello di business di tipo industriale.</p>
+                    
+                    <p>La società è classificata nella categoria Leanus® <strong>RUNNERS</strong> - "L'azienda cresce ad elevati ritmi ma sembra non supportare tale crescita con un uguale incremento di efficienza patrimoniale", con i seguenti indicatori chiave:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Indicatore</th>
+                                    <th class="text-end">Valore</th>
+                                    <th>Valutazione</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Leanus® Score</td>
+                                    <td class="text-end">0,52 ("5 - Negativo")</td>
+                                    <td>Elevata rischiosità</td>
+                                </tr>
+                                <tr>
+                                    <td>Probabilità di Default MCC</td>
+                                    <td class="text-end">2,87%</td>
+                                    <td>Fascia "3" - Rischio medio-basso</td>
+                                </tr>
+                                <tr>
+                                    <td>Z-Score di Altman</td>
+                                    <td class="text-end">2,39</td>
+                                    <td>Zona grigia (moderato rischio)</td>
+                                </tr>
+                                <tr>
+                                    <td>Debiti Finanziari</td>
+                                    <td class="text-end">€1.217.809</td>
+                                    <td>7,2% del passivo</td>
+                                </tr>
+                                <tr>
+                                    <td>PFN</td>
+                                    <td class="text-end">€1.169.095</td>
+                                    <td>PFN/EBITDA: 1,79</td>
+                                </tr>
+                                <tr>
+                                    <td>DSCR</td>
+                                    <td class="text-end">6,397</td>
+                                    <td>Eccellente</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h6>Punti di forza:</h6>
+                            <ul>
+                                <li>Significativo incremento del fatturato (+9,11%)</li>
+                                <li>Marginalità operativa in forte ripresa (EBITDA margin 8,66%)</li>
+                                <li>PFN/EBITDA sostenibile (1,79)</li>
+                                <li>Ottima solidità patrimoniale (D/E: 0,20)</li>
+                                <li>Straordinaria capacità di generazione di cassa (Cash Flow Operativo/Ricavi: 47,35%)</li>
+                                <li>Eccellente DSCR (6,397)</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Criticità rilevanti:</h6>
+                            <ul>
+                                <li>Liquidità gravemente insufficiente (0,64% dei ricavi)</li>
+                                <li>Copertura immobilizzazioni non adeguata (0,62)</li>
+                                <li>Squilibrio strutturale nella gestione del circolante (220 giorni)</li>
+                                <li>Tempi di incasso estremamente dilatati (272 giorni)</li>
+                                <li>Copertura degli oneri finanziari appena sufficiente (EBIT/Oneri finanziari: 1,01)</li>
+                                <li>Oneri finanziari elevati (18,82% dei debiti finanziari medi)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <p class="mt-3">L'azienda presenta quindi un profilo di interesse moderato per gli istituti di credito, grazie alla capacità di generare flussi di cassa operativi significativi e al miglioramento della marginalità operativa. Tuttavia, le criticità relative alla struttura patrimoniale e alla gestione della liquidità rappresentano elementi di attenzione che potrebbero condizionare il rating creditizio.</p>
+                </div>
+            </div>
+
+            <!-- Sezione Indicatori Sostenibilità Debito -->
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">4.2 Indicatori di Sostenibilità del Debito</h5></div>
+                <div class="card-body">
+                    <p>Gli indicatori di sostenibilità del debito presentano una situazione complessivamente positiva, con significativi miglioramenti rispetto agli esercizi precedenti:</p>
+                    <div class="row">
+                        <div class="col-lg-7 mb-3 mb-lg-0">
+                            <h6>Tabella 4.1: Indicatori Sostenibilità Debito</h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-striped table-hover">
+                                    <thead class="table-light"><tr><th>Indicatore</th><th class="text-end">Valore 12/2024</th><th class="text-end">Valore 12/2023</th><th>Valutazione</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>PFN/EBITDA</td><td class="text-end">1,79</td><td class="text-end">NOK</td><td><span class="status-badge bg-success">Buono</span></td></tr>
+                                        <tr><td>Leva Finanziaria (D/E)</td><td class="text-end">0,20</td><td class="text-end">0,28</td><td><span class="status-badge bg-success">Ottima</span></td></tr>
+                                        <tr><td>EBIT/Oneri Finanziari</td><td class="text-end">1,01</td><td class="text-end">NOK</td><td><span class="status-badge bg-warning">Appena sufficiente</span></td></tr>
+                                        <tr><td>DSCR</td><td class="text-end">6,397</td><td class="text-end">NOK</td><td><span class="status-badge bg-success">Eccellente</span></td></tr>
+                                        <tr><td>Cash Flow Operativo/Debiti Finanziari</td><td class="text-end">293,90%</td><td class="text-end">11,24%</td><td><span class="status-badge bg-success">Eccellente</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <h6 class="text-center small">Grafico 4.1: Indicatori Sostenibilità (Radar)</h6>
+                            <div class="chart-container" style="height: 300px;"> <canvas id="debtSustainabilityChart"></canvas> </div>
+                        </div>
+                    </div>
+                    <h6 class="mt-4">Interpretazione Indicatori Sostenibilità:</h6>
+                    <ul class="small">
+                        <li>Il rapporto <strong>PFN/EBITDA</strong> di 1,79 indica che l'azienda sarebbe in grado di azzerare la propria posizione finanziaria netta in meno di 2 anni utilizzando il solo EBITDA. Tale valore è ampiamente al di sotto della soglia di attenzione (3,0-4,0x), confermando una buona capacità di rimborso.</li>
+                        <li>La <strong>Leva Finanziaria (D/E)</strong>, pari a 0,20, evidenzia un ricorso all'indebitamento estremamente contenuto rispetto al capitale proprio, a conferma di una solida struttura patrimoniale dal punto di vista del leverage.</li>
+                        <li>La copertura degli <strong>oneri finanziari</strong> è appena sufficiente, con un EBIT 1,01 volte superiore agli stessi, indicando una capacità marginale di sostenere il costo del debito attraverso la redditività operativa.</li>
+                        <li>Il <strong>DSCR</strong> di 6,397 evidenzia un'eccellente capacità di servizio del debito, ampiamente superiore alla soglia minima richiesta (1,2).</li>
+                        <li>Il <strong>Cash Flow Operativo</strong> del periodo (€3.579.187) rappresenta il 293,90% dei Debiti Finanziari totali, evidenziando la straordinaria capacità dell'azienda di estinguere teoricamente l'intero debito finanziario in meno di 4 mesi con i soli flussi di cassa operativi.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Capacità Indebitamento -->
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">4.3 Capacità di Indebitamento Incrementale</h5></div>
+                <div class="card-body">
+                    <p>Secondo la valutazione Leanus, la capacità teorica di indebitamento incrementale sostenibile per EDILCALCESTRUZZO SRL è stimata in <strong>€0</strong>.</p>
+                    <div class="row align-items-center">
+                        <div class="col-md-5 mb-3 mb-md-0 text-center">
+                            <div class="alert-box alert-warning p-3">
+                                <div class="icon-circle bg-icon-warning mx-auto mb-2"><i class="fas fa-exclamation"></i></div>
+                                <h6 class="mb-1">Capacità Incrementale Limitata:</h6>
+                                <p class="fs-3 fw-bold mb-1">€ 0</p>
+                                <p class="small text-muted mb-0">Debito aggiuntivo teorico</p>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <h6>Fattori Chiave:</h6>
+                            <div class="row small">
+                                <div class="col-6"><strong>Limitazioni:</strong>
+                                    <ul class="fa-ul ms-3">
+                                        <li><span class="fa-li text-danger"><i class="fas fa-times"></i></span>Storicità EBITDA positivo (solo un esercizio)</li>
+                                        <li><span class="fa-li text-danger"><i class="fas fa-times"></i></span>Liquidità criticamente bassa (0,64% dei ricavi)</li>
+                                        <li><span class="fa-li text-warning"><i class="fas fa-exclamation"></i></span>Copertura immobilizzazioni insufficiente (0,62)</li>
+                                        <li><span class="fa-li text-warning"><i class="fas fa-exclamation"></i></span>EBIT/Oneri finanziari appena sufficiente (1,01)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-6"><strong>Elementi positivi:</strong>
+                                    <ul class="fa-ul ms-3">
+                                        <li><span class="fa-li text-success"><i class="fas fa-check"></i></span>PFN/EBITDA sostenibile (1,79)</li>
+                                        <li><span class="fa-li text-success"><i class="fas fa-check"></i></span>Leva finanziaria contenuta (0,20)</li>
+                                        <li><span class="fa-li text-success"><i class="fas fa-check"></i></span>Eccellente generazione di cassa (47,35% dei ricavi)</li>
+                                        <li><span class="fa-li text-success"><i class="fas fa-check"></i></span>DSCR molto positivo (6,397)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="small mt-3">Questa valutazione estremamente prudenziale appare in contrasto con alcuni indicatori di performance, in particolare il miglioramento significativo del rapporto PFN/EBITDA (1,79) e l'eccellente capacità di generazione di cassa operativa.</p>
+                    <p class="small">Applicando un approccio più analitico e assumendo un rapporto PFN/EBITDA target massimo di 3,0x (prudenziale rispetto al benchmark di settore), la capacità teorica di indebitamento incrementale potrebbe essere stimata in circa <strong>€794.642</strong>.</p>
+                </div>
+            </div>
+
+            <!-- DSCR -->
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">4.4 DSCR (Debt Service Coverage Ratio)</h5></div>
+                <div class="card-body">
+                    <p>Il DSCR (Debt Service Coverage Ratio) rappresenta l'indicatore principe per la valutazione della sostenibilità del debito secondo il framework normativo del CCII (Codice della Crisi d'Impresa e dell'Insolvenza).</p>
+                    <div class="table-responsive mb-3">
+                        <table class="table table-sm table-striped table-hover">
+                            <thead class="table-light">
+                                <tr><th>Parametro DSCR</th><th class="text-end">Valore</th><th>Valutazione</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>DSCR calcolato</td><td class="text-end">6,397</td><td><span class="status-badge bg-success">Eccellente</span></td></tr>
+                                <tr><td>Soglia bancaria minima</td><td class="text-end">1,2</td><td>Ampiamente superata</td></tr>
+                                <tr><td>Gap rispetto alla soglia</td><td class="text-end">+433,1%</td><td>Significativo margine di sicurezza</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="alert-box alert-success">
+                        <h5>Analisi DSCR:</h5>
+                        <p>Il valore del DSCR pari a 6,397 è ampiamente superiore alla soglia minima richiesta dal sistema bancario (1,2) e alla soglia di allerta prevista dal CCII (1,0), confermando l'eccellente capacità dell'azienda di onorare i propri impegni finanziari.</p>
+                        <p>La formula utilizzata per il calcolo del DSCR è: DSCR = Cash Flow Operativo / (Quota capitale + Quota interessi)</p>
+                    </div>
+                    <p>Stress test sul DSCR:</p>
+                    <ul>
+                        <li><strong>Riduzione Cash Flow Operativo del 20%:</strong> DSCR = 5,12 (ampiamente sostenibile)</li>
+                        <li><strong>Incremento oneri finanziari di 200 bp:</strong> DSCR = 6,13 (ampiamente sostenibile)</li>
+                        <li><strong>Scenario combinato:</strong> DSCR = 4,93 (ampiamente sostenibile)</li>
+                        <li><strong>Riduzione Cash Flow Operativo dell'80%:</strong> DSCR = 1,28 (sostenibile con margine ridotto)</li>
+                    </ul>
+                    <p>Anche in scenari di significativo stress (riduzione dell'80% del cash flow operativo), l'azienda manterrebbe un DSCR superiore a 1,2, confermando l'elevata resilienza della struttura finanziaria rispetto alla capacità di servizio del debito.</p>
+                </div>
+            </div>
+
+            <!-- PFN/EBITDA -->
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">4.5 PFN/EBITDA</h5></div>
+                <div class="card-body">
+                    <p>Il rapporto tra Posizione Finanziaria Netta ed EBITDA, principale indicatore sintetico della sostenibilità del debito nel medio-lungo termine, risulta per EDILCALCESTRUZZO SRL pari a <strong>1,79x</strong> al 31/12/2024.</p>
+                    
+                    <div class="table-responsive mb-3">
+                        <table class="table table-sm table-striped table-hover">
+                            <thead class="table-light">
+                                <tr><th>Componente</th><th class="text-end">2022</th><th class="text-end">2023</th><th class="text-end">2024</th><th>Variazione 2023-2024</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>PFN (€)</td><td class="text-end">1.673.019</td><td class="text-end">1.646.045</td><td class="text-end">1.169.095</td><td>-29,00%</td></tr>
+                                <tr><td>EBITDA (€)</td><td class="text-end">-166.822</td><td class="text-end">-185.211</td><td class="text-end">654.579</td><td>+453,42%</td></tr>
+                                <tr><td>PFN/EBITDA</td><td class="text-end">NOK</td><td class="text-end">NOK</td><td class="text-end">1,79</td><td>N/A</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <p>Il valore di 1,79x nel 2024 è determinato da due fattori concomitanti:</p>
+                    <ul>
+                        <li>La riduzione della PFN (-29,00%)</li>
+                        <li>Il drastico miglioramento dell'EBITDA, che diventa positivo dopo due esercizi di valori negativi</li>
+                    </ul>
+                    
+                    <p>Questo valore è molto contenuto e ben al di sotto della soglia di attenzione (3,0-4,0x), confermando l'eccellente capacità dell'azienda di ripagare il debito finanziario con la propria generazione di margini operativi. Tuttavia, la limitata serie storica di EBITDA positivo suggerisce cautela nell'interpretazione di questo indicatore.</p>
+                    
+                    <h6 class="mt-3">Benchmark settoriale:</h6>
+                    <p>Sebbene non siano disponibili dati specifici di benchmark settoriale per il rapporto PFN/EBITDA, la pratica bancaria considera generalmente:</p>
+                    <ul>
+                        <li>Valori < 3,0x: Ottimi</li>
+                        <li>Valori tra 3,0x e 4,0x: Buoni</li>
+                        <li>Valori tra 4,0x e 5,0x: Accettabili</li>
+                        <li>Valori > 5,0x: Critici</li>
+                    </ul>
+                    
+                    <p>Con un valore di 1,79x, EDILCALCESTRUZZO SRL si posiziona nella fascia di eccellenza, evidenziando un profilo di rischio creditizio contenuto relativamente a questo specifico parametro.</p>
+                </div>
+            </div>
+
+            <!-- Matching Finanziario -->
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">4.6 Matching Finanziario (Cash Flow, Amounts, Duration, Quality)</h5></div>
+                <div class="card-body">
+                    <p>Seguendo il framework metodologico del Manuale Kitzanos, è fondamentale valutare il matching finanziario secondo le quattro dimensioni chiave: Cash Flow, Amounts, Duration e Quality.</p>
+                    
+                    <div class="row gy-3">
+                        <div class="col-md-6">
+                            <div class="dashboard-card matching-card excellent h-100">
+                                <h6 class="matching-card-header"><i class="fas fa-coins text-success"></i> Cash Flow Matching</h6>
+                                <p class="small mb-1">L'analisi del Cash Flow Matching valuta l'allineamento tra la capacità di generazione di cassa dell'impresa e gli impegni per il servizio del debito:</p>
+                                <ul class="small list-unstyled">
+                                    <li><strong>Cash Flow Operativo annuo:</strong> €3.579.187</li>
+                                    <li><strong>Servizio del debito stimato:</strong> €559.294</li>
+                                    <li><strong>DSCR:</strong> 6,40</li>
+                                </ul>
+                                <p class="small">EDILCALCESTRUZZO SRL presenta un eccellente Cash Flow Matching, con una capacità di generazione di cassa operativa che supera di oltre 6 volte gli impegni per il servizio del debito.</p>
+                                <p class="small fw-bold mb-0">Valutazione: <span class="status-badge bg-success">Eccellente</span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="dashboard-card matching-card excellent h-100">
+                                <h6 class="matching-card-header"><i class="fas fa-layer-group text-success"></i> Amounts Matching</h6>
+                                <p class="small mb-1">L'analisi dell'Amounts Matching verifica che il debito a lungo termine non superi l'ammontare degli investimenti a lungo termine:</p>
+                                <ul class="small list-unstyled">
+                                    <li><strong>Valore immobilizzazioni:</strong> €10.003.357</li>
+                                    <li><strong>Debito a lungo termine:</strong> €154.351</li>
+                                    <li><strong>Differenza:</strong> €9.849.006</li>
+                                </ul>
+                                <p class="small">EDILCALCESTRUZZO SRL presenta un ottimo Amounts Matching, con un valore delle immobilizzazioni ampiamente superiore al debito a lungo termine.</p>
+                                <p class="small fw-bold mb-0">Valutazione: <span class="status-badge bg-success">Ottimo</span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="dashboard-card matching-card adequate h-100">
+                                <h6 class="matching-card-header"><i class="fas fa-hourglass-half text-warning"></i> Duration Matching</h6>
+                                <p class="small mb-1">L'analisi del Duration Matching verifica l'allineamento tra la durata del finanziamento e la vita utile degli asset finanziati:</p>
+                                <ul class="small list-unstyled">
+                                    <li><strong>Struttura del debito:</strong> 87,3% a breve termine</li>
+                                    <li><strong>Immobilizzazioni:</strong> 58,9% dell'attivo</li>
+                                </ul>
+                                <p class="small">Questa configurazione suggerisce un potenziale disallineamento tra la struttura temporale delle fonti (prevalentemente a breve) e degli impieghi (prevalentemente a lungo), che potrebbe generare tensioni finanziarie.</p>
+                                <p class="small fw-bold mb-0">Valutazione: <span class="status-badge bg-warning">Subottimale</span></p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="dashboard-card matching-card adequate h-100">
+                                <h6 class="matching-card-header"><i class="fas fa-gem text-warning"></i> Quality Matching</h6>
+                                <p class="small mb-1">L'analisi del Quality Matching verifica l'appropriatezza della forma tecnica del finanziamento rispetto alla natura dell'attivo finanziato:</p>
+                                <ul class="small list-unstyled">
+                                    <li><strong>Composizione dell'attivo:</strong> Prevalentemente immobilizzazioni materiali</li>
+                                    <li><strong>Forme tecniche:</strong> Prevalenza debito a breve termine (87,3%)</li>
+                                    <li><strong>Costo del debito:</strong> 18,82% (anomalo)</li>
+                                </ul>
+                                <p class="small">L'attuale concentrazione del debito nel breve termine rappresenta un elemento di potenziale squilibrio che potrebbe essere ottimizzato attraverso una rimodulazione della struttura finanziaria.</p>
+                                <p class="small fw-bold mb-0">Valutazione: <span class="status-badge bg-warning">Da ottimizzare</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analisi della Capacità di Indebitamento Sostenibile -->
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">4.7 Analisi della Capacità di Indebitamento Sostenibile</h5></div>
+                <div class="card-body">
+                    <p>La capacità di indebitamento sostenibile dipende dalla stabilità e prevedibilità dei flussi di cassa operativi. Considerando un approccio prudente, che limita il debito finanziario a un livello tale che il rapporto PFN/EBITDA non superi 3,0x, EDILCALCESTRUZZO SRL presenta una capacità di indebitamento incrementale limitata ma positiva.</p>
+                    
+                    <div class="table-responsive mb-3">
+                        <table class="table table-sm table-striped table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Scenario</th>
+                                    <th>Formula</th>
+                                    <th class="text-end">Valore (€)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Capacità teorica (PFN/EBITDA = 3,0x)</td>
+                                    <td>3,0 × EBITDA - PFN attuale</td>
+                                    <td class="text-end">794.642</td>
+                                </tr>
+                                <tr>
+                                    <td>Capacità teorica (PFN/EBITDA = 2,5x)</td>
+                                    <td>2,5 × EBITDA - PFN attuale</td>
+                                    <td class="text-end">467.353</td>
+                                </tr>
+                                <tr>
+                                    <td>Capacità incrementale sostenibile</td>
+                                    <td>Capacità teorica - Debiti finanziari attuali</td>
+                                    <td class="text-end">-423.167</td>
+                                </tr>
+                                <tr>
+                                    <td>Fido consigliato a breve termine (Leanus)</td>
+                                    <td>-</td>
+                                    <td class="text-end">0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <p>La capacità di indebitamento incrementale sostenibile stimata da Leanus (€0) appare coerente con un approccio prudenziale che considera:</p>
+                    <ol>
+                        <li>La limitata storicità dell'EBITDA positivo</li>
+                        <li>La scarsa liquidità disponibile</li>
+                        <li>Gli squilibri nella struttura patrimoniale</li>
+                    </ol>
+                    
+                    <h6>Proiezioni future della capacità di indebitamento:</h6>
+                    <p>Basandosi sul Business Plan Inerziale elaborato da Leanus per il periodo 2025-2028, si può stimare l'evoluzione della capacità di indebitamento sostenibile:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-sm table-striped table-hover">
+                            <thead class="table-light">
+                                <tr><th>Anno</th><th class="text-end">PFN/EBITDA previsto</th><th class="text-end">DSCR previsto</th><th class="text-end">Capacità di indebitamento incrementale (€)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>2025</td><td class="text-end">1,92</td><td class="text-end">4,23</td><td class="text-end">705.875</td></tr>
+                                <tr><td>2026</td><td class="text-end">1,80</td><td class="text-end">4,72</td><td class="text-end">818.064</td></tr>
+                                <tr><td>2027</td><td class="text-end">1,74</td><td class="text-end">4,53</td><td class="text-end">853.234</td></tr>
+                                <tr><td>2028</td><td class="text-end">1,66</td><td class="text-end">5,41</td><td class="text-end">906.345</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <p class="small mt-3">Le proiezioni evidenziano un progressivo miglioramento della posizione finanziaria, con una graduale riduzione del rapporto PFN/EBITDA e un conseguente incremento della capacità di assunzione di nuovo debito. Questo scenario conferma un potenziale miglioramento della bancabilità di EDILCALCESTRUZZO SRL nel medio periodo.</p>
+                </div>
+            </div>
+
+            <!-- KPI Crisi -->
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">4.8 KPI della Crisi d'Impresa (CCII)</h5></div>
+                <div class="card-body">
+                    <p>Secondo quanto riportato nel report Leanus, EDILCALCESTRUZZO SRL risulta in linea con 3 su 6 indicatori della crisi calcolati sullo schema civilistico, evidenziando potenziali aree di vulnerabilità secondo il framework normativo del Codice della Crisi d'Impresa e dell'Insolvenza (CCII).</p>
+                    
+                    <div class="table-responsive mb-3">
+                        <table class="table table-sm table-striped table-hover">
+                            <thead class="table-light">
+                                <tr><th>Indicatore</th><th>Formula</th><th class="text-end">Valore EDILCALCESTRUZZO</th><th>Soglia di Allarme</th><th>Valutazione</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Oneri Finanziari/Ricavi</td><td>Tot. Oneri Fin./Ricavi</td><td class="text-end">3,61%</td><td>> 3,0%</td><td><span class="status-badge bg-danger">Non in linea</span></td></tr>
+                                <tr><td>Patrimonio Netto/Debiti Totali</td><td>PN/(Tot. Debiti + Ratei)</td><td class="text-end">57,11%</td><td>< 7,6%</td><td><span class="status-badge bg-success">Ampiamente in linea</span></td></tr>
+                                <tr><td>Attività a Breve/Passività a Breve</td><td>Attivo Circolante/Passivo Corrente</td><td class="text-end">83,65%</td><td>< 93,7%</td><td><span class="status-badge bg-danger">Non in linea</span></td></tr>
+                                <tr><td>Cash Flow/Totale Attivo</td><td>(Utile + Amm.ti + Acc.ti)/Tot. Attivo</td><td class="text-end">2,31%</td><td>< 0,5%</td><td><span class="status-badge bg-success">In linea</span></td></tr>
+                                <tr><td>Indebitamento Prev. e Trib./Totale Attivo</td><td>(Debiti prev. + Debiti trib.)/Tot. Attivo</td><td class="text-end">5,87%</td><td>> 4,9%</td><td><span class="status-badge bg-danger">Non in linea</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="alert-box alert-warning">
+                        <h5>Risultato complessivo: 3/6 indicatori in linea</h5>
+                        <p>L'analisi conferma la presenza di criticità rispetto agli indicatori normativi, in particolare:</p>
+                        <ul>
+                            <li>L'incidenza degli oneri finanziari sui ricavi (3,61%) supera la soglia di allarme (3,0%)</li>
+                            <li>La liquidità a breve termine (83,65%) è inferiore alla soglia minima richiesta (93,7%)</li>
+                            <li>L'incidenza dei debiti previdenziali e tributari (5,87%) supera la soglia di allarme (4,9%)</li>
+                        </ul>
+                        <p>Questi elementi configurano potenziali segnali di allerta che potrebbero richiedere l'attivazione delle procedure previste dal CCII, nonostante i significativi miglioramenti registrati nell'ultimo esercizio.</p>
+                    </div>
+                    
+                    <h6 class="mt-3">Early Warning e segnali d'allarme:</h6>
+                    <p>Il report Leanus evidenzia diversi segnali di allerta per EDILCALCESTRUZZO SRL:</p>
+                    <ol>
+                        <li>Score Leanus "5 - Negativo" con valore 0,52</li>
+                        <li>Liquidità inferiore al Minimum Cash (0,64% dei ricavi)</li>
+                        <li>Oneri Finanziari elevati (18,82% dei Debiti Finanziari Medi)</li>
+                        <li>Tempi di incasso dai clienti anomali (272 giorni)</li>
+                        <li>Ciclo del circolante eccessivo (220 giorni)</li>
+                    </ol>
+                    <p>Questi elementi, pur compensati dal significativo miglioramento della redditività operativa e della generazione di cassa, configurano un quadro di rischio medio che richiede un attento monitoraggio e l'implementazione di azioni correttive mirate.</p>
+                </div>
+            </div>
+
+            <!-- Raccomandazioni -->
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">4.9 Raccomandazioni per la Strategia Finanziaria</h5></div>
+                <div class="card-body">
+                    <div class="table-responsive mb-3">
+                        <table class="table table-sm table-striped table-hover">
+                            <thead class="table-light">
+                                <tr><th>Area</th><th>Situazione Attuale</th><th>Azione Suggerita</th><th>Effetti Previsti</th><th>Impatto Quantitativo/Costo</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Struttura Finanziaria</td>
+                                    <td>Debito concentrato nel breve termine (87,3% del totale)</td>
+                                    <td>Riequilibrare la struttura del debito incrementando la componente a M/L termine</td>
+                                    <td>Miglioramento Duration Matching, riduzione rischio rifinanziamento</td>
+                                    <td>Incremento costo medio: +0,5-1,0%<br>Beneficio: stabilizzazione finanziaria</td>
+                                </tr>
+                                <tr>
+                                    <td>Liquidità</td>
+                                    <td>Criticamente bassa (0,64% dei ricavi)</td>
+                                    <td>Implementare sistema strutturato di cash management e costituire riserva di liquidità</td>
+                                    <td>Miglioramento indici di liquidità, riduzione rischio crisi di liquidità</td>
+                                    <td>Target minimo: €250.000-300.000 (3-4% dei ricavi)</td>
+                                </tr>
+                                <tr>
+                                    <td>Capitale Circolante</td>
+                                    <td>Ciclo del circolante: 220 giorni</td>
+                                    <td>Ottimizzare gestione crediti commerciali, rivedere politiche di incasso</td>
+                                    <td>Riduzione DSO, miglioramento indici CCII</td>
+                                    <td>Target DSO: 180-200 giorni<br>Impatto su CCN: -€600.000-800.000</td>
+                                </tr>
+                                <tr>
+                                    <td>Costo del Debito</td>
+                                    <td>Oneri finanziari: 18,82% dei debiti</td>
+                                    <td>Rinegoziare condizioni di finanziamento, diversificare fonti</td>
+                                    <td>Riduzione incidenza oneri finanziari, miglioramento EBIT/OF</td>
+                                    <td>Target: 8-10%<br>Risparmio: €100.000-120.000/anno</td>
+                                </tr>
+                                <tr>
+                                    <td>Copertura Immobilizzazioni</td>
+                                    <td>Rapporto PN/Immob.: 0,62</td>
+                                    <td>Rafforzamento patrimoniale tramite capitalizzazione utili o incremento capitale</td>
+                                    <td>Miglioramento equilibrio patrimoniale</td>
+                                    <td>Target ratio: 0,75-0,80<br>Fabbisogno: €1.300.000-1.800.000</td>
+                                </tr>
+                                <tr>
+                                    <td>Compliance Normativa</td>
+                                    <td>3/6 indicatori CCII in linea</td>
+                                    <td>Implementare sistema strutturato di monitoraggio KPI e adeguati assetti</td>
+                                    <td>Prevenzione crisi e miglioramento rating</td>
+                                    <td>Costo implementazione: €20.000-30.000<br>Beneficio: riduzione rischio normativo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h6>Raccomandazioni prioritarie:</h6>
+                    
+                    <ol>
+                        <li><strong>Riequilibrio della struttura finanziaria:</strong> La concentrazione del debito nel breve termine (87,3%) rappresenta un elemento di vulnerabilità che richiede un intervento prioritario. Si raccomanda di rinegoziare la struttura del debito, incrementando la componente a medio-lungo termine al 40-50% del totale, preferibilmente attraverso finanziamenti chirografari con piano di ammortamento allineato alla vita utile degli asset.</li>
+                        <li><strong>Costituzione di adeguate riserve di liquidità:</strong> L'attuale livello di liquidità (0,64% dei ricavi) è criticamente basso e espone l'azienda a potenziali tensioni finanziarie. Si raccomanda di costituire una riserva minima di liquidità pari al 3-4% dei ricavi (€250.000-300.000), eventualmente attraverso l'accensione di linee di credito stand-by.</li>
+                        <li><strong>Ottimizzazione del capitale circolante:</strong> I tempi di incasso dai clienti (272 giorni) risultano anomali e generano un fabbisogno finanziario eccessivo. Si raccomanda l'implementazione di politiche incisive di credit management, con l'obiettivo di ridurre il DSO a 180-200 giorni nel medio periodo, liberando risorse finanziarie per €600.000-800.000.</li>
+                        <li><strong>Riduzione del costo del debito:</strong> L'attuale incidenza degli oneri finanziari (18,82% dei debiti finanziari medi) è eccessiva e compromette la redditività netta dell'azienda. Si raccomanda una rinegoziazione delle condizioni di finanziamento, con l'obiettivo di ridurre il costo medio del debito all'8-10%, generando un risparmio annuo di €100.000-120.000.</li>
+                        <li><strong>Rafforzamento patrimoniale:</strong> La copertura delle immobilizzazioni con mezzi propri (0,62) risulta non adeguata e configura un potenziale squilibrio patrimoniale. Si raccomanda un piano di rafforzamento patrimoniale attraverso la capitalizzazione degli utili futuri e/o l'incremento del capitale sociale, con l'obiettivo di raggiungere un rapporto PN/Immobilizzazioni di 0,75-0,80 nel medio periodo.</li>
+                    </ol>
+                    
+                    <p class="mt-3"><strong>Considerazioni conclusive:</strong> EDILCALCESTRUZZO SRL presenta un profilo di bancabilità caratterizzato da significative contraddizioni interne: da un lato, l'eccellente capacità di generazione di cassa operativa e il miglioramento della redditività rappresentano elementi di attrattività per gli istituti di credito; dall'altro, le criticità relative alla struttura patrimoniale, alla gestione della liquidità e al costo del debito configurano fattori di rischio che potrebbero limitare l'accesso a nuove linee di credito.</p>
+                    <p>La strategia finanziaria dovrebbe orientarsi prioritariamente alla risoluzione delle criticità strutturali, in particolare attraverso il riequilibrio della struttura del debito e l'ottimizzazione del capitale circolante, per consolidare il percorso di miglioramento avviato nell'ultimo esercizio e incrementare progressivamente il rating creditizio dell'azienda.</p>
+                </div>
+            </div>
+
+            <!-- ================================================================ -->
+            <!-- FINE CONTENUTO SPECIFICO PARTE 4 -->
+            <!-- ================================================================ -->
+
+        </div> <!-- /dashboard-container -->
+
+        <!-- Footer Standard V2 (Corretto) -->
+        <footer class="footer no-print"> <div class="container-fluid px-4"> <div class="row align-items-center"> <div class="col-md-6 text-center text-md-start mb-2 mb-md-0"> SCAN360 © <span id="currentYearFooterReport"></span> </div> <div class="col-md-6 text-center text-md-end"> Powered by <a href="http://www.kitzanos.com" target="_blank" class="text-white fw-bold">Kitzanos Lab</a> <img src="../assets/img/logo_kitzanos.png" alt="Kitzanos Logo" class="ms-2"> </div> </div> </div> </footer>
+
+    </div> <!-- /main-wrapper -->
+
+    <!-- Script JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/charts_config.js"></script>
+    <script src="../js/report_init.js"></script>
+     <script>
+        document.getElementById('currentYearSidebar').textContent = new Date().getFullYear();
+        document.getElementById('currentYearFooterReport').textContent = new Date().getFullYear();
+
+         // Script aggiornamento badge IRP header
+         document.addEventListener('DOMContentLoaded', function() {
+             const irpScoreValue = 64.28; // IRP Score value
+             let irpBadgeClass = 'bg-warning';
+             let irpCategory = 'C';
+             
+             if (irpScoreValue >= 90) {
+                 irpBadgeClass = 'bg-success';
+                 irpCategory = 'A';
+             } else if (irpScoreValue >= 80) {
+                 irpBadgeClass = 'bg-success';
+                 irpCategory = 'B+';
+             } else if (irpScoreValue >= 75) {
+                 irpBadgeClass = 'bg-success';
+                 irpCategory = 'B';
+             } else if (irpScoreValue >= 60) {
+                 irpBadgeClass = 'bg-warning';
+                 irpCategory = 'C';
+             } else if (irpScoreValue >= 45) {
+                 irpBadgeClass = 'bg-danger';
+                 irpCategory = 'D';
+             } else {
+                 irpBadgeClass = 'bg-danger';
+                 irpCategory = 'E';
+             }
+             
+             document.getElementById('irp-header-badge').className = `badge ${irpBadgeClass} me-3`;
+             document.getElementById('irp-header-badge').innerHTML = `<i class="fas fa-shield-alt me-1"></i> IRP: ${irpScoreValue} (${irpCategory})`;
+         });
+
+        // Chart per sostenibilità debito
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('debtSustainabilityChart').getContext('2d');
+            const debtSustainabilityChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['PFN/EBITDA', 'Leva (D/E)', 'DSCR', 'Autonomia', 'Liquidità', 'CFO/Ricavi'],
+                    datasets: [{
+                        label: '2023',
+                        data: [0, 72, 0, 65, 10, 11],
+                        borderColor: 'rgba(54, 162, 235, 0.8)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderWidth: 2
+                    }, {
+                        label: '2024',
+                        data: [80, 90, 95, 70, 15, 95],
+                        borderColor: 'rgba(255, 99, 132, 0.8)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 100,
+                            beginAtZero: true,
+                            ticks: {
+                                display: false
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        });
+
+        function printDocument() {
+            window.print();
+        }
+
+        function logout() {
+            window.location.href = "../index.html";
+        }
+     </script>
+<script src="../js/parte4_charts_init.js"></script>
+<scan-chat data-bot-id="033a9b91-a72b-4704-aae2-04d0b1796bdd"></scan-chat>
+<script src="../js/bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard CDA Final - EDILCALCESTRUZZO SRL | SCAN</title>
+    <!-- Librerie Esterne -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="./css/print.css" rel="stylesheet" media="print">
+    <link href="./css/monitor_cda.css" rel="stylesheet">
+
+</head>
+<body>
+
+   <!-- Sidebar -->
+    <aside class="sidebar no-print">
+         <div class="sidebar-header">   <img src="assets/img/logo_scan.png" alt="SCAN Logo" style="max-height: 40px;">
+ <h5>EDILCALCESTRUZZO SRL</h5> </div>
+         <ul class="sidebar-nav flex-grow-1">
+             <li class="nav-item"> <a class="nav-link active" href="monitor-cda_final.html"> <i class="fas fa-tachometer-alt fa-fw"></i> Overview CDA </a> </li>
+             <!-- Link Interni alla Pagina -->
+             <li class="nav-item"> <a class="nav-link" href="#kpi-section"> <i class="fas fa-key fa-fw"></i> KPI Principali </a> </li>
+             <li class="nav-item"> <a class="nav-link" href="#charts-section"> <i class="fas fa-chart-pie fa-fw"></i> Grafici Chiave </a> </li>
+             <li class="nav-item"> <a class="nav-link" href="#alerts-section"> <i class="fas fa-bell fa-fw"></i> Alert e Rischi </a> </li>
+             <li class="nav-item"> <a class="nav-link" href="#details-accordion"> <i class="fas fa-layer-group fa-fw"></i> Approfondimenti </a> </li>
+             <li class="nav-item"> <a class="nav-link" href="#actions-summary"> <i class="fas fa-tasks fa-fw"></i> Azioni Prioritarie </a> </li>
+             <li class="nav-item"> <a class="nav-link" href="index.html"> <i class="fas fa-home fa-fw"></i> Torna alla home </a> </li>
+         </ul>
+         <div class="sidebar-footer"> <small>SCAN360 © <span id="currentYearSidebar"></span> Kitzanos</small> </div>
+     </aside>
+
+    <!-- Contenuto Principale Wrapper -->
+    <div class="main-wrapper">
+        <!-- Header Orizzontale -->
+        <header class="dashboard-header no-print">
+            <div class="header-title">
+                 <h5 class="mb-0">Dashboard Esecutiva CDA</h5>
+                 <p class="mb-0">EDILCALCESTRUZZO SRL | <span class="report-date">11 Agosto 2025</span></p>
+            </div>
+        </header>
+        <div class="container d-none d-print-block mt-4 mb-4">
+            <h1 class="text-center mb-0"><span class="company-name">EDILCALCESTRUZZO SRL</span></h1>
+            <p class="text-center mb-0">Dashboard Esecutiva CDA | <span class="report-date">11 Agosto 2025</span></p>
+            <hr>
+        </div>
+
+        <!-- Area Contenuto Dashboard CDA -->
+        <div class="dashboard-container">
+
+            <!-- Executive Summary Card (Updated for EDILCALCESTRUZZO SRL) -->
+            <div class="card executive-summary-card mb-4 report-section">
+                 <div class="card-body">
+                     <div class="row align-items-center">
+                         <div class="col-lg-8">
+                             <h4 class="card-title mb-3" style="color: var(--primary);"><i class="fas fa-info-circle me-2"></i>Executive Summary</h4>
+                             <p class="mb-2">L'analisi finanziaria di EDILCALCESTRUZZO SRL evidenzia un <strong>profilo di rischio medio (IRP 64,28)</strong>, con un'azienda classificata come RUNNERS che mostra crescita ma con alcune vulnerabilità strutturali. L'EBITDA margin dell'8,66% è in forte miglioramento (+453,42%), con un Leanus Score "5 - Negativo" (0,52).</p>
+                             <p class="mb-0 text-warning">Le <strong>aree di criticità</strong> includono la <strong>copertura immobilizzazioni insufficiente</strong> (0,62), la <strong>liquidità criticamente bassa</strong> (0,64% dei ricavi) e il <strong>ciclo del circolante eccessivo</strong> (220 giorni). Gli interventi proposti possono migliorare significativamente gli indicatori di bancabilità e la struttura finanziaria.</p>
+                         </div>
+                         <div class="col-lg-4 text-center mt-3 mt-lg-0">
+                              <h6 class="card-title-small mb-1">Indice Rischio (IRP)</h6>
+                              <!-- IRP EDILCALCESTRUZZO -->
+                              <div class="irp-score-circle risk-medium mx-auto" style="width: 110px; height: 110px; border-width: 4px;">
+    <span class="irp-score-value" style="font-size: 2.8rem;">64,3</span>
+    <span class="irp-score-max" style="font-size: 0.7rem;">/ 100</span>
+</div>
+<div class="irp-category-text text-warning mt-1" style="font-size: 1rem;">
+    Rischio Medio <span class="status-badge bg-warning text-dark">M</span>
+</div>
+                            
+                             <a href="report/irp_dettaglio.html" target="_blank" class="btn btn-link btn-sm p-0 mt-1 small">Dettaglio IRP</a>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+
+             <!-- Sezione KPI Principali V4 (8 KPI - Updated for EDILCALCESTRUZZO SRL) -->
+             <section id="kpi-section" class="report-section">
+                  <h4 class="section-title small"><i class="fas fa-key me-2"></i>INDICATORI CHIAVE</h4>
+                   <div class="row gy-4">
+                      <div class="col-lg-3 col-md-6"> <div class="kpi-card-v4"> <span class="icon-circle bg-icon-success"><i class="fas fa-euro-sign"></i></span> <div class="kpi-content"> <div class="kpi-title">Ricavi</div> <div class="kpi-value">€ 7,56 M</div> <div class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +9,11% YoY</div> </div> </div> </div>
+                      <div class="col-lg-3 col-md-6"> <div class="kpi-card-v4"> <span class="icon-circle bg-icon-success"><i class="fas fa-percent"></i></span> <div class="kpi-content"> <div class="kpi-title">EBITDA Margin</div> <div class="kpi-value">8,66%</div> <div class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +11,36 p.p.</div> </div> </div> </div>
+                      <div class="col-lg-3 col-md-6"> <div class="kpi-card-v4"> <span class="icon-circle bg-icon-success"><i class="fas fa-chart-line"></i></span> <div class="kpi-content"> <div class="kpi-title">EBITDA</div> <div class="kpi-value">€ 655 K</div> <div class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +453,42% YoY</div> </div> </div> </div>
+                      <div class="col-lg-3 col-md-6"> <div class="kpi-card-v4"> <span class="icon-circle bg-icon-warning"><i class="fas fa-coins"></i></span> <div class="kpi-content"> <div class="kpi-title">Utile Netto</div> <div class="kpi-value">€ 40 K</div> <div class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> +36,28%</div> </div> </div> </div>
+                      <div class="col-lg-3 col-md-6"> <div class="kpi-card-v4"> <span class="icon-circle bg-icon-success"><i class="fas fa-balance-scale-right"></i></span> <div class="kpi-content"> <div class="kpi-title">PFN / EBITDA</div> <div class="kpi-value">1,79x</div> <div class="kpi-trend trend-up"><i class="fas fa-arrow-up"></i> Miglioramento</div> </div> </div> </div>
+                      <div class="col-lg-3 col-md-6"> <div class="kpi-card-v4"> <span class="icon-circle bg-icon-success"><i class="fas fa-landmark"></i></span> <div class="kpi-content"> <div class="kpi-title">Leva (D/E)</div> <div class="kpi-value">0,20x</div> <div class="kpi-trend trend-down"><i class="fas fa-arrow-down"></i> -0,08</div> </div> </div> </div>
+                      <div class="col-lg-3 col-md-6"> <div class="kpi-card-v4"> <span class="icon-circle bg-icon-danger"><i class="fas fa-hourglass-half"></i></span> <div class="kpi-content"> <div class="kpi-title">Ciclo Circolante</div> <div class="kpi-value">220 gg</div> <div class="kpi-trend trend-down"><i class="fas fa-arrow-up"></i> +3 gg</div> </div> </div> </div>
+                      <div class="col-lg-3 col-md-6"> <div class="kpi-card-v4"> <span class="icon-circle bg-icon-success"><i class="fas fa-water"></i></span> <div class="kpi-content"> <div class="kpi-title">Cash Flow Operativo</div> <div class="kpi-value">€ 3,58 M</div> <div class="kpi-trend trend-up text-success"><i class="fas fa-arrow-up"></i> 47,35% Ricavi</div> </div> </div> </div>
+                 </div>
+             </section>
+
+             <!-- Sezione Alert Principali (Updated for EDILCALCESTRUZZO SRL) -->
+             <section id="alerts-section" class="report-section">
+                 <h4 class="section-title small"><i class="fas fa-bell me-2 text-warning"></i>ALERT PRINCIPALI</h4>
+                 <div class="row">
+                     <div class="col-lg-6 mb-4">
+                         <div class="alert-card alert-danger">
+                             <i class="fas fa-tint alert-icon"></i>
+                             <div>
+                                 <h5>Liquidità Criticamente Bassa <span class="badge bg-danger ms-2">Critico</span></h5>
+                                 <p>La liquidità disponibile è pari a soli €48.714 (0,64% dei ricavi), significativamente al di sotto del livello minimo prudenziale (5%).</p>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col-lg-6 mb-4">
+                         <div class="alert-card alert-danger">
+                             <i class="fas fa-percentage alert-icon"></i>
+                             <div>
+                                 <h5>Oneri Finanziari Elevati <span class="badge bg-danger ms-2">Critico</span></h5>
+                                 <p>Costo del debito al 18,82% significativamente superiore ai tassi di mercato, con oneri finanziari pari a €272.691.</p>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col-lg-6 mb-4">
+                         <div class="alert-card alert-danger">
+                              <i class="fas fa-hourglass-half alert-icon"></i>
+                              <div>
+                                   <h5>Ciclo Circolante Eccessivo <span class="badge bg-danger ms-2">Critico</span></h5>
+                                   <p>Ciclo del circolante di 220 giorni con significativo assorbimento di liquidità (DSO 272gg, DPO 174gg, DIO 122gg).</p>
+                              </div>
+                         </div>
+                     </div>
+                      <div class="col-lg-6 mb-4">
+                          <div class="alert-card alert-danger">
+                               <i class="fas fa-building alert-icon"></i>
+                               <div>
+                                   <h5>Copertura Immobilizzazioni Insufficiente <span class="badge bg-danger ms-2">Critico</span></h5>
+                                   <p>Indice di copertura delle immobilizzazioni pari a 0,62, ben al di sotto della soglia minima (0,7), con squilibrio strutturale.</p>
+                               </div>
+                          </div>
+                      </div>
+                 </div>
+             </section>
+
+             <!-- Sezione Grafici Chiave CDA (Updated for EDILCALCESTRUZZO SRL) -->
+             <section id="charts-section" class="report-section">
+                   <h4 class="section-title small"><i class="fas fa-chart-pie me-2"></i>GRAFICI CHIAVE</h4>
+                   <div class="row">
+                       <div class="col-lg-6 mb-4">
+                            <div class="dashboard-card chart-card">
+                                <h6 class="card-title-modern">Trend Economico (Ricavi/EBITDA)</h6>
+                                <div class="chart-container-cda" style="height: 350px;">
+                                     <canvas id="trendRicaviEbitdaChart"></canvas>
+                                 </div>
+                            </div>
+                       </div>
+                       <div class="col-lg-6 mb-4">
+                            <div class="dashboard-card chart-card">
+                                <h6 class="card-title-modern">Redditività e Leva (ROE/ROI/D:E)</h6>
+                                <div class="chart-container-cda" style="height: 350px;">
+                                      <canvas id="trendPfnEbitdaChart"></canvas>
+                                 </div>
+                            </div>
+                       </div>
+                        <!-- Grafico Ciclo Circolante -->
+                         <div class="col-lg-6 mb-4">
+                            <div class="dashboard-card chart-card">
+                                <h6 class="card-title-modern">Evoluzione Ciclo Circolante (Giorni)</h6>
+                                <div class="chart-container-cda" style="height: 350px;">
+                                     <canvas id="trendWorkingCapitalChart"></canvas>
+                                </div>
+                            </div>
+                       </div>
+                        <div class="col-lg-6 mb-4">
+                           <div class="dashboard-card chart-card">
+                               <h6 class="card-title-modern">Generazione Cassa Operativa (% Ricavi)</h6>
+                               <div class="chart-container-cda" style="height: 350px;">
+                                    <canvas id="trendCashFlowOpChart"></canvas>
+                               </div>
+                           </div>
+                      </div>
+                   </div>
+              </section>
+
+             <!-- SEZIONI DI DETTAGLIO CON ACCORDION (Updated for EDILCALCESTRUZZO SRL) -->
+             <h2 class="section-title mt-5" id="details-accordion"><i class="fas fa-layer-group me-2"></i>Approfondimenti Dettagliati</h2>
+             <div class="accordion report-section" id="cdaDetailsAccordion">
+
+                 <!-- 1. Dettaglio Performance Economica -->
+                 <div class="accordion-item">
+                     <h2 class="accordion-header" id="headingEconomic"> <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEconomic" aria-expanded="false" aria-controls="collapseEconomic"> <i class="fas fa-chart-line me-2"></i> Performance Economica<span class="badge bg-success ms-2">In miglioramento</span> </button> </h2>
+                     <div id="collapseEconomic" class="accordion-collapse collapse" aria-labelledby="headingEconomic" data-bs-parent="#cdaDetailsAccordion">
+                         <div class="accordion-body">
+                              <!-- Contenuto per EDILCALCESTRUZZO SRL -->
+                              <h6>Principali indicatori economici</h6>
+                              <div class="table-responsive mb-3"><table class="table table-sm table-striped">
+                                  <tbody><tr><td>Ricavi</td><td class="value-highlight">€7.559.559</td><td><i class="fas fa-arrow-up text-success"></i> +9,11%</td></tr><tr><td>EBITDA</td><td class="value-highlight">€654.579 (8,66%)</td><td><i class="fas fa-arrow-up text-success"></i> +453,42%</td></tr><tr><td>EBIT</td><td class="value-highlight">€275.050 (3,64%)</td><td><i class="fas fa-arrow-up text-success"></i> +144,31%</td></tr><tr><td>Utile Netto</td><td class="value-highlight">€40.394 (0,53%)</td><td><i class="fas fa-arrow-up text-success"></i> +36,28%</td></tr><tr><td>Margine di Contribuzione</td><td class="value-highlight">32,52%</td><td><i class="fas fa-arrow-up text-success"></i> +62,15%</td></tr><tr><td>Break-Even Point</td><td class="value-highlight">€6.713.670</td><td><span class="badge bg-success">11,19% margine</span></td></tr></tbody>
+                              </table></div>
+                              <h6>Indici di redditività</h6>
+                              <div class="table-responsive mb-3"><table class="table table-sm table-striped">
+                                   <tbody><tr><td>ROE</td><td class="value-highlight">0,65%</td><td><i class="fas fa-arrow-up text-success"></i> +0,15 p.p.</td><td><span class="badge bg-danger">Insufficiente</span> (<7%)</td></tr><tr><td>ROI</td><td class="value-highlight">3,74%</td><td><i class="fas fa-arrow-up text-success"></i> +11,95 p.p.</td><td><span class="badge bg-warning text-dark">Insufficiente</span> (<8%)</td></tr><tr><td>ROS</td><td class="value-highlight">3,64%</td><td><i class="fas fa-arrow-up text-success"></i> +12,64 p.p.</td><td><span class="badge bg-warning text-dark">Sufficiente</span> (<6%)</td></tr><tr><td>Turnover Capitale</td><td class="value-highlight">1,03x</td><td><i class="fas fa-arrow-up text-success"></i> +0,12x</td><td><span class="badge bg-success">Adeguato</span> (>1,0x)</td></tr><tr><td>EBIT/Oneri Fin.</td><td class="value-highlight">1,01x</td><td><i class="fas fa-arrow-up text-success"></i> n.d.</td><td><span class="badge bg-danger">Critico</span> (<3x)</td></tr><tr><td>Costo Medio Debito</td><td class="value-highlight">18,82%</td><td><i class="fas fa-arrow-up text-danger"></i> +1,64 p.p.</td><td><span class="badge bg-danger">Critico</span></td></tr></tbody>
+                              </table></div>
+                              <h6 class="mt-3">Evoluzione Conto Economico (Dettaglio)</h6>
+                              <div class="table-responsive"><table class="table table-sm table-striped table-hover">
+                                  <thead class="table-light"><tr><th>Voce</th><th class="text-end">2022 (€)</th><th class="text-end">2023 (€)</th><th class="text-end">2024 (€)</th><th class="text-end">Var % 23-24</th></tr></thead>
+                                  <tbody><tr><td>Ricavi</td><td class="text-end">7.127K</td><td class="text-end">6.928K</td><td class="text-end">7.560K</td><td class="text-end text-success">+9,1%</td></tr><tr><td>Acquisti</td><td class="text-end">-3.508K</td><td class="text-end">-3.229K</td><td class="text-end">-2.571K</td><td class="text-end text-success">-20,4%</td></tr><tr><td>Valore Aggiunto</td><td class="text-end">3.619K</td><td class="text-end">3.700K</td><td class="text-end">4.988K</td><td class="text-end text-success">+34,8%</td></tr><tr><td>Costi variabili</td><td class="text-end">-2.028K</td><td class="text-end">-2.184K</td><td class="text-end">-2.530K</td><td class="text-end text-danger">+15,9%</td></tr><tr><td>MdC</td><td class="text-end">1.591K</td><td class="text-end">1.516K</td><td class="text-end">2.458K</td><td class="text-end text-success">+62,2%</td></tr><tr><td>Costi fissi</td><td class="text-end">-1.757K</td><td class="text-end">-1.701K</td><td class="text-end">-1.803K</td><td class="text-end text-danger">+6,0%</td></tr><tr class="table-success fw-bold"><td>EBITDA</td><td class="text-end">-167K</td><td class="text-end">-185K</td><td class="text-end">655K</td><td class="text-end text-success">+453,4%</td></tr><tr><td>Amm.ti/Svalut.</td><td class="text-end">-581K</td><td class="text-end">-436K</td><td class="text-end">-380K</td><td class="text-end text-success">-12,9%</td></tr><tr><td>EBIT</td><td class="text-end">-748K</td><td class="text-end">-621K</td><td class="text-end">275K</td><td class="text-end text-success">+144,3%</td></tr><tr><td>Componenti straordinarie</td><td class="text-end">957K</td><td class="text-end">939K</td><td class="text-end">130K</td><td class="text-end text-danger">-86,1%</td></tr><tr><td>Gest. Finanziaria</td><td class="text-end">-141K</td><td class="text-end">-289K</td><td class="text-end">-273K</td><td class="text-end text-success">-5,5%</td></tr><tr><td>EBT</td><td class="text-end">68K</td><td class="text-end">30K</td><td class="text-end">132K</td><td class="text-end text-success">+346,8%</td></tr><tr><td>Imposte</td><td class="text-end">0K</td><td class="text-end">0K</td><td class="text-end">-92K</td><td class="text-end text-danger">n.a.</td></tr><tr class="table-success fw-bold"><td>Utile Netto</td><td class="text-end">68K</td><td class="text-end">30K</td><td class="text-end">40K</td><td class="text-end text-success">+36,3%</td></tr></tbody>
+                              </table></div>
+                              <div class="row mt-3"> <div class="col-md-6"><div class="alert alert-success small p-2"><h6>Punti di forza:</h6><ul><li>EBITDA in forte miglioramento (+453,42%)</li><li>Crescita dei ricavi (+9,11%)</li><li>Margine di contribuzione in crescita (+62,15%)</li><li>Ritorno a EBIT positivo</li></ul></div></div> <div class="col-md-6"><div class="alert alert-danger small p-2"><h6>Aree di miglioramento:</h6><ul><li>Costo del debito elevato (18,82%)</li><li>ROE insufficiente (0,65%)</li><li>Utile netto marginale (0,53%)</li><li>Copertura oneri finanziari critica (1,01x)</li></ul></div></div></div>
+                         </div>
+                     </div>
+                 </div>
+
+                 <!-- Dettaglio Struttura Patrimoniale -->
+                  <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingAssets"> <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAssets" aria-expanded="false" aria-controls="collapseAssets"> <i class="fas fa-landmark me-2"></i> Struttura Patrimoniale <span class="badge bg-warning ms-2 text-dark">Squilibrata</span></button> </h2>
+                      <div id="collapseAssets" class="accordion-collapse collapse" aria-labelledby="headingAssets" data-bs-parent="#cdaDetailsAccordion">
+                          <div class="accordion-body">
+                               <!-- Contenuto per EDILCALCESTRUZZO SRL -->
+                               <div class="row mb-4">
+                                  <div class="col-md-6"><h6>Stato Patrimoniale Sintetico (Impieghi)</h6><table class="table table-sm table-striped"><tbody><tr><td>Attivo Fisso Netto</td><td class="value-highlight">€10.003.357</td><td><i class="fas fa-arrow-up text-danger"></i> +42,41%</td></tr><tr><td>- Imm. materiali</td><td>€3.304.525</td><td><i class="fas fa-arrow-down text-success"></i> n.d.</td></tr><tr><td>- Imm. immateriali</td><td>€425.102</td><td><i class="fas fa-equals text-secondary"></i> n.d.</td></tr><tr><td>- Imm. finanziarie</td><td>€6.273.730</td><td><i class="fas fa-arrow-up text-danger"></i> +90,56%</td></tr><tr><td>Capitale Circolante</td><td class="value-highlight">€6.977.320</td><td><i class="fas fa-arrow-down text-success"></i> -29,90%</td></tr><tr><td>- Crediti comm.</td><td>€5.692.100</td><td><i class="fas fa-arrow-up text-danger"></i> +6,38%</td></tr><tr><td>- Rimanenze</td><td>€864.542</td><td><i class="fas fa-arrow-down text-success"></i> -0,58%</td></tr><tr><td>- Debiti comm.</td><td>-€2.605.093</td><td><i class="fas fa-arrow-down text-success"></i> -2,05%</td></tr><tr class="table-primary fw-bold"><td>Capitale Investito Netto</td><td class="value-highlight">€16.980.677</td><td><i class="fas fa-arrow-up text-danger"></i> +0,02%</td></tr></tbody></table></div>
+                                  <div class="col-md-6"><h6>Struttura delle Fonti</h6><table class="table table-sm table-striped"><tbody><tr><td>Patrimonio Netto</td><td class="value-highlight">€6.185.357</td><td><i class="fas fa-arrow-up text-success"></i> +4,54%</td></tr><tr><td>PFN</td><td class="value-highlight">€1.169.095</td><td><i class="fas fa-arrow-down text-success"></i> -29,00%</td></tr><tr><td>- Debiti finanziari</td><td>€1.217.809</td><td><i class="fas fa-arrow-down text-success"></i> -27,50%</td></tr><tr><td>- Liquidità</td><td>€48.714</td><td><i class="fas fa-arrow-up text-success"></i> +44,25%</td></tr><tr class="table-primary fw-bold"><td>Totale Fonti</td><td class="value-highlight">€16.980.677</td><td><i class="fas fa-arrow-up text-danger"></i> +0,02%</td></tr></tbody></table></div>
+                               </div>
+                               <h6>Indici di Solidità Patrimoniale</h6>
+                               <div class="table-responsive"><table class="table table-sm table-striped table-hover">
+                                   <thead class="table-light"><tr><th>Indice</th><th>Formula</th><th class="text-end">2022</th><th class="text-end">2023</th><th class="text-end">2024</th><th>Valutazione</th></tr></thead>
+                                   <tbody><tr><td>Autonomia Fin.</td><td>PN / Tot Passivo</td><td class="text-end">36,7%</td><td class="text-end">34,9%</td><td class="text-end">36,4%</td><td><span class="status-badge bg-success">Adeguata</span></td></tr><tr><td>Cop. Immob.</td><td>PN/AF</td><td class="text-end">0,81</td><td class="text-end">0,84</td><td class="text-end">0,62</td><td><span class="status-badge bg-danger">Non adeguata</span></td></tr><tr><td>Struttura Primario</td><td>PN / AF</td><td class="text-end">0,81</td><td class="text-end">0,84</td><td class="text-end">0,62</td><td><span class="status-badge bg-danger">Non adeguata</span></td></tr><tr><td>Struttura Secondario</td><td>(PN+PConsolidate)/AF</td><td class="text-end">n.d.</td><td class="text-end">0,95</td><td class="text-end">0,74</td><td><span class="status-badge bg-danger">Non adeguata</span></td></tr><tr><td>Leva Finanziaria (D/E)</td><td>Debt Fin / PN</td><td class="text-end">0,29</td><td class="text-end">0,28</td><td class="text-end">0,20</td><td><span class="status-badge bg-success">Ottima</span></td></tr><tr><td>PFN/EBITDA</td><td>PFN / EBITDA</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">1,79</td><td><span class="status-badge bg-success">Sostenibile</span></td></tr></tbody>
+                               </table></div>
+                               <div class="row mt-3"> <div class="col-md-6"><div class="alert alert-success small p-2"><h6>Punti di forza:</h6><ul><li>Leva finanziaria contenuta (0,20)</li><li>PFN/EBITDA sostenibile (1,79)</li><li>Riduzione dell'indebitamento (-27,50%)</li><li>Autonomia finanziaria adeguata (36,4%)</li></ul></div></div> <div class="col-md-6"><div class="alert alert-danger small p-2"><h6>Aree di attenzione:</h6><ul><li>Copertura immobilizzazioni insufficiente (0,62)</li><li>Liquidità criticamente bassa (0,64% dei ricavi)</li><li>Crescente rigidità patrimoniale (58,9% attivo fisso)</li><li>Preponderanza debiti finanziari a breve (87,3%)</li></ul></div></div></div>
+                          </div>
+                      </div>
+                  </div>
+
+                 <!-- Dettaglio Situazione Finanziaria e Flussi -->
+                  <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingFinancial"> <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFinancial" aria-expanded="false" aria-controls="collapseFinancial"> <i class="fas fa-university me-2"></i> Situazione Finanziaria e Flussi<span class="badge bg-warning ms-2 text-dark">Miglioramento</span> </button> </h2>
+                      <div id="collapseFinancial" class="accordion-collapse collapse" aria-labelledby="headingFinancial" data-bs-parent="#cdaDetailsAccordion">
+                          <div class="accordion-body">
+                              <!-- Contenuto per EDILCALCESTRUZZO SRL -->
+                               <div class="row mb-4">
+                                   <div class="col-md-6"><h6>Indicatori Sostenibilità Debito</h6><table class="table table-sm table-striped"><tbody><tr><td>PFN/EBITDA</td><td class="value-highlight">1,79</td><td><span class="badge bg-success">Sostenibile</span></td></tr><tr><td>Leva (D/E)</td><td class="value-highlight">0,20</td><td><span class="badge bg-success">Ottima</span></td></tr><tr><td>DSCR</td><td class="value-highlight">6,397</td><td><span class="badge bg-success">Eccellente</span></td></tr><tr><td>Oneri Fin./Ricavi</td><td class="value-highlight">3,61%</td><td><span class="badge bg-warning text-dark">Elevato</span></td></tr><tr><td>CF Op./Ricavi</td><td class="value-highlight">47,35%</td><td><span class="badge bg-success">Eccellente</span></td></tr><tr><td>EBIT/Oneri Fin.</td><td class="value-highlight">1,01</td><td><span class="badge bg-danger">Critico</span></td></tr></tbody></table></div>
+                                   <div class="col-md-6"><h6>Posizione Finanziaria Netta</h6><table class="table table-sm table-striped"><tbody><tr><td>Debiti finanziari</td><td class="value-highlight">€1.217.809</td><td><i class="fas fa-arrow-down text-success"></i> -27,50%</td></tr><tr><td>Liquidità</td><td class="value-highlight">€48.714</td><td><i class="fas fa-arrow-up text-success"></i> +44,25%</td></tr><tr class="table-warning fw-bold"><td>PFN</td><td class="value-highlight">€1.169.095</td><td><i class="fas fa-arrow-down text-success"></i> -29,00%</td></tr></tbody></table></div>
+                               </div>
+                                <h6 class="mt-3">Capacità di Indebitamento</h6>
+                                <div class="table-responsive"><table class="table table-sm table-striped">
+                                     <thead class="table-light"><tr><th>Indicatore</th><th class="text-end">Valore</th><th>Interpretazione</th></tr></thead>
+                                     <tbody><tr><td>Capacità teorica indebitamento incrementale</td><td class="text-end text-warning">€0</td><td>Limitata capacità di assumere nuovo debito</td></tr><tr><td>Stress test - Riduzione ricavi che rende EBIT=0</td><td class="text-end">-11,19%</td><td>Discreta resilienza a cali di fatturato</td></tr><tr><td>Stress test - Aumento costi fissi che rende EBIT=0</td><td class="text-end">+15,25%</td><td>Moderata capacità di assorbire aumenti di costi fissi</td></tr>
+                                     <tr class="table-success fw-bold"><td>DSCR (Debt Service Coverage Ratio)</td><td class="text-end text-success">6,397</td><td>Eccellente - ampiamente superiore ai criteri bancari</td></tr><tr><td>Probabilità di Default (MCC)</td><td class="text-end text-success">2,87%</td><td>Medio-bassa - FASCIA "3"</td></tr><tr class="table-danger fw-bold"><td>Leanus Score</td><td class="text-end text-danger">0,52</td><td>Profilo "5 - Negativo"</td></tr></tbody>
+                                </table></div>
+                               <div class="row mt-3"> <div class="col-md-6"><div class="alert alert-success small p-2"><h6>Punti di forza:</h6><ul><li>Cash Flow Operativo eccellente (47,35% dei ricavi)</li><li>DSCR eccellente (6,397)</li><li>PFN/EBITDA sostenibile (1,79)</li><li>Riduzione dell'indebitamento (-27,50%)</li></ul></div></div> <div class="col-md-6"><div class="alert alert-danger small p-2"><h6>Aree di criticità:</h6><ul><li>Liquidità criticamente bassa (0,64% dei ricavi)</li><li>Oneri finanziari elevati (18,82%)</li><li>Copertura oneri finanziari critica (1,01x)</li><li>Capacità indebitamento incrementale limitata</li></ul></div></div></div>
+                          </div>
+                      </div>
+                   </div>
+
+                  <!-- Dettaglio Capitale Circolante -->
+                  <div class="accordion-item">
+                      <h2 class="accordion-header" id="headingCapital"> <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCapital" aria-expanded="false" aria-controls="collapseCapital"> <i class="fas fa-sync-alt me-2"></i> Capitale Circolante <span class="badge bg-danger ms-2">Critico</span> </button> </h2>
+                      <div id="collapseCapital" class="accordion-collapse collapse" aria-labelledby="headingCapital" data-bs-parent="#cdaDetailsAccordion">
+                          <div class="accordion-body">
+                              <!-- Contenuto per EDILCALCESTRUZZO SRL -->
+                              <div class="row mb-4">
+                                  <div class="col-md-6"><h6>Ciclo del Capitale Circolante</h6><table class="table table-sm table-striped"><tbody>
+<tr><td>Giorni Clienti (DSO)</td><td class="value-highlight">272 gg</td><td class="text-success"><i class="fas fa-arrow-down"></i> -7 gg</td><td><span class="badge bg-danger">Critico</span></td></tr><tr><td>Giorni Magazzino (DIO)</td><td class="value-highlight">122 gg</td><td class="text-danger"><i class="fas fa-arrow-up"></i> +25 gg</td><td><span class="badge bg-danger">Critico</span></td></tr><tr><td>Giorni Fornitori (DPO)</td><td class="value-highlight">174 gg</td><td class="text-success"><i class="fas fa-arrow-up"></i> +15 gg</td><td><span class="badge bg-warning text-dark">Elevato</span></td></tr><tr class="table-danger fw-bold"><td>Ciclo del Circolante</td><td class="value-highlight">220 gg</td><td class="text-danger"><i class="fas fa-arrow-up"></i> +3 gg</td><td><span class="badge bg-danger">Critico</span></td></tr></tbody></table></div>
+                                  <div class="col-md-6"><h6>Test di Congruità Componenti</h6><table class="table table-sm table-striped"><tbody><tr><td>Crediti vs benchmark</td><td class="value-highlight">272 gg vs 90 gg</td><td class="text-danger">Eccesso di 182 gg (€3.821.818)</td></tr><tr><td>Magazzino vs benchmark</td><td class="value-highlight">122 gg vs 50 gg</td><td class="text-danger">Eccesso di 72 gg (€514.296)</td></tr><tr><td>Debiti vs benchmark</td><td class="value-highlight">174 gg vs 100 gg</td><td class="text-success">Eccesso di 74 gg (€528.582)</td></tr></tbody></table></div>
+                              </div>
+                              <h6>Evoluzione Capitale Circolante</h6>
+                              <div class="table-responsive"><table class="table table-sm table-striped">
+                                  <thead class="table-light"><tr><th>Componente</th><th class="text-end">2022</th><th class="text-end">2023</th><th class="text-end">2024</th><th>Variazione</th></tr></thead>
+                                  <tbody><tr><td>Crediti Clienti</td><td class="text-end">€4.504K</td><td class="text-end">€5.351K</td><td class="text-end">€5.692K</td><td><span class="badge bg-danger">+€341K</span></td></tr><tr><td>Rimanenze</td><td class="text-end">€406K</td><td class="text-end">€870K</td><td class="text-end">€865K</td><td><span class="badge bg-success">-€5K</span></td></tr><tr><td>Debiti Fornitori</td><td class="text-end">€2.097K</td><td class="text-end">€2.660K</td><td class="text-end">€2.605K</td><td><span class="badge bg-danger">-€55K</span></td></tr><tr><td>Altri Debiti</td><td class="text-end">€5.804K</td><td class="text-end">€6.133K</td><td class="text-end">€5.913K</td><td><span class="badge bg-success">-€220K</span></td></tr></tbody>
+                              </table></div>
+                              <div class="alert alert-danger mt-3 small p-2"><h5>Criticità del circolante:</h5><ul><li>Ciclo del circolante eccessivo (220gg) con deterioramento di 77gg nel triennio</li><li>Tempi di incasso anomali (DSO 272 giorni)</li><li>Significativo incremento giorni magazzino (+190% nel triennio)</li><li>Capitale circolante operativo di €3.951.549</li></ul></div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- Dettaglio Rischi -->
+                   <div class="accordion-item">
+                       <h2 class="accordion-header" id="headingRisk"> <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRisk" aria-expanded="false" aria-controls="collapseRisk"> <i class="fas fa-exclamation-triangle me-2"></i> Profilo di Rischio <span class="badge bg-warning ms-2 text-dark">Medio</span></button> </h2>
+                       <div id="collapseRisk" class="accordion-collapse collapse" aria-labelledby="headingRisk" data-bs-parent="#cdaDetailsAccordion">
+                           <div class="accordion-body">
+                               <!-- Contenuto per EDILCALCESTRUZZO SRL -->
+                                <div class="row">
+                                   <div class="col-md-6"><h6>Indice Rischio Ponderato (IRP)</h6><p>Valore: <strong>64,28 / 100</strong> <span class="badge bg-warning text-dark">CATEGORIA M</span></p>
+<table class="table table-sm">
+    <tr><td>Component Score</td><td class="text-end">61,70</td></tr>
+    <tr><td>Leanus Score Norm.</td><td class="text-end">39,17</td></tr>
+    <tr><td>MCC Rating Norm.</td><td class="text-end">89,80</td></tr>
+    <tr><td>Z-Score Norm.</td><td class="text-end">77,12</td></tr>
+</table>
+<p class="text-muted small">L'azienda presenta un profilo di rischio medio con significative contraddizioni interne tra indicatori operativi positivi e vulnerabilità strutturali.</p>
+</div>
+                                   <div class="col-md-6"><h6>Modelli di Rating</h6><table class="table table-sm"><tbody><tr><td>Z-Score Altman</td><td class="value-highlight">2,39</td><td><span class="badge bg-warning text-dark">Zona Grigia</span></td></tr><tr><td>PD (MCC)</td><td class="value-highlight">2,87%</td><td><span class="badge bg-success">Fascia 3</span></td></tr><tr><td>Leanus Score</td><td class="value-highlight">0,52 - Negativo</td><td><span class="badge bg-danger">Negativo</span></td></tr><tr><td>DSCR</td><td class="value-highlight">6,397</td><td><span class="badge bg-success">Eccellente</span></td></tr><tr><td>IRP Finale</td><td class="value-highlight">64,28</td><td><span class="badge bg-warning text-dark">Categoria M</span></td></tr></tbody></table></div>
+                                </div>
+                                <h6 class="mt-3">Stress Test Sintesi</h6>
+                                <p class="small">Resistenza Ricavi: -11,19% | Resistenza Costi: +15,25% | Liquidità critica: +3gg variazione DSO/DPO</p>
+                                <div class="row mt-3"><div class="col-md-6"><div class="alert alert-success small p-2"><h6>Punti di forza:</h6><ul><li>Cash Flow Operativo eccellente (47,35%)</li><li>DSCR eccellente (6,397)</li><li>Leva finanziaria contenuta (0,20)</li><li>PFN/EBITDA sostenibile (1,79)</li><li>Crescita dei ricavi (+9,11%)</li></ul></div></div><div class="col-md-6"><div class="alert alert-danger small p-2"><h6>Red Flags:</h6><ul><li>Liquidità criticamente bassa (0,64%)</li><li>Ciclo circolante eccessivo (220gg)</li><li>Copertura immobilizzazioni insufficiente (0,62)</li><li>Oneri finanziari elevati (18,82%)</li><li>Copertura oneri finanziari critica (1,01x)</li></ul></div></div></div>
+                           </div>
+                       </div>
+                   </div>
+
+                  <!-- Dettaglio Azioni Raccomandate -->
+                   <div class="accordion-item">
+                       <h2 class="accordion-header" id="headingActions"> <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActions" aria-expanded="false" aria-controls="collapseActions"> <i class="fas fa-lightbulb me-2"></i> Piano d'Azione </button> </h2>
+                       <div id="collapseActions" class="accordion-collapse collapse" aria-labelledby="headingActions" data-bs-parent="#cdaDetailsAccordion">
+                           <div class="accordion-body">
+                               <!-- Contenuto per EDILCALCESTRUZZO SRL -->
+                               <div class="action-item priority-high"><h6>PRIORITÀ ALTA: Ottimizzazione Capitale Circolante</h6><div class="action-detail"><strong>1a. Gestione crediti:</strong> Riduzione DSO da 272 a 180 giorni con liberazione di circa €1.900.000 di liquidità.</div><div class="action-detail"><strong>1b. Gestione magazzino:</strong> Riduzione DIO da 122 a 80 giorni per liberare €300.000 di liquidità.</div></div>
+                               <div class="action-item priority-high"><h6>PRIORITÀ ALTA: Riequilibrio Patrimoniale</h6><div class="action-detail"><strong>2a. Rafforzamento patrimoniale:</strong> Incremento del capitale sociale e/o capitalizzazione utili per migliorare la copertura dell'attivo fisso da 0,62 a 0,75-0,80.</div><div class="action-detail"><strong>2b. Rimodulazione debito:</strong> Conversione di €700.000 di debito a breve in debito a medio-lungo termine.</div></div>
+                               <div class="action-item priority-medium"><h6>PRIORITÀ MEDIA: Ristrutturazione Finanziaria</h6><div class="action-detail"><strong>3a. Rinegoziazione oneri:</strong> Riduzione costo del debito dal 18,82% a livelli di mercato (8-10%).</div><div class="action-detail"><strong>3b. Costituzione riserve liquidità:</strong> Incremento liquidità minima a €250.000-300.000 (3-4% dei ricavi).</div></div>
+                               <div class="action-item priority-medium"><h6>PRIORITÀ MEDIA: Ottimizzazione Operativa</h6><div class="action-detail"><strong>4a. Analisi marginalità:</strong> Revisione mix produttivo e pricing per incrementare EBITDA margin all'11-12%.</div><div class="action-detail"><strong>4b. Controllo costi variabili:</strong> Ottimizzazione costi variabili cresciuti del 15,87%.</div></div>
+                               <div class="row mt-4"><div class="col-md-6"><div class="alert alert-success"><h6>Impatto Stimato:</h6><ul><li>Liberazione liquidità: €2.200.000-2.500.000</li><li>Riduzione oneri finanziari: €100.000-120.000/anno</li><li>Miglioramento copertura immobilizzazioni: da 0,62 a 0,75-0,80</li><li>Incremento EBITDA: +€180.000-250.000/anno</li></ul></div></div><div class="col-md-6"><div class="alert alert-primary"><h6>Tempistiche:</h6><ul><li>Immediato (0-3m): Gestione crediti/magazzino</li><li>Breve (3-6m): Ristrutturazione debito</li><li>Medio (6-12m): Rafforzamento patrimoniale</li><li>Lungo (>12m): Ottimizzazione operativa</li></ul></div></div></div>
+                           </div>
+                       </div>
+                   </div>
+
+             </div> <!-- Fine Accordion Principale -->
+
+
+            <!-- Sezione Azioni Prioritarie CDA (Updated for EDILCALCESTRUZZO SRL) -->
+             <section id="actions-summary" class="report-section">
+                  <h4 class="section-title small"><i class="fas fa-tasks me-2"></i>AZIONI PRIORITARIE</h4>
+                  <div class="card actions-card">
+                      <div class="card-body">
+                          <ol class="action-list list-unstyled">
+                              <li>
+                                  <div class="d-flex justify-content-between align-items-start">
+                                      <div>
+                                          <span class="icon-circle icon-circle-sm bg-icon-danger me-2"><i class="fas fa-sync-alt"></i></span>
+                                          <strong>Ottimizzazione capitale circolante</strong>
+                                          <p class="small text-muted mb-0">Implementare politiche incisive di credit management per ridurre i tempi di incasso da 272 a 180 giorni, liberando circa €1.900.000 di liquidità.</p>
+                                      </div>
+                                      <span class="priority-badge status-badge bg-danger">Alta Priorità</span>
+                                  </div>
+                              </li>
+                               <li>
+                                  <div class="d-flex justify-content-between align-items-start">
+                                       <div>
+                                           <span class="icon-circle icon-circle-sm bg-icon-danger me-2"><i class="fas fa-building"></i></span>
+                                           <strong>Riequilibrio patrimoniale</strong>
+                                          <p class="small text-muted mb-0">Implementare piano di rafforzamento patrimoniale per migliorare la copertura delle immobilizzazioni da 0,62 a 0,75-0,80 nel medio periodo.</p>
+                                       </div>
+                                      <span class="priority-badge status-badge bg-danger">Alta Priorità</span>
+                                  </div>
+                              </li>
+                               <li>
+                                  <div class="d-flex justify-content-between align-items-start">
+                                       <div>
+                                           <span class="icon-circle icon-circle-sm bg-icon-warning me-2"><i class="fas fa-percentage"></i></span>
+                                           <strong>Ristrutturazione del debito finanziario</strong>
+                                          <p class="small text-muted mb-0">Rinegoziare le condizioni di finanziamento per ridurre il costo del debito dal 18,82% all'8-10%, generando un risparmio annuo di €100.000-120.000.</p>
+                                       </div>
+                                      <span class="priority-badge status-badge bg-warning text-dark">Media Priorità</span>
+                                  </div>
+                              </li>
+                               <li>
+                                  <div class="d-flex justify-content-between align-items-start">
+                                       <div>
+                                            <span class="icon-circle icon-circle-sm bg-icon-info me-2"><i class="fas fa-tint"></i></span>
+                                            <strong>Costituzione riserve di liquidità</strong>
+                                           <p class="small text-muted mb-0">Incrementare le disponibilità liquide minime a €250.000-300.000 (3-4% dei ricavi) per ridurre il rischio di tensioni finanziarie.</p>
+                                       </div>
+                                      <span class="priority-badge status-badge bg-info text-dark">Bassa Priorità</span>
+                                  </div>
+                              </li>
+                          </ol>
+                      </div>
+                  </div>
+             </section>
+        </div> <!-- /dashboard-container -->
+
+        <!-- Footer Standard V2 -->
+        <footer class="footer no-print">
+             <div class="container-fluid px-4"> <div class="row"> <div class="col-md-6 text-center text-md-start mb-2 mb-md-0"> SCAN360 © <span id="currentYearFooterReport"></span> </div> <div class="col-md-6 text-center text-md-end"> Powered by <a href="http://www.kitzanos.com" target="_blank" class="text-white fw-bold">Kitzanos Lab</a> <img src="assets/img/logo_kitzanos.png" alt="Kitzanos Logo" class="ms-2" style="height: 20px; vertical-align: middle;">
+ </div> </div> </div>
+        </footer>
+
+    </div> <!-- /main-wrapper -->
+
+    <!-- Script JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="js/monitor_cda.js"></script>
+    <scan-chat data-bot-id="033a9b91-a72b-4704-aae2-04d0b1796bdd"></scan-chat>
+    <script src="./js/bundle.js"></script>
+</body>
+</html>

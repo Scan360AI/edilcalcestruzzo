@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bilancio Plus - Ottimizzazione - EDILCALCESTRUZZO SRL | SCAN</title>
+    <!-- Librerie Esterne -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- CSS Custom -->
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/print.css" rel="stylesheet" media="print">
+    <!-- Stili Incorporati -->
+    <link href="./css/bilancio_plus.css" rel="stylesheet">
+    <!-- Chart.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar Semplificata -->
+    <aside class="sidebar no-print">
+         <div class="sidebar-header">
+            <!-- Inserisci qui il logo se desiderato -->
+             <img src="assets/img/logo_scan.png" alt="FREM Logo" style="max-height: 40px;">
+            <h5>EDILCALCESTRUZZO SRL</h5>
+        </div>
+        <ul class="sidebar-nav flex-grow-1">
+            <!-- Link Home -->
+            <li class="nav-item"> <a class="nav-link" href="index.html"> <i class="fas fa-home fa-fw"></i> Torna alla Home </a> </li>
+            <li class="nav-title">Sezioni Bilancio Plus</li>
+            <!-- Ancore alle sezioni della pagina -->
+            <li class="nav-item"> <a class="nav-link" href="#summary"> <i class="fas fa-clipboard-list fa-fw"></i> Sintesi Attuale </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#optimization-areas"> <i class="fas fa-search-plus fa-fw"></i> Aree Ottimizzazione </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#optimization-proposals"> <i class="fas fa-cogs fa-fw"></i> Ipotesi Ottimizzazione </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#impact-summary"> <i class="fas fa-chart-pie fa-fw"></i> Impatto Complessivo </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="#final-thoughts"> <i class="fas fa-gavel fa-fw"></i> Considerazioni Finali </a> </li>
+            
+        </ul>
+        <div class="sidebar-footer"> <small>SCAN360 © <span id="currentYearSidebar"></span> Kitzanos</small> </div>
+    </aside>
+
+    <!-- Contenuto Principale Wrapper -->
+    <div class="main-wrapper">
+        <!-- Header Orizzontale -->
+        <header class="dashboard-header no-print">
+            <div class="header-title">
+                <h5 class="mb-0">Analisi Finanziaria e Proposte di Ottimizzazione (Bilancio Plus)</h5>
+                <p class="mb-0">EDILCALCESTRUZZO SRL | <span class="report-date">Dati al 12/2024</span></p>
+            </div>
+            <div class="header-controls d-flex align-items-center">
+                <!-- Rimosso badge IRP -->
+                <button class="btn btn-sm btn-outline-secondary me-2 print-button" onclick="printDocument()"> <i class="fas fa-print"></i> Stampa </button>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-light border dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fas fa-user-circle me-1"></i> EDILCALCESTRUZZO SRL </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton"> <li><button class="dropdown-item" type="button" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</button></li> </ul>
+                </div>
+            </div>
+        </header>
+        <div class="container d-none d-print-block mt-4 mb-4">
+            <h1 class="text-center mb-0"><span class="company-name">EDILCALCESTRUZZO SRL</span></h1>
+            <p class="text-center mb-0">Analisi Finanziaria e Proposte di Ottimizzazione (Bilancio Plus) | <span class="report-date">Dati al 12/2024</span></p>
+            <hr>
+        </div>
+
+        <!-- Area Contenuto Specifico del Report -->
+        <div class="dashboard-container">
+
+            <!-- ================================================================ -->
+            <!-- CONTENUTO BILANCIO PLUS - EDILCALCESTRUZZO SRL (con grafici e colori) -->
+            <!-- ================================================================ -->
+
+             <h2 class="section-title" id="optimization-analysis-title"><i class="fas fa-magic me-2"></i>Analisi Finanziaria e Proposte di Ottimizzazione</h2>
+
+            <!-- Sezione 1: Premessa -->
+            <div class="card mb-4 report-section">
+                 <div class="card-header"><h5 class="mb-0">1. Premessa sulla Definitività dei Dati 2024</h5></div>
+                 <div class="card-body small">
+                     <p>L'analisi si basa sui dati del bilancio 2024 di EDILCALCESTRUZZO SRL, operante nel settore "Estrazione di ghiaia, sabbia, argilla e caolino" (ATECO 08.12.00). L'azienda, attiva dal 2011, opera come industrial player nel mercato B2B con 40 dipendenti e un costo del personale di €1.466.345. Presenta una crescita significativa dei ricavi (+9,11%) con un notevole miglioramento della marginalità operativa (EBITDA +453,42%). L'azienda è classificata come RUNNERS nel sistema Leanus, crescendo ad elevati ritmi ma con necessità di supportare tale crescita con un adeguato incremento di efficienza patrimoniale.</p>
+                 </div>
+            </div>
+
+             <!-- Sezione 2: Sintesi Situazione Attuale -->
+             <div class="card mb-4 report-section" id="summary">
+                 <div class="card-header"><h5 class="mb-0">2. Sintesi della Situazione Attuale</h5></div>
+                 <div class="card-body small">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="card-title-small">2.1 Profilo Economico</h6>
+                            <ul class="list-styled">
+                                <li><strong>Ricavi:</strong> €7.559.559 (<span class="text-success">+9,11%</span> vs 2023)</li>
+                                <li><strong>EBITDA:</strong> €654.579 (8,66% sui Ricavi) (<span class="text-success">+453,42%</span> vs 2023)</li>
+                                <li><strong>EBIT:</strong> €275.050 (3,64% sui Ricavi) (<span class="text-success">+144,31%</span> vs 2023)</li>
+                                <li><strong>Utile netto:</strong> €40.394 (0,53% sui Ricavi) (<span class="text-success">+36,28%</span> vs 2023)</li>
+                            </ul>
+                             <h6 class="card-title-small mt-3">2.2 Profilo Patrimoniale</h6>
+                            <ul class="list-styled">
+                                <li><strong>Patrimonio Netto:</strong> €6.185.357 (<span class="text-success">+4,54%</span> vs 2023)</li>
+                                <li><strong>PFN:</strong> €1.169.095 (<span class="badge bg-warning">Indebitamento</span>)</li>
+                                <li><strong>Liquidità:</strong> €48.714 (<span class="text-success">+44,25%</span> vs 2023)</li>
+                                <li><strong>PFN/EBITDA:</strong> 1,79 (<span class="badge bg-success">Sostenibile</span>)</li>
+                                <li><strong>Leva (D/E):</strong> 0,20 (<span class="badge bg-success">Ottima</span>)</li>
+                            </ul>
+                        </div>
+                         <div class="col-md-6">
+                             <h6 class="card-title-small">2.3 Profilo Finanziario</h6>
+                            <ul class="list-styled">
+                                <li><strong>Cash Flow Operativo:</strong> €3.579.187 (47,35% sui Ricavi) (<span class="badge bg-success">Eccellente</span>)</li>
+                                <li><strong>DSO:</strong> 272 giorni (<span class="text-success">-7gg</span> vs 2023)</li>
+                                <li><strong>DPO:</strong> 174 giorni (<span class="text-success">+15gg</span> vs 2023)</li>
+                                <li><strong>DIO:</strong> 122 giorni (<span class="text-danger">+25gg</span> vs 2023)</li>
+                                <li><strong>CCC:</strong> 220 giorni (<span class="badge bg-danger">Critico</span>)</li>
+                            </ul>
+                             <h6 class="card-title-small mt-3">2.4 Indicatori di Rischio e Rating</h6>
+                             <ul class="list-styled">
+                                <li><strong>Leanus Score:</strong> 0,52 ("5 - Negativo") (<span class="badge bg-danger">Critico</span>)</li>
+                                <li><strong>Z-Score di Altman:</strong> 2,39 (<span class="badge bg-warning">Zona Grigia</span>)</li>
+                                <li><strong>Prob. Default (MCC):</strong> 2,87% (<span class="badge bg-warning">Fascia "3"</span>)</li>
+                                <li><strong>DSCR:</strong> 6,397 (<span class="badge bg-success">Eccellente</span>)</li>
+                             </ul>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+
+             <!-- Sezione 3: Aree di Potenziale Ottimizzazione -->
+             <div class="card mb-4 report-section" id="optimization-areas">
+                 <div class="card-header"><h5 class="mb-0">3. Analisi delle Aree di Potenziale Ottimizzazione</h5></div>
+                 <div class="card-body small">
+                      <div class="row">
+                          <div class="col-md-4">
+                              <h6 class="card-title-small">3.1 Area Economica</h6>
+                               <ul class="list-styled">
+                                   <li><i class="fas fa-info-circle text-success me-1"></i> EBITDA: €654.579 (8,66%)</li>
+                                   <li><i class="fas fa-info-circle text-success me-1"></i> Marg. Contr.: €2.458.074 (32,5%)</li>
+                                   <li><i class="fas fa-info-circle text-warning me-1"></i> ROI: 3,74% (insufficiente)</li>
+                                   <li><i class="fas fa-info-circle text-danger me-1"></i> ROE: 0,65% (critico)</li>
+                                   <li><i class="fas fa-exclamation-triangle text-danger me-1"></i> Oneri finanziari: €272.691 (18,82%)</li>
+                               </ul>
+                          </div>
+                           <div class="col-md-4">
+                               <h6 class="card-title-small">3.2 Area Patrimoniale</h6>
+                                <ul class="list-styled">
+                                    <li><i class="fas fa-info-circle text-warning me-1"></i> Attivo Fisso: €10.003.357 (58,9%)</li>
+                                    <li><i class="fas fa-exclamation-triangle text-danger me-1"></i> Copertura Immob.: 0,62</li>
+                                    <li><i class="fas fa-info-circle text-success me-1"></i> Patrimonio Netto: €6.185.357</li>
+                                    <li><i class="fas fa-info-circle text-success me-1"></i> Turnover: 1,03 (adeguato)</li>
+                                </ul>
+                           </div>
+                            <div class="col-md-4">
+                                <h6 class="card-title-small">3.3 Area Finanziaria</h6>
+                                 <ul class="list-styled">
+                                     <li><i class="fas fa-info-circle text-success me-1"></i> CF Operativo: €3.579.187 (47,35%)</li>
+                                     <li><i class="fas fa-exclamation-triangle text-danger me-1"></i> Oneri Fin.: €272.691 (elevati)</li>
+                                     <li><i class="fas fa-exclamation-triangle text-danger me-1"></i> Liquidità: €48.714 (0,64%)</li>
+                                     <li><i class="fas fa-exclamation-triangle text-danger me-1"></i> Ciclo Circolante: 220 giorni</li>
+                                     <li><i class="fas fa-info-circle text-success me-1"></i> DSCR: 6,397 (eccellente)</li>
+                                 </ul>
+                            </div>
+                      </div>
+                 </div>
+            </div>
+
+             <!-- Sezione 4: Ipotesi di Ottimizzazione -->
+             <div class="card mb-4 report-section" id="optimization-proposals">
+                <div class="card-header"><h5 class="mb-0">4. Ipotesi di Ottimizzazione del Bilancio 2024</h5></div>
+                 <div class="card-body">
+                     <h6 class="card-title-small">4.1 Premessa Metodologica</h6>
+                     <p class="small">Le seguenti ipotesi sono formulate nel pieno rispetto della normativa e dei principi contabili vigenti, con l'obiettivo di migliorare la rappresentazione della realtà economica sottostante dell'azienda che opera nel settore dell'estrazione di ghiaia, sabbia, argilla e caolino, mantenendo una rappresentazione veritiera e corretta della situazione aziendale.</p>
+
+                     <h6 class="card-title-small mt-4">4.2 Tabella Miglioramenti Proposti</h6>
+                     <div class="table-responsive">
+                         <table class="table table-sm table-striped table-hover">
+                              <thead class="table-light">
+                                  <tr>
+                                      <th>Voce/Indice</th>
+                                      <th>Situazione Attuale (2024)</th>
+                                      <th>Azione Suggerita</th>
+                                      <th>Effetto Previsto</th>
+                                      <th>Impatto Quantitativo</th>
+                                      <th>Principio/Norma</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td><strong>Revisione Ammortamenti</strong></td>
+                                      <td>€379.529 (5,0% dei ricavi)</td>
+                                      <td>Revisione aliquote di ammortamento entro i limiti consentiti</td>
+                                      <td>Miglioramento EBIT</td>
+                                      <td class="text-end"><span class="text-success">-€38.000/-€57.000</span> (ammortamenti)</td>
+                                      <td>OIC 16, par. 70-72</td>
+                                  </tr>
+                                  <tr>
+                                      <td><strong>Capitalizzazione Costi</strong></td>
+                                      <td>Attivo fisso: €10.003.357</td>
+                                      <td>Capitalizzazione costi di natura incrementativa</td>
+                                      <td>Incremento immobilizzazioni</td>
+                                      <td class="text-end"><span class="text-success">+€90.000-€130.000</span> (attivo fisso)</td>
+                                      <td>OIC 16, par. 15-19</td>
+                                  </tr>
+                                  <tr>
+                                      <td><strong>Valutazione Rimanenze</strong></td>
+                                      <td>€864.542 (DIO: 122 gg)</td>
+                                      <td>Affinamento metodo di valorizzazione e revisione stime obsolescenza</td>
+                                      <td>Ottimizzazione valore</td>
+                                      <td class="text-end"><span class="text-success">+€50.000/+€85.000</span> (rimanenze)</td>
+                                      <td>OIC 13, par. 50-60</td>
+                                  </tr>
+                                   <tr>
+                                      <td><strong>Ottimizzazione Accantonamenti</strong></td>
+                                      <td>Fondi: €1.059.757</td>
+                                      <td>Revisione critica degli accantonamenti in base alle attuali stime di rischio</td>
+                                      <td>Riduzione fondi</td>
+                                      <td class="text-end"><span class="text-success">-€40.000/-€70.000</span> (fondi)</td>
+                                      <td>OIC 31, par. 13-27</td>
+                                  </tr>
+                                  <tr>
+                                      <td><strong>Riclassificazione Poste Patrimoniali</strong></td>
+                                      <td>Copertura immob.: 0,62</td>
+                                      <td>Riclassificazione delle poste patrimoniali attive e passive</td>
+                                      <td>Miglioramento indici</td>
+                                      <td class="text-end"><span class="text-success">+0,03/+0,06</span> (copertura)</td>
+                                      <td>OIC 12, par. 38-64</td>
+                                  </tr>
+                                   <tr>
+                                      <td><strong>Ottimizzazione PFN</strong></td>
+                                      <td>PFN: €1.169.095</td>
+                                      <td>Corretta identificazione di strumenti cash equivalent</td>
+                                      <td>Riduzione PFN</td>
+                                      <td class="text-end"><span class="text-success">-€40.000/-€60.000</span> (PFN)</td>
+                                      <td>OIC 14, ESMA</td>
+                                  </tr>
+                              </tbody>
+                         </table>
+                     </div>
+
+                     <!-- Sezione Grafici Impatto INSERITA QUI -->
+                     <h6 class="card-title-small mt-5">5.0 Visualizzazione Impatto Ottimizzazioni</h6>
+                     <div class="row">
+                         <div class="col-lg-6 col-md-6 mb-3">
+                            <h6 class="text-center small">Grafico 5.1: EBITDA (€) - Prima vs Dopo</h6>
+                            <div class="chart-container"><canvas id="ebitdaChart"></canvas></div>
+                         </div>
+                         <div class="col-lg-6 col-md-6 mb-3">
+                            <h6 class="text-center small">Grafico 5.2: EBITDA Margin (%) - Prima vs Dopo</h6>
+                            <div class="chart-container"><canvas id="ebitdaMarginChart"></canvas></div>
+                         </div>
+                         <div class="col-lg-6 col-md-6 mb-3">
+                            <h6 class="text-center small">Grafico 5.3: PFN/EBITDA - Prima vs Dopo</h6>
+                            <div class="chart-container"><canvas id="pfnEbitdaChart"></canvas></div>
+                         </div>
+                         <div class="col-lg-6 col-md-6 mb-3">
+                             <h6 class="text-center small">Grafico 5.4: Leanus Score - Prima vs Dopo</h6>
+                             <div class="chart-container"><canvas id="magazzinoChart"></canvas></div>
+                         </div>
+                     </div>
+                     <!-- Fine Sezione Grafici -->
+
+                     <h6 class="card-title-small mt-4">4.3 Motivazioni dei Miglioramenti Proposti (Dettaglio)</h6>
+                      <div class="accordion small" id="motivationsAccordion">
+                          <!-- Revisione Ammortamenti -->
+                          <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingMotiv1"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMotiv1" aria-expanded="false" aria-controls="collapseMotiv1">4.3.1 Affinamento delle Politiche di Ammortamento</button></h2>
+                              <div id="collapseMotiv1" class="accordion-collapse collapse" aria-labelledby="headingMotiv1" data-bs-parent="#motivationsAccordion"><div class="accordion-body"><strong>Problematica:</strong> Ammortamenti e svalutazioni totali di €379.529 (5,0% dei ricavi) che potrebbero non riflettere pienamente la vita utile effettiva dei beni.<br><strong>Soluzione Proposta:</strong> Riesame della vita utile residua degli impianti di estrazione, considerando l'evoluzione tecnologica e le condizioni operative effettive, con riduzione ponderata delle aliquote di ammortamento del 10-15% per le immobilizzazioni materiali rilevanti.<br><strong>Ratio/Logica:</strong> L'OIC 16 consente la modifica delle aliquote di ammortamento in funzione del deterioramento fisico e dell'obsolescenza e prevede che il cambiamento delle stime non costituisce correzione di errore ma una modifica di stima.<br><strong>Benefici Attesi:</strong> Riduzione degli ammortamenti di €38.000-57.000, con conseguente incremento dell'EBIT e dell'utile netto.<br><strong>Normativa Riferimento:</strong> OIC 16, par. 70-72</div></div>
+                          </div>
+                          <!-- Capitalizzazione Costi -->
+                           <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingMotiv2"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMotiv2" aria-expanded="false" aria-controls="collapseMotiv2">4.3.2 Capitalizzazione di Costi di Sviluppo e Manutenzioni Incrementative</button></h2>
+                              <div id="collapseMotiv2" class="accordion-collapse collapse" aria-labelledby="headingMotiv2" data-bs-parent="#motivationsAccordion"><div class="accordion-body"><strong>Problematica:</strong> Attivo fisso netto rilevante (€10.003.357, 58,9% dell'attivo) con possibili costi di natura incrementativa erroneamente spesati.<br><strong>Soluzione Proposta:</strong> Analisi dettagliata dei costi di manutenzione per individuare componenti con natura incrementativa, capitalizzazione dei costi sostenuti per miglioramenti strutturali dei siti estrattivi e degli impianti.<br><strong>Ratio/Logica:</strong> L'OIC 16 disciplina la capitalizzazione dei costi di manutenzione straordinaria incrementativa del valore e/o della vita utile del bene, distinguendoli dalle manutenzioni ordinarie da spesare.<br><strong>Benefici Attesi:</strong> Incremento delle immobilizzazioni materiali di €90.000-130.000 con corrispondente incremento dell'utile.<br><strong>Normativa Riferimento:</strong> OIC 16, paragrafi 15-19</div></div>
+                          </div>
+                           <!-- Valutazione Rimanenze -->
+                           <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingMotiv3"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMotiv3" aria-expanded="false" aria-controls="collapseMotiv3">4.3.3 Affinamento della Valutazione delle Rimanenze</button></h2>
+                              <div id="collapseMotiv3" class="accordion-collapse collapse" aria-labelledby="headingMotiv3" data-bs-parent="#motivationsAccordion"><div class="accordion-body"><strong>Problematica:</strong> Rimanenze per €864.542 con rotazione lenta (122 giorni) che potrebbero essere sottovalutate o non correttamente valorizzate.<br><strong>Soluzione Proposta:</strong> Affinamento del metodo di valorizzazione (LIFO/FIFO/costo medio ponderato) in base all'andamento dei prezzi delle materie prime, revisione delle stime di obsolescenza e del valore di mercato, analisi dettagliata della composizione delle scorte per individuare materiali sottovalutati.<br><strong>Ratio/Logica:</strong> L'OIC 13 definisce i criteri di valutazione delle rimanenze e consente la scelta del metodo più appropriato per rappresentare correttamente il valore delle scorte.<br><strong>Benefici Attesi:</strong> Ottimizzazione del valore delle rimanenze finali di €50.000-85.000, con miglioramento del risultato economico.<br><strong>Normativa Riferimento:</strong> OIC 13, paragrafi 50-60</div></div>
+                          </div>
+                          <!-- Ottimizzazione Accantonamenti -->
+                          <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingMotiv4"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMotiv4" aria-expanded="false" aria-controls="collapseMotiv4">4.3.4 Ottimizzazione degli Accantonamenti</button></h2>
+                              <div id="collapseMotiv4" class="accordion-collapse collapse" aria-labelledby="headingMotiv4" data-bs-parent="#motivationsAccordion"><div class="accordion-body"><strong>Problematica:</strong> Fondi rischi e oneri per €1.059.757 (6,2% del passivo) che potrebbero essere sovrastimati rispetto ai rischi effettivi.<br><strong>Soluzione Proposta:</strong> Analisi dettagliata dei rischi effettivi (contenziosi, garanzie, ripristini ambientali), ricalcolo degli accantonamenti sulla base di parametri probabilistici aggiornati, valutazione dell'attualizzazione dei fondi a lungo termine.<br><strong>Ratio/Logica:</strong> L'OIC 31 definisce le condizioni per la rilevazione dei fondi rischi e oneri in base a obbligazioni attuali, stime attendibili e probabilità di utilizzo risorse. Accantonamenti eccessivi violano il principio di rappresentazione veritiera e corretta.<br><strong>Benefici Attesi:</strong> Riduzione degli accantonamenti di €40.000-70.000, con miglioramento del risultato d'esercizio.<br><strong>Normativa Riferimento:</strong> OIC 31, paragrafi 13-27</div></div>
+                          </div>
+                          <!-- Riclassificazione Poste Patrimoniali -->
+                           <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingMotiv5"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMotiv5" aria-expanded="false" aria-controls="collapseMotiv5">4.3.5 Riclassificazione di Poste Patrimoniali</button></h2>
+                              <div id="collapseMotiv5" class="accordion-collapse collapse" aria-labelledby="headingMotiv5" data-bs-parent="#motivationsAccordion"><div class="accordion-body"><strong>Problematica:</strong> Copertura immobilizzazioni 0,62, notevolmente sotto la soglia di equilibrio, con conseguente squilibrio patrimoniale.<br><strong>Soluzione Proposta:</strong> Riclassificazione delle poste patrimoniali attive e passive a breve e lungo termine, verifica della corretta classificazione dei debiti commerciali e finanziari, riclassificazione di crediti e debiti in base alla loro effettiva esigibilità.<br><strong>Ratio/Logica:</strong> L'OIC 12 fornisce indicazioni per la classificazione delle voci di stato patrimoniale, consentendo una rappresentazione più fedele dell'equilibrio patrimoniale dell'impresa.<br><strong>Benefici Attesi:</strong> Miglioramento della copertura immobilizzazioni a 0,65-0,68, con conseguente rafforzamento degli indici di solidità patrimoniale.<br><strong>Normativa Riferimento:</strong> OIC 12, par. 38-64</div></div>
+                          </div>
+                          <!-- Ottimizzazione PFN -->
+                           <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingMotiv6"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMotiv6" aria-expanded="false" aria-controls="collapseMotiv6">4.3.6 Ottimizzazione della Posizione Finanziaria Netta</button></h2>
+                              <div id="collapseMotiv6" class="accordion-collapse collapse" aria-labelledby="headingMotiv6" data-bs-parent="#motivationsAccordion"><div class="accordion-body"><strong>Problematica:</strong> PFN di €1.169.095 (PFN/EBITDA 1,79) che potrebbe includere componenti non strettamente finanziarie.<br><strong>Soluzione Proposta:</strong> Corretta identificazione di strumenti cash equivalent, verifica della classificazione delle componenti finanziarie, analisi della natura dei depositi cauzionali e anticipi.<br><strong>Ratio/Logica:</strong> Gli orientamenti ESMA sulla PFN e l'OIC 14 sulle disponibilità liquide forniscono criteri per la corretta classificazione delle componenti finanziarie, escludendo elementi di natura operativa o commerciale.<br><strong>Benefici Attesi:</strong> Riduzione della PFN di €40.000-60.000, con miglioramento del rapporto PFN/EBITDA e degli indicatori di bancabilità.<br><strong>Normativa Riferimento:</strong> OIC 14 sulla disponibilità liquide e orientamenti ESMA sulla PFN</div></div>
+                          </div>
+                      </div> <!-- Fine Accordion -->
+                 </div>
+            </div>
+
+             <!-- Sezione 6: Impatto Complessivo -->
+              <div class="card mb-4 report-section" id="impact-summary">
+                 <div class="card-header"><h5 class="mb-0">6. Impatto Complessivo delle Ottimizzazioni Proposte</h5></div>
+                 <div class="card-body small">
+                      <div class="row">
+                         <div class="col-md-4">
+                             <h6 class="card-title-small">6.1 Impatto Indici Economici</h6>
+                             <ul class="list-styled">
+                                 <li><strong>EBITDA:</strong> <span class="text-success">€704.579-€744.579</span> (da €654.579)</li>
+                                 <li><strong>EBITDA Margin:</strong> <span class="text-success">9,32-9,85%</span> (da 8,66%)</li>
+                                 <li><strong>EBIT:</strong> <span class="text-success">€363.050-€428.050</span> (da €275.050)</li>
+                                 <li><strong>Utile Netto:</strong> <span class="text-success">€128.394-€193.394</span> (da €40.394)</li>
+                                 <li><strong>ROE:</strong> <span class="text-success">2,1-3,1%</span> (da 0,65%)</li>
+                             </ul>
+                         </div>
+                         <div class="col-md-4">
+                              <h6 class="card-title-small">6.2 Impatto Indici Patrimoniali/Finanziari</h6>
+                              <ul class="list-styled">
+                                 <li><strong>PFN:</strong> <span class="text-success">€1.109.095-€1.129.095</span> (da €1.169.095)</li>
+                                 <li><strong>PFN/EBITDA:</strong> <span class="text-success">1,52-1,57</span> (da 1,79)</li>
+                                 <li><strong>Copertura Immob.:</strong> <span class="text-success">0,65-0,68</span> (da 0,62)</li>
+                                 <li><strong>Interest Coverage Ratio:</strong> <span class="text-success">1,33-1,57</span> (da 1,01)</li>
+                                 <li><strong>Ciclo Circolante:</strong> <span class="text-success">205-210 gg</span> (da 220 gg)</li>
+                             </ul>
+                         </div>
+                          <div class="col-md-4">
+                              <h6 class="card-title-small">6.3 Impatto Rating/Rischio</h6>
+                               <ul class="list-styled">
+                                  <li><strong>Leanus Score:</strong> <span class="text-success">1,10-1,30</span> (da 0,52)</li>
+                                  <li><strong>Categoria:</strong> <span class="text-success">Miglioramento verso "4 - Critico"</span> (da "5 - Negativo")</li>
+                                  <li><strong>Fascia MCC:</strong> <span class="text-success">Conferma "3"</span> (consolidamento)</li>
+                                  <li><strong>IRP:</strong> <span class="text-success">69,80-72,50</span> (da 64,28)</li>
+                               </ul>
+                          </div>
+                      </div>
+                 </div>
+            </div>
+
+            <!-- Sezione 7: Conclusioni -->
+            <div class="card mb-4 report-section" id="final-thoughts">
+                 <div class="card-header"><h5 class="mb-0">7. Considerazioni Finali</h5></div>
+                 <div class="card-body small">
+                     <p>L'analisi condotta su EDILCALCESTRUZZO SRL ha evidenziato un profilo aziendale caratterizzato da significativa crescita dei ricavi (+9,11%) e notevole miglioramento della marginalità operativa (EBITDA +453,42%), ma con importanti criticità strutturali nella copertura delle immobilizzazioni (0,62), nella gestione della liquidità (0,64% dei ricavi) e nel ciclo del circolante (220 giorni).</p>
+                     <p>Gli interventi suggeriti porteranno a un miglioramento complessivo del profilo di rischio: l'EBITDA crescerà moderatamente (€704.579-744.579), l'EBIT aumenterà significativamente (€363.050-428.050) e l'utile netto potrà più che triplicare (€128.394-193.394). Si otterrà inoltre una riduzione della PFN (da €1.169.095 a €1.109.095-1.129.095) e un miglioramento del rapporto PFN/EBITDA (da 1,79 a 1,52-1,57).</p>
+                     <p>Si raccomanda di prioritizzare: 1) la revisione delle politiche di ammortamento (impatto potenziale fino a €57.000), 2) la capitalizzazione di costi incrementativi (impatto potenziale fino a €130.000), 3) l'ottimizzazione degli accantonamenti (impatto potenziale fino a €70.000), e 4) l'affinamento del working capital management (impatto potenziale fino a €200.000). L'implementazione completa del piano dovrebbe essere completata entro 3-6 mesi, con monitoraggio bisettimanale della liquidità e mensile degli indicatori chiave.</p>
+                 </div>
+            </div>
+
+
+            <!-- ================================================================ -->
+            <!-- FINE CONTENUTO BILANCIO PLUS -->
+            <!-- ================================================================ -->
+
+        </div> <!-- /dashboard-container -->
+
+ <!-- Footer Standard (per coerenza, ma nascosto in stampa) -->
+         <footer class="footer no-print">
+              <div class="container-fluid px-4"> <!-- Usa container-fluid per larghezza piena -->
+                  <div class="row">
+                      <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                           <span id="currentYearFooter"></span>
+                      </div>
+                      <div class="col-md-6 text-center text-md-end">
+                          Powered by <a href="http://www.kitzanos.com" target="_blank" class="text-white fw-bold">Kitzanos Lab</a>
+                          <img src="assets/img/logo_kitzanos.png" alt="Kitzanos Logo" class="ms-2" style="height: 20px; vertical-align: middle;">
+                      </div>
+                  </div>
+              </div>
+          </footer>
+
+
+    </div> <!-- /main-wrapper -->
+
+    <!-- Script JS Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Chart.js è già caricato nell'HEAD -->
+
+    <!-- ### START SCRIPT JS EMBEDDED ### -->
+    <script src="./js/bilancio_plus.js"></script>
+    <!-- ### END EMBEDDED JAVASCRIPT ### -->
+    <!-- ### Chatnode JAVASCRIPT ### -->
+    <scan-chat data-bot-id="033a9b91-a72b-4704-aae2-04d0b1796bdd"></scan-chat>
+    <script src="../js/bundle.js"></script>
+</body>
+</html>

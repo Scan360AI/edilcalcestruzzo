@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Accesso riservato alla piattaforma SCAN360 per l'analisi finanziaria di EDILCALCESTRUZZO SRL">
+    <title>Login - SCAN360 | EDILCALCESTRUZZO SRL</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <style>
+        /* Stili aggiuntivi specifici per login */
+        html, body { height: 100%; }
+        body { 
+            display: flex; 
+            align-items: center; 
+            padding-top: 40px; 
+            padding-bottom: 40px; 
+            background-color: #eef2f7; 
+            background-image: linear-gradient(135deg, #eef2f7 0%, #e6edf5 100%);
+        }
+        .login-container { 
+            max-width: 450px; 
+            margin: auto; 
+            width: 90%;
+        }
+        .login-card-header { 
+            background-color: var(--primary); 
+            color: white; 
+            border-radius: 8px 8px 0 0 !important; 
+            padding: 1rem 1.5rem; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .login-btn { 
+            background-color: var(--primary); 
+            border-color: var(--primary); 
+            padding: 0.75rem 1.5rem; 
+            font-weight: 600; 
+            color: white !important;
+            transition: all 0.3s ease;
+        }
+        .login-btn:hover { 
+            background-color: #13134f; 
+            border-color: #13134f; 
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .login-btn:active {
+            transform: translateY(0);
+        }
+        .powered-by img { 
+            max-height: 25px; 
+            filter: grayscale(50%);
+            transition: filter 0.3s ease;
+        }
+        .powered-by:hover img {
+            filter: grayscale(0%);
+        }
+        .watermark-login { 
+            text-align: center; 
+            margin-top: 20px; 
+            color: #6c757d; 
+            font-size: 0.8rem; 
+        }
+        .input-group-text {
+            background-color: #f8f9fa;
+            border-right: none;
+        }
+        .form-control {
+            border-left: none;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #ced4da;
+            border-left: none;
+        }
+        .input-group:focus-within .input-group-text {
+            border-color: #86b7fe;
+        }
+        .alert-login {
+            display: none;
+            margin-bottom: 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 8px;
+        }
+        .logo-container {
+            margin-bottom: 1.5rem;
+        }
+        .logo-container img {
+            max-height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container w-100">
+        <div class="card shadow-lg">
+            <div class="card-header text-center login-card-header">
+                <h4 class="mb-0">SCAN360</h4>
+                <small>Strategic Corporate Analysis Navigator</small>
+            </div>
+            <div class="card-body p-4 p-md-5">
+                <div class="text-center mb-4">
+                    <div class="logo-container">
+                        <img src="assets/img/edilcalcestruzzo_logo.png" alt="EDILCALCESTRUZZO SRL Logo" class="img-fluid">
+                    </div>
+                    <h5 class="fw-bold">Accesso Riservato</h5>
+                    <p class="text-muted small mb-0">Analisi Finanziaria EDILCALCESTRUZZO SRL</p>
+                    <p class="text-muted small">Estrazione di ghiaia, sabbia, argilla e caolino</p>
+                </div>
+                
+                <div class="alert alert-danger alert-login" id="loginAlert" role="alert">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <span id="loginAlertMessage">Credenziali non valide. Riprova.</span>
+                </div>
+                
+                <form id="loginForm" onsubmit="return handleLogin(event)">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            <input type="text" class="form-control" id="username" placeholder="Inserisci username" required autocomplete="username">
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            <input type="password" class="form-control" id="password" placeholder="Inserisci password" required autocomplete="current-password">
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword" tabindex="-1">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn login-btn">
+                            <span id="loginBtnText">Accedi</span>
+                            <i class="fas fa-sign-in-alt ms-1"></i>
+                            <span class="spinner-border spinner-border-sm ms-1 d-none" id="loginSpinner" role="status" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </form>
+                <div class="powered-by d-flex justify-content-center align-items-center mt-4 pt-3 border-top">
+                    <span class="me-2 text-muted small">Powered by</span>
+                    <a href="https://www.kitzanos.com" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                        <img src="assets/img/kitzanos_logo_scuro.png" alt="Kitzanos Logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="watermark-login">
+            SCAN360 © 2025 Kitzanos Lab | Report elaborato il 11/08/2025
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+        // Previeni il loop di reindirizzamento sulla pagina di login
+        // Rimuovi eventuali stati di login corrotti
+        if (window.location.pathname.endsWith('login-page.html')) {
+            try {
+                // Se siamo sulla pagina di login, assicuriamoci che l'utente non sia "loggato"
+                const isLoggedIn = localStorage.getItem('scanUserLoggedIn');
+                if (isLoggedIn === 'true') {
+                    // Se l'utente risulta loggato ma è sulla pagina di login, 
+                    // probabilmente c'è un problema, quindi facciamo un clean
+                    console.log('Pulizia stato login sulla pagina di login');
+                    localStorage.removeItem('scanUserLoggedIn');
+                    localStorage.removeItem('scanUserData');
+                }
+            } catch (e) {
+                console.error('Errore controllo stato login:', e);
+            }
+        }
+        
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+        
+        // Funzione di gestione login migliorata
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const loginAlert = document.getElementById('loginAlert');
+            const loginAlertMessage = document.getElementById('loginAlertMessage');
+            const loginBtn = document.querySelector('.login-btn');
+            const loginBtnText = document.getElementById('loginBtnText');
+            const loginSpinner = document.getElementById('loginSpinner');
+            
+            // Nascondi eventuali messaggi di errore precedenti
+            loginAlert.style.display = 'none';
+            
+            // Mostra spinner e disabilita pulsante
+            loginBtn.disabled = true;
+            loginBtnText.textContent = 'Accesso in corso';
+            loginSpinner.classList.remove('d-none');
+            
+            // Simula una richiesta di login (da sostituire con la vera implementazione)
+            setTimeout(() => {
+                // Esempio di credenziali valide (da sostituire con la vera implementazione)
+                if (username === 'admin' && password === 'password') {
+                    // Login riuscito
+                    localStorage.setItem('scanUserLoggedIn', 'true');
+                    localStorage.setItem('scanUserData', JSON.stringify({
+                        username: username,
+                        role: 'admin',
+                        lastLogin: new Date().toISOString()
+                    }));
+                    
+                    // Reindirizza alla dashboard
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Login fallito
+                    loginAlert.style.display = 'block';
+                    loginAlertMessage.textContent = 'Credenziali non valide. Riprova.';
+                    
+                    // Ripristina pulsante
+                    loginBtn.disabled = false;
+                    loginBtnText.textContent = 'Accedi';
+                    loginSpinner.classList.add('d-none');
+                    
+                    // Focus sul campo username
+                    document.getElementById('username').focus();
+                }
+            }, 1000); // Simula un ritardo di rete
+            
+            return false;
+        }
+    </script>
+    <scan-chat data-bot-id="033a9b91-a72b-4704-aae2-04d0b1796bdd"></scan-chat>
+    <script src="./js/bundle.js"></script>
+</body>
+</html>

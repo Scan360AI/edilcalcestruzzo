@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisi Economica e Benchmark - EDILCALCESTRUZZO SRL | SCAN V9</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/print.css" rel="stylesheet" media="print">
+     <style>
+        .table-success-light { background-color: #d1e7dd !important; }
+        .table-warning-light { background-color: #fff3cd !important; }
+        .table-danger-light { background-color: #f8d7da !important; }
+     </style>
+</head>
+<body>
+
+ <!-- Sidebar -->
+    <aside class="sidebar no-print">
+        <div class="sidebar-header"> <img src="../assets/img/logo_scan.png" alt="SCAN Logo" style="max-height: 40px;"> <h5>EDILCALCESTRUZZO SRL</h5> </div>
+        <ul class="sidebar-nav flex-grow-1">
+            <li class="nav-item"> <a class="nav-link" href="../dashboard_v2.html"> <i class="fas fa-tachometer-alt fa-fw"></i> Dashboard </a> </li>
+            <li class="nav-title">Analisi Dettagliata</li>
+            <li class="nav-item"> <a class="nav-link" href="parte1_sintesi.html"> <i class="fas fa-file-alt fa-fw"></i> Sintesi e Profilo </a> </li>
+            <li class="nav-item"> <a class="nav-link active" href="parte2_economico.html"> <i class="fas fa-balance-scale fa-fw"></i> Analisi Economica </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte3_patrimoniale.html"> <i class="fas fa-landmark fa-fw"></i> Analisi Patrimoniale </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte4_bancabilita.html"> <i class="fas fa-university fa-fw"></i> Bancabilità </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte5_circolante_flussi.html"> <i class="fas fa-sync-alt fa-fw"></i> Circolante e Flussi </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte6_rischi-raccomandazioni.html"> <i class="fas fa-exclamation-triangle fa-fw"></i> Rischi e Azioni </a> </li>
+            <li class="nav-title">Approfondimenti</li>
+            <li class="nav-item"> <a class="nav-link" href="irp_dettaglio.html"> <i class="fas fa-shield-alt fa-fw"></i> Dettaglio IRP </a> </li>
+        </ul>
+        <div class="sidebar-footer"> <small>SCAN360 © <span id="currentYearSidebar"></span> Kitzanos</small> </div>
+    </aside>
+
+
+    <!-- Contenuto Principale Wrapper -->
+    <div class="main-wrapper">
+        <!-- Header Orizzontale -->
+        <header class="dashboard-header no-print">
+            <div class="header-title">
+                <h5 class="mb-0">Report Dettagliato: Analisi Economica e Benchmark</h5>
+                <p class="mb-0">EDILCALCESTRUZZO SRL | <span class="report-date">11 Agosto 2025</span></p>
+            </div>
+            <div class="header-controls d-flex align-items-center">
+                <span id="irp-header-badge" class="badge me-3"></span> <!-- Badge IRP -->
+                <button class="btn btn-sm btn-outline-secondary me-2 print-button" onclick="printDocument()"> <i class="fas fa-print"></i> Stampa </button>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-light border dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fas fa-user-circle me-1"></i> EDILCALCESTRUZZO SRL </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton"> <li><button class="dropdown-item" type="button" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</button></li> </ul>
+                </div>
+            </div>
+        </header>
+        <div class="container d-none d-print-block mt-4 mb-4">
+            <h1 class="text-center mb-0"><span class="company-name">EDILCALCESTRUZZO SRL</span></h1>
+            <p class="text-center mb-0">Report Dettagliato: Analisi Economica e Benchmark | <span class="report-date">11 Agosto 2025</span></p>
+            <hr>
+        </div>
+
+        <!-- Area Contenuto Specifico del Report -->
+        <div class="dashboard-container">
+
+            <!-- ================================================================ -->
+            <!-- CONTENUTO SPECIFICO PARTE 2 - V9 - Updated for EDILCALCESTRUZZO -->
+            <!-- ================================================================ -->
+
+             <h2 class="section-title" id="economic-analysis"><i class="fas fa-balance-scale me-2"></i>SEZIONE 2.1: ANALISI ECONOMICA</h2>
+
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">2.1.1 Conto Economico Riclassificato</h5></div>
+                <div class="card-body">
+                    <p>Il conto economico riclassificato evidenzia la struttura dei costi e dei ricavi di EDILCALCESTRUZZO SRL nel periodo 2022-2024, consentendo di valutare la redditività operativa e netta nel settore "Estrazione di ghiaia, sabbia, argilla e caolino".</p>
+
+                     <h6 class="mt-4 text-center small">Grafico 2.1: Andamento Ricavi ed EBITDA 2022-2024 (€000 e %)</h6>
+                     <div class="chart-container mb-4" style="height: 350px;">
+                         <canvas id="economicTrendChart"></canvas>
+                     </div>
+
+                    <h6 class="mt-4">Tabella 2.1: Conto Economico Riclassificato 2022-2024 (valori in €)</h6>
+                     <div class="table-responsive">
+                         <table class="table table-sm table-striped table-hover">
+                             <thead class="table-light">
+                                 <tr><th>Voce</th><th class="text-end">2022</th><th class="text-end">% Ricavi</th><th class="text-end">2023</th><th class="text-end">% Ricavi</th><th class="text-end">2024</th><th class="text-end">% Ricavi</th><th class="text-end">Var. % 23-24</th></tr>
+                             </thead>
+                             <tbody>
+                                 <tr><td>Ricavi</td><td class="text-end">7.126.744</td><td class="text-end">100,0%</td><td class="text-end">6.928.450</td><td class="text-end">100,0%</td><td class="text-end">7.559.559</td><td class="text-end">100,0%</td><td class="text-success">+9,11%</td></tr>
+                                 <tr><td>Acquisti e consumi</td><td class="text-end">(3.507.681)</td><td class="text-end">-49,2%</td><td class="text-end">(3.228.934)</td><td class="text-end">-46,6%</td><td class="text-end">(2.571.474)</td><td class="text-end">-34,0%</td><td class="text-success">-20,36%</td></tr>
+                                 <tr><td>Valore Aggiunto su Consumi</td><td class="text-end">3.619.063</td><td class="text-end">50,8%</td><td class="text-end">3.699.516</td><td class="text-end">53,4%</td><td class="text-end">4.988.085</td><td class="text-end">66,0%</td><td class="text-success">+34,83%</td></tr>
+                                 <tr><td>Costi variabili di produzione</td><td class="text-end">(2.028.425)</td><td class="text-end">-28,5%</td><td class="text-end">(2.183.559)</td><td class="text-end">-31,5%</td><td class="text-end">(2.530.011)</td><td class="text-end">-33,5%</td><td class="text-danger">+15,87%</td></tr>
+                                 <tr><td>Margine di Contribuzione</td><td class="text-end">1.590.638</td><td class="text-end">22,3%</td><td class="text-end">1.515.957</td><td class="text-end">21,9%</td><td class="text-end">2.458.074</td><td class="text-end">32,5%</td><td class="text-success">+62,15%</td></tr>
+                                 <tr><td>Costi fissi</td><td class="text-end">(1.757.460)</td><td class="text-end">-24,7%</td><td class="text-end">(1.701.168)</td><td class="text-end">-24,6%</td><td class="text-end">(1.803.495)</td><td class="text-end">-23,9%</td><td class="text-danger">+6,01%</td></tr>
+                                 <tr class="table-success fw-bold"><td>EBITDA</td><td class="text-end">(166.822)</td><td class="text-end">-2,3%</td><td class="text-end">(185.211)</td><td class="text-end">-2,7%</td><td class="text-end">654.579</td><td class="text-end">8,7%</td><td class="text-success">+453,42%</td></tr>
+                                 <tr><td>Ammortamenti e svalutazioni</td><td class="text-end">(580.754)</td><td class="text-end">-8,2%</td><td class="text-end">(435.507)</td><td class="text-end">-6,3%</td><td class="text-end">(379.529)</td><td class="text-end">-5,0%</td><td class="text-success">-12,85%</td></tr>
+                                 <tr><td>EBIT (Reddito Operativo)</td><td class="text-end">(747.576)</td><td class="text-end">-10,5%</td><td class="text-end">(620.718)</td><td class="text-end">-9,0%</td><td class="text-end">275.050</td><td class="text-end">3,6%</td><td class="text-success">+144,31%</td></tr>
+                                 <tr><td>Saldo oneri/ricavi diversi</td><td class="text-end">957.095</td><td class="text-end">13,4%</td><td class="text-end">938.975</td><td class="text-end">13,6%</td><td class="text-end">130.074</td><td class="text-end">1,7%</td><td class="text-danger">-86,14%</td></tr>
+                                 <tr><td>Margine Ante Gestione Fin.</td><td class="text-end">209.519</td><td class="text-end">2,9%</td><td class="text-end">318.257</td><td class="text-end">4,6%</td><td class="text-end">405.124</td><td class="text-end">5,4%</td><td class="text-success">+27,29%</td></tr>
+                                 <tr><td>Gestione finanziaria</td><td class="text-end">(141.121)</td><td class="text-end">-2,0%</td><td class="text-end">(288.617)</td><td class="text-end">-4,2%</td><td class="text-end">(272.691)</td><td class="text-end">-3,6%</td><td class="text-success">-5,52%</td></tr>
+                                 <tr><td>EBT (Utile ante imposte)</td><td class="text-end">68.398</td><td class="text-end">1,0%</td><td class="text-end">29.640</td><td class="text-end">0,4%</td><td class="text-end">132.433</td><td class="text-end">1,8%</td><td class="text-success">+346,80%</td></tr>
+                                 <tr><td>Imposte</td><td class="text-end">0</td><td class="text-end">0,0%</td><td class="text-end">0</td><td class="text-end">0,0%</td><td class="text-end">(92.039)</td><td class="text-end">-1,2%</td><td class="text-danger">N/A</td></tr>
+                                 <tr class="table-success fw-bold"><td>Utile/Perdita d'esercizio</td><td class="text-end">68.398</td><td class="text-end">1,0%</td><td class="text-end">29.640</td><td class="text-end">0,4%</td><td class="text-end">40.394</td><td class="text-end">0,5%</td><td class="text-success">+36,28%</td></tr>
+                             </tbody>
+                         </table>
+                     </div>
+
+                    <h6 class="mt-4">Analisi della composizione dei costi</h6>
+                     <div class="table-responsive">
+                         <table class="table table-sm table-striped table-hover">
+                             <thead class="table-light">
+                                 <tr><th>Categoria di costo</th><th class="text-end">2022</th><th class="text-end">% Ricavi</th><th class="text-end">2023</th><th class="text-end">% Ricavi</th><th class="text-end">2024</th><th class="text-end">% Ricavi</th><th class="text-end">Var.% 23-24</th></tr>
+                             </thead>
+                             <tbody>
+                                 <tr><td>Acquisti e consumi</td><td class="text-end">3.507.681</td><td class="text-end">49,2%</td><td class="text-end">3.228.934</td><td class="text-end">46,6%</td><td class="text-end">2.571.474</td><td class="text-end">34,0%</td><td class="text-success">-20,36%</td></tr>
+                                 <tr><td>Costi variabili di produzione</td><td class="text-end">2.028.425</td><td class="text-end">28,5%</td><td class="text-end">2.183.559</td><td class="text-end">31,5%</td><td class="text-end">2.530.011</td><td class="text-end">33,5%</td><td class="text-danger">+15,87%</td></tr>
+                                 <tr><td>Costo del personale</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">1.466.345</td><td class="text-end">19,4%</td><td class="text-end">n.d.</td></tr>
+                                 <tr><td>Altri costi fissi</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">337.150</td><td class="text-end">4,5%</td><td class="text-end">n.d.</td></tr>
+                                 <tr><td>Ammortamenti</td><td class="text-end">580.754</td><td class="text-end">8,2%</td><td class="text-end">435.507</td><td class="text-end">6,3%</td><td class="text-end">350.925</td><td class="text-end">4,6%</td><td class="text-success">-19,42%</td></tr>
+                                 <tr><td>Svalutazioni e acc.</td><td class="text-end">0</td><td class="text-end">0,0%</td><td class="text-end">0</td><td class="text-end">0,0%</td><td class="text-end">28.604</td><td class="text-end">0,4%</td><td class="text-danger">N/A</td></tr>
+                                 <tr><td>Oneri diversi</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">586.727</td><td class="text-end">7,8%</td><td class="text-end">n.d.</td></tr>
+                                 <tr><td>Oneri finanziari</td><td class="text-end">141.121</td><td class="text-end">2,0%</td><td class="text-end">288.617</td><td class="text-end">4,2%</td><td class="text-end">272.691</td><td class="text-end">3,6%</td><td class="text-success">-5,52%</td></tr>
+                             </tbody>
+                         </table>
+                     </div>
+
+                    <h6 class="mt-4">Analisi del Conto Economico (EDILCALCESTRUZZO SRL):</h6>
+                    <ol class="small">
+                        <li><strong>Ricavi:</strong> Significativa crescita del 9,11% nel 2024 rispetto al 2023, invertendo il trend negativo degli anni precedenti e dimostrando una ripresa della domanda nel settore estrattivo.</li>
+                        <li><strong>Valore Aggiunto (66,0%):</strong> Straordinario miglioramento (+34,83%), con progressiva crescita dal 50,8% del 2022, indicando un'eccezionale ottimizzazione nell'impiego delle materie prime e nei processi produttivi.</li>
+                        <li><strong>EBITDA (8,7%):</strong> Radicale miglioramento con passaggio da un valore negativo (-2,7% nel 2023) a un margine positivo, con una variazione incrementale del 453,42%, indice di una profonda ristrutturazione operativa.</li>
+                        <li><strong>EBIT (3,6%):</strong> Inversione di tendenza con passaggio da valori negativi a positivi, segnalando un recupero della redditività operativa, sebbene ancora su livelli contenuti rispetto ai benchmark settoriali.</li>
+                        <li><strong>Utile Netto (0,5%):</strong> Incremento del 36,28% rispetto al 2023, ma ancora su livelli marginali in rapporto ai ricavi, principalmente a causa dell'elevata incidenza degli oneri finanziari.</li>
+                        <li><strong>Oneri finanziari:</strong> Pur in lieve riduzione (-5,52%), mantengono un'incidenza significativa (3,6% dei ricavi), erodendo gran parte della redditività operativa.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">2.1.2 Analisi della Marginalità</h5></div>
+                 <div class="card-body">
+                    <p>L'analisi della marginalità valuta la capacità di generare valore aggiunto nel settore dell'estrazione di materiali da costruzione.</p>
+                    <div class="row">
+                        <div class="col-lg-7 mb-3 mb-lg-0">
+                            <h6 class="text-center small">Grafico 2.2: Evoluzione delle Principali Marginalità (%)</h6>
+                             <div class="chart-container" style="height: 350px;">
+                                 <canvas id="marginalityChart"></canvas>
+                             </div>
+                        </div>
+                         <div class="col-lg-5">
+                             <h6>Tabella 2.2: Evoluzione Indici di Marginalità (EDILCALCESTRUZZO SRL)</h6>
+                             <div class="table-responsive">
+                                <table class="table table-sm table-striped table-hover">
+                                     <thead><tr><th>Indicatore</th><th class="text-end">2022</th><th class="text-end">2023</th><th class="text-end">2024</th><th>Trend</th></tr></thead>
+                                     <tbody>
+                                         <tr><td>Valore Aggiunto/Ricavi</td><td class="text-end">50,8%</td><td class="text-end">53,4%</td><td class="text-end">66,0%</td><td class="text-success"><i class="fas fa-arrow-up"></i></td></tr>
+                                         <tr><td>MdC/Ricavi</td><td class="text-end">22,3%</td><td class="text-end">21,9%</td><td class="text-end">32,5%</td><td class="text-success"><i class="fas fa-arrow-up"></i></td></tr>
+                                         <tr><td>EBITDA/Ricavi</td><td class="text-end">-2,3%</td><td class="text-end">-2,7%</td><td class="text-end">8,7%</td><td class="text-success"><i class="fas fa-arrow-up"></i></td></tr>
+                                         <tr><td>ROS (EBIT/Ricavi)</td><td class="text-end">-10,5%</td><td class="text-end">-9,0%</td><td class="text-end">3,6%</td><td class="text-success"><i class="fas fa-arrow-up"></i></td></tr>
+                                         <tr><td>Utile Netto/Ricavi</td><td class="text-end">1,0%</td><td class="text-end">0,4%</td><td class="text-end">0,5%</td><td class="text-success"><i class="fas fa-arrow-up"></i></td></tr>
+                                         <tr class="table-secondary"><td>Break-Even Point (€)</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">6.713.670</td><td class="text-warning"><i class="fas fa-arrow-up"></i></td></tr>
+                                         <tr class="table-secondary"><td>Margine Sicurezza</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">11,19%</td><td class="text-warning"><i class="fas fa-check"></i></td></tr>
+                                     </tbody>
+                                 </table>
+                             </div>
+                             <h6 class="mt-3">Break-Even e Leva Operativa (2024 - EDILCALCESTRUZZO SRL)</h6>
+                             <div class="alert-box alert-success small mt-2 p-2">
+                                 <ul class="list-unstyled mb-0">
+                                     <li><i class="fas fa-bullseye me-1"></i> BEP: €6.713.670 | Margine Sicurezza: 11,19% (Discreto)</li>
+                                     <li><i class="fas fa-calculator me-1"></i> Moltiplicatore CF: 3,08</li>
+                                     <li><i class="fas fa-arrows-alt-v me-1"></i> Variazione ricavi per EBIT=0: -11,19% | Variazione CF per EBIT=0: +15,25%</li>
+                                 </ul>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+
+            <div class="card mb-4 report-section">
+                 <div class="card-header"><h5 class="mb-0">2.1.3 Struttura e Dettaglio Principali Costi</h5></div>
+                 <div class="card-body">
+                     <p>Analisi delle principali voci di costo e loro incidenza nel settore dell'estrazione di materiali da costruzione.</p>
+                     <h6 class="mt-4">Tabella 2.3: Struttura dei Costi 2022-2024 (EDILCALCESTRUZZO SRL)</h6>
+                      <div class="table-responsive">
+                         <table class="table table-sm table-striped table-hover">
+                            <thead class="table-light">
+                                <tr><th>Categoria di Costo</th><th class="text-end">2022</th><th class="text-end">% Ricavi</th><th class="text-end">2023</th><th class="text-end">% Ricavi</th><th class="text-end">2024</th><th class="text-end">% Ricavi</th><th>Var%</th><th>Valutazione</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Acquisti e consumi</td><td class="text-end">3.507.681</td><td class="text-end">49,2%</td><td class="text-end">3.228.934</td><td class="text-end">46,6%</td><td class="text-end">2.571.474</td><td class="text-end">34,0%</td><td class="text-success">-20,36%</td><td><span class="status-badge bg-success">Miglioramento</span></td></tr>
+                                <tr><td>Costi variabili produzione</td><td class="text-end">2.028.425</td><td class="text-end">28,5%</td><td class="text-end">2.183.559</td><td class="text-end">31,5%</td><td class="text-end">2.530.011</td><td class="text-end">33,5%</td><td class="text-danger">+15,87%</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                <tr><td>Costo del personale</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">1.466.345</td><td class="text-end">19,4%</td><td class="text-end">n.d.</td><td><span class="status-badge bg-warning">Elevato</span></td></tr>
+                                <tr><td>Altri costi fissi</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">337.150</td><td class="text-end">4,5%</td><td class="text-end">n.d.</td><td><span class="status-badge bg-secondary">Da valutare</span></td></tr>
+                                <tr><td>Ammortamenti</td><td class="text-end">580.754</td><td class="text-end">8,2%</td><td class="text-end">435.507</td><td class="text-end">6,3%</td><td class="text-end">350.925</td><td class="text-end">4,6%</td><td class="text-success">-19,42%</td><td><span class="status-badge bg-success">In riduzione</span></td></tr>
+                                <tr><td>Oneri finanziari</td><td class="text-end">141.121</td><td class="text-end">2,0%</td><td class="text-end">288.617</td><td class="text-end">4,2%</td><td class="text-end">272.691</td><td class="text-end">3,6%</td><td class="text-success">-5,52%</td><td><span class="status-badge bg-warning">Elevato</span></td></tr>
+                            </tbody>
+                         </table>
+                     </div>
+                     <h6 class="mt-4">Analisi del Costo del Personale</h6>
+                      <div class="table-responsive">
+                         <table class="table table-sm table-striped table-hover">
+                            <thead class="table-light">
+                                <tr><th>Dettaglio</th><th class="text-end">2022</th><th class="text-end">2023</th><th class="text-end">2024</th><th class="text-end">Var.% 23-24</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Numero dipendenti</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">40</td><td class="text-end">n.d.</td></tr>
+                                <tr><td>Costo totale personale (€)</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">1.466.345</td><td class="text-end">n.d.</td></tr>
+                                <tr><td>Costo medio per dipendente (€)</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">36.659</td><td class="text-end">n.d.</td></tr>
+                                <tr><td>Incidenza su ricavi (%)</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">19,4%</td><td class="text-end">n.d.</td></tr>
+                                <tr><td>Ricavi per dipendente (€)</td><td class="text-end">n.d.</td><td class="text-end">n.d.</td><td class="text-end">188.989</td><td class="text-end">n.d.</td></tr>
+                            </tbody>
+                         </table>
+                     </div>
+                     <h6 class="mt-4">Approfondimento (EDILCALCESTRUZZO SRL):</h6>
+                     <ul class="small">
+                          <li><strong>Acquisti/Consumi (34,0%):</strong> Significativa riduzione dell'incidenza rispetto al 2023 (-20,36%), segnale positivo di miglioramento dell'efficienza produttiva e ottimizzazione della supply chain.</li>
+                          <li><strong>Costi variabili (+15,87%):</strong> Incremento preoccupante che contrasta con la riduzione dei consumi, suggerendo possibili inefficienze operative o incremento dei costi energetici.</li>
+                          <li><strong>Costo del personale (19,4%):</strong> Incidenza significativamente superiore ai benchmark settoriali (12-15%), indicativa di possibile sovradimensionamento dell'organico o inefficienze nella gestione delle risorse umane.</li>
+                          <li><strong>Oneri finanziari (3,6%):</strong> Pur in lieve riduzione (-5,52%), mantengono un'incidenza elevata, con un costo del debito anomalo (18,82% dei debiti finanziari medi), significativamente superiore ai tassi di mercato.</li>
+                          <li><strong>Ammortamenti (4,6%):</strong> In progressiva riduzione nel triennio, suggerendo un possibile invecchiamento degli impianti o una revisione delle politiche di ammortamento.</li>
+                     </ul>
+                 </div>
+            </div>
+
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">2.1.4 Indici di Redditività</h5></div>
+                 <div class="card-body">
+                     <p>Analisi della capacità di generare ritorni adeguati nel settore dell'estrazione di materiali da costruzione.</p>
+                      <div class="row">
+                         <div class="col-lg-7 mb-3 mb-lg-0">
+                             <h6>Tabella 2.4: Indici di Redditività 2022-2024 (EDILCALCESTRUZZO SRL)</h6>
+                              <div class="table-responsive">
+                                 <table class="table table-sm table-striped table-hover">
+                                     <thead class="table-light"><tr><th>Indice</th><th>Formula</th><th class="text-end">2022</th><th class="text-end">2023</th><th class="text-end">2024</th><th>Soglia</th><th>Valutazione</th></tr></thead>
+                                     <tbody>
+                                         <tr><td>ROE</td><td>Utile/PN</td><td class="text-end">1,16%</td><td class="text-end">0,50%</td><td class="text-end">0,65%</td><td>> 7%</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                         <tr><td>ROI</td><td>EBIT/CIN</td><td class="text-end">-9,89%</td><td class="text-end">-8,21%</td><td class="text-end">3,74%</td><td>> 8%</td><td><span class="status-badge bg-warning">Insufficiente</span></td></tr>
+                                         <tr><td>ROS</td><td>EBIT/Ricavi</td><td class="text-end">-10,5%</td><td class="text-end">-9,0%</td><td class="text-end">3,6%</td><td>> 6%</td><td><span class="status-badge bg-warning">Sufficiente</span></td></tr>
+                                         <tr><td>EBITDA Margin</td><td>EBITDA/Ricavi</td><td class="text-end">-2,3%</td><td class="text-end">-2,7%</td><td class="text-end">8,7%</td><td>> 8%</td><td><span class="status-badge bg-success">Adeguato</span></td></tr>
+                                         <tr><td>Redditività Netta</td><td>Utile/Ricavi</td><td class="text-end">1,0%</td><td class="text-end">0,4%</td><td class="text-end">0,5%</td><td>> 4%</td><td><span class="status-badge bg-danger">Insufficiente</span></td></tr>
+                                         <tr><td>Turnover</td><td>Ricavi/CIN</td><td class="text-end">0,94</td><td class="text-end">0,91</td><td class="text-end">1,03</td><td>> 1</td><td><span class="status-badge bg-success">Adeguato</span></td></tr>
+                                         <tr><td>Cash Flow / Ricavi</td><td>CF Op./Ricavi</td><td class="text-end">16,3%</td><td class="text-end">2,7%</td><td class="text-end">47,4%</td><td>> 8%</td><td><span class="status-badge bg-success">Eccellente</span></td></tr>
+                                     </tbody>
+                                 </table>
+                             </div>
+                         </div>
+                          <div class="col-lg-5">
+                              <h6 class="text-center small">Grafico 2.3: Andamento Redditività (%)</h6>
+                              <div class="chart-container" style="height: 280px;"> <canvas id="profitabilityIndicesChart"></canvas> </div>
+                         </div>
+                     </div>
+                      <h6 class="mt-4">Analisi (EDILCALCESTRUZZO SRL):</h6>
+                      <ul class="small">
+                        <li><strong>ROE (0,65%):</strong> Valore estremamente contenuto e criticamente distante dal benchmark di settore (7-10%), riflettendo una scarsa remunerazione del capitale proprio che potrebbe compromettere la capacità di attrarre nuovi investimenti.</li>
+                        <li><strong>ROI (3,74%):</strong> Pur in significativo miglioramento rispetto ai valori negativi degli anni precedenti, rimane insufficiente rispetto al benchmark di settore (8-10%), evidenziando una redditività ancora inadeguata del capitale investito.</li>
+                        <li><strong>ROS (3,6%):</strong> Il passaggio a un valore positivo rappresenta un progresso sostanziale, ma rimane al di sotto della soglia di adeguatezza settoriale (6-8%).</li>
+                        <li><strong>EBITDA Margin (8,7%):</strong> Unico indicatore di redditività allineato ai benchmark, segnalando un buon recupero dell'efficienza operativa.</li>
+                        <li><strong>Cash Flow / Ricavi (47,4%):</strong> Valore eccezionalmente elevato, significativamente superiore al benchmark di settore (8-10%), potenzialmente influenzato da componenti non ricorrenti o variazioni del capitale circolante.</li>
+                        <li><strong>Turnover (1,03):</strong> Miglioramento dell'efficienza nell'utilizzo delle risorse investite, con un valore ora allineato al limite inferiore del range di riferimento del settore (1,0-1,5).</li>
+                      </ul>
+                 </div>
+            </div>
+
+             <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">2.1.5 Effetto Leva Finanziaria</h5></div>
+                 <div class="card-body">
+                     <p>Valutazione dell'impatto dell'indebitamento sulla redditività del capitale proprio nel contesto del settore estrattivo.</p>
+                      <div class="row">
+                          <div class="col-lg-7 mb-3 mb-lg-0">
+                              <h6>Tabella 2.5: Analisi Effetto Leva 2022-2024 (EDILCALCESTRUZZO SRL)</h6>
+                              <div class="table-responsive">
+                                 <table class="table table-sm table-striped table-hover">
+                                      <thead><tr><th>Parametro</th><th>Formula</th><th class="text-end">2022</th><th class="text-end">2023</th><th class="text-end">2024</th><th class="text-end">Variazione 23-24</th></tr></thead>
+                                      <tbody>
+                                          <tr><td>ROI</td><td>EBIT/CIN</td><td class="text-end">-9,89%</td><td class="text-end">-8,21%</td><td class="text-end">3,74%</td><td class="text-end">+11,95 p.p.</td></tr>
+                                          <tr><td>Costo medio del debito (i)</td><td>Oneri Fin./Debiti Fin.</td><td class="text-end">8,28%</td><td class="text-end">17,18%</td><td class="text-end">22,39%</td><td class="text-end">+5,21 p.p.</td></tr>
+                                          <tr><td>Spread (ROI - i)</td><td>ROI - i</td><td class="text-end text-danger">-18,17%</td><td class="text-end text-danger">-25,39%</td><td class="text-end text-danger">-18,65%</td><td class="text-end">+6,74 p.p.</td></tr>
+                                          <tr><td>Rapporto D/E (Debt/Equity)</td><td>Debiti Fin./PN</td><td class="text-end">0,29</td><td class="text-end">0,28</td><td class="text-end">0,20</td><td class="text-end">-0,08</td></tr>
+                                          <tr class="table-secondary"><td>Effetto leva (ROI - i) × D/E</td><td>(ROI - i) × D/E</td><td class="text-end text-danger">-5,27%</td><td class="text-end text-danger">-7,11%</td><td class="text-end text-danger">-3,73%</td><td class="text-end">+3,38 p.p.</td></tr>
+                                          <tr><td>ROE teorico (ROI + effetto leva)</td><td>ROI + Effetto Leva</td><td class="text-end">-15,16%</td><td class="text-end">-15,32%</td><td class="text-end">0,01%</td><td class="text-end">+15,33 p.p.</td></tr>
+                                          <tr class="fw-bold"><td>ROE effettivo</td><td>Utile Netto/PN</td><td class="text-end">1,16%</td><td class="text-end">0,50%</td><td class="text-end">0,65%</td><td class="text-end">+0,15 p.p.</td></tr>
+                                          <tr><td>Differenza (ROE effettivo - ROE teorico)</td><td>ROE - ROE teorico</td><td class="text-end">+16,32%</td><td class="text-end">+15,82%</td><td class="text-end">+0,64%</td><td class="text-end">-15,18 p.p.</td></tr>
+                                      </tbody>
+                                 </table>
+                              </div>
+                          </div>
+                          <div class="col-lg-5">
+                               <h6 class="text-center small">Grafico 2.4: Evoluzione della Struttura Finanziaria</h6>
+                               <div class="chart-container" style="height: 250px;"> <canvas id="leverageChart"></canvas> </div>
+                                <h6 class="mt-4">Analisi Leva (EDILCALCESTRUZZO SRL):</h6>
+                               <ul class="small list-unstyled">
+                                <li><i class="fas fa-exclamation-circle text-danger me-1"></i> Spread (ROI-i) fortemente negativo (-18,65%), sebbene in lieve miglioramento rispetto al 2023, a causa dell'elevatissimo costo del debito.</li>
+                                <li><i class="fas fa-exclamation-circle text-danger me-1"></i> Costo del debito anomalo (22,39%), quasi sei volte superiore al ROI (3,74%), elemento patologico che erode drasticamente la redditività.</li>
+                                <li><i class="fas fa-check-circle text-success me-1"></i> D/E contenuto (0,20), significativamente inferiore al benchmark ottimale (<1,0), indicando un limitato ricorso al capitale di terzi.</li>
+                                <li><i class="fas fa-exclamation-triangle text-warning me-1"></i> ROE effettivo (0,65%) superiore al ROE teorico (0,01%), suggerendo la presenza di componenti straordinarie positive non riflesse nel risultato operativo.</li>
+                                <li><i class="fas fa-exclamation-circle text-danger me-1"></i> L'effetto leva negativo (-3,73%) erode significativamente la redditività del capitale proprio, nonostante il basso livello di indebitamento.</li>
+                               </ul>
+                          </div>
+                      </div>
+                 </div>
+            </div>
+
+             <h2 class="section-title mt-5" id="benchmark"><i class="fas fa-chart-bar me-2"></i>SEZIONE 2.2: BENCHMARK E POSIZIONAMENTO COMPETITIVO</h2>
+
+            <div class="card mb-4 report-section">
+                <div class="card-header"><h5 class="mb-0">2.2.1 Posizionamento Competitivo</h5></div>
+                 <div class="card-body">
+                     <p>Valutazione della performance rispetto al settore "Estrazione di ghiaia, sabbia, argilla e caolino" (ATECO 08.12.00).</p>
+                     <div class="row">
+                         <div class="col-lg-7 mb-3 mb-lg-0">
+                              <h6 class="text-center small">Grafico 2.5: Posizionamento Competitivo (Base 100 = Media Settore)</h6>
+                             <div class="chart-container" style="height: 350px;"> <canvas id="benchmarkRadarChart"></canvas>          
+                                 <script>
+                                     document.addEventListener('DOMContentLoaded', function() {
+                                         const ctxBenchmarkRadar = document.getElementById('benchmarkRadarChart');
+
+                                         if (ctxBenchmarkRadar) {
+                                             try {
+                                                  const benchmarkRadarData = {
+                                                     labels: ["Crescita Ricavi", "EBITDA Margin", "ROI", "Turnover", "Costo Personale (inv)", "PFN/EBITDA (inv)", "D/E (inv)"],
+                                                     datasets: [
+                                                         {
+                                                             label: "EDILCALCESTRUZZO SRL",
+                                                             data: [303, 87, 37, 103, 62, 168, 500],
+                                                             backgroundColor: "rgba(25, 25, 112, 0.3)",
+                                                             borderColor: "rgba(25, 25, 112, 1)",
+                                                             borderWidth: 2, pointBackgroundColor: "rgba(25, 25, 112, 1)", pointBorderColor: "#fff",
+                                                             pointHoverBackgroundColor: "#fff", pointHoverBorderColor: "rgba(25, 25, 112, 1)"
+                                                         },
+                                                         {
+                                                             label: "Media Settore",
+                                                             data: [100, 100, 100, 100, 100, 100, 100],
+                                                             backgroundColor: "rgba(217, 140, 0, 0.3)",
+                                                             borderColor: "rgba(217, 140, 0, 1)",
+                                                             borderWidth: 2, pointBackgroundColor: "rgba(217, 140, 0, 1)", pointBorderColor: "#fff",
+                                                             pointHoverBackgroundColor: "#fff", pointHoverBorderColor: "rgba(217, 140, 0, 1)"
+                                                         }
+                                                     ]
+                                                 };
+
+                                                 const benchmarkRadarOptions = {
+                                                     responsive: true,
+                                                     maintainAspectRatio: false,
+                                                       scales: {
+                                                          r: {
+                                                              angleLines: { color: '#e0e0e0' }, grid: { color: '#e0e0e0' },
+                                                              pointLabels: { font: { size: 10 } },
+                                                              ticks: {
+                                                                  backdropColor: 'rgba(255, 255, 255, 0.75)', font: { size: 9 },
+                                                                  maxTicksLimit: 5,
+                                                              },
+                                                              suggestedMin: 0,
+                                                          }
+                                                       },
+                                                       plugins: {
+                                                            legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15, font: { size: 11 } } },
+                                                            title: { display: false },
+                                                            tooltip: {
+                                                                backgroundColor: 'rgba(0, 0, 0, 0.8)', titleFont: { weight: 'bold', size: 13 },
+                                                                bodyFont: { size: 12 }, padding: 10, cornerRadius: 4, displayColors: true, boxPadding: 4,
+                                                                callbacks: {
+                                                                    label: function(context) {
+                                                                        let label = context.dataset.label || '';
+                                                                        if (label) label += ': ';
+                                                                        if (context.parsed.r !== null) { label += context.parsed.r.toFixed(1); }
+                                                                        else { label += 'N/D'; }
+                                                                        return label;
+                                                                    }
+                                                                }
+                                                            }
+                                                       },
+                                                       animation: { duration: 400 }
+                                                 };
+
+                                                 const existingChart = Chart.getChart(ctxBenchmarkRadar);
+                                                 if (existingChart instanceof Chart) {
+                                                     existingChart.destroy();
+                                                 }
+
+                                                 new Chart(ctxBenchmarkRadar, {
+                                                     type: 'radar',
+                                                     data: benchmarkRadarData,
+                                                     options: benchmarkRadarOptions
+                                                 });
+                                                 console.log("Grafico benchmarkRadarChart inizializzato direttamente in HTML.");
+
+                                             } catch (error) {
+                                                 console.error("Errore inizializzazione grafico benchmarkRadarChart in HTML:", error);
+                                                  const ctx = ctxBenchmarkRadar.getContext('2d');
+                                                   if (ctx) {
+                                                       ctx.clearRect(0, 0, ctxBenchmarkRadar.width, ctxBenchmarkRadar.height);
+                                                       ctx.font = '14px Titillium Web, sans-serif';
+                                                       ctx.fillStyle = '#dc3545';
+                                                       ctx.textAlign = 'center';
+                                                       ctx.fillText('Errore durante il caricamento del grafico.', ctxBenchmarkRadar.width / 2, ctxBenchmarkRadar.height / 2);
+                                                   }
+                                             }
+                                         } else {
+                                              console.warn("Canvas 'benchmarkRadarChart' non trovato.");
+                                         }
+                                     });
+                                 </script>
+                                 </div>
+                         </div>
+                         <div class="col-lg-5">
+                              <h6>Tabella 2.6: Posizionamento Competitivo 2024 (EDILCALCESTRUZZO SRL)</h6>
+                              <div class="table-responsive">
+                                <table class="table table-sm table-striped table-hover">
+                                    <thead><tr><th>Indicatore</th><th>EDILCALCESTRUZZO</th><th>Media Sett.</th><th>Gap</th><th>Valutazione</th></tr></thead>
+                                    <tbody>
+                                        <tr><td>Crescita ricavi</td><td>+9,11%</td><td>+3,0%</td><td class="text-success">+6,11 p.p.</td><td><span class="status-badge bg-success">Superiore</span></td></tr>
+                                        <tr><td>EBITDA Margin</td><td>8,66%</td><td>10,0%</td><td class="text-danger">-1,34 p.p.</td><td><span class="status-badge bg-warning">Inferiore</span></td></tr>
+                                        <tr><td>ROI</td><td>3,74%</td><td>10,0%</td><td class="text-danger">-6,26 p.p.</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                        <tr><td>ROE</td><td>0,65%</td><td>8,0%</td><td class="text-danger">-7,35 p.p.</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                        <tr><td>Turnover</td><td>1,03</td><td>1,0</td><td class="text-success">+0,03</td><td><span class="status-badge bg-success">Allineato</span></td></tr>
+                                        <tr><td>PFN/EBITDA</td><td>1,79</td><td>3,0</td><td class="text-success">-1,21</td><td><span class="status-badge bg-success">Superiore</span></td></tr>
+                                        <tr><td>Leva D/E</td><td>0,20</td><td>1,0</td><td class="text-success">-0,80</td><td><span class="status-badge bg-success">Eccellente</span></td></tr>
+                                        <tr><td>Giorni Crediti Clienti</td><td>272</td><td>90</td><td class="text-danger">+182</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                        <tr><td>Ciclo Circolante</td><td>220</td><td>100</td><td class="text-danger">+120</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                    </tbody>
+                                </table>
+                              </div>
+                         </div>
+                     </div>
+                      <h6 class="mt-4">Analisi posizionamento (EDILCALCESTRUZZO SRL):</h6>
+                      <p class="small mb-0">EDILCALCESTRUZZO SRL presenta un <strong>posizionamento contrastato</strong> rispetto al settore. Eccelle in termini di crescita dei ricavi (+9,11% vs +3,0%), solidità finanziaria (PFN/EBITDA 1,79 vs 3,0) e struttura patrimoniale (D/E 0,20 vs 1,0). Le <strong>principali criticità</strong> riguardano la redditività del capitale investito (ROI 3,74% vs 10,0%) e del capitale proprio (ROE 0,65% vs 8,0%), significativamente inferiori ai benchmark settoriali. La gestione del capitale circolante rappresenta l'area di maggiore debolezza, con tempi di incasso dai clienti (272 giorni) e ciclo del circolante (220 giorni) criticamente superiori alle medie di settore, evidenziando gravi inefficienze nella gestione del credito commerciale.</p>
+                 </div>
+            </div>
+
+             <div class="card mb-4 report-section">
+                 <div class="card-header"><h5 class="mb-0">2.2.2 Gap Analysis vs Best Practice</h5></div>
+                  <div class="card-body">
+                     <p>Identificazione aree di miglioramento rispetto alle best practice del settore estrattivo.</p>
+                     <h6 class="mt-4">Tabella 2.7: Gap Analysis 2024 (EDILCALCESTRUZZO SRL)</h6>
+                      <div class="table-responsive">
+                         <table class="table table-sm table-striped table-hover">
+                            <thead class="table-light"> <tr><th>Area</th><th>Situazione Attuale</th><th>Benchmark</th><th>Gap</th><th>Valutazione</th></tr></thead>
+                             <tbody>
+                                <tr><td>Gestione Crediti Clienti</td><td>DSO: 272 giorni</td><td>80-100 giorni</td><td class="text-danger">+172 giorni</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                <tr><td>Costo del Debito</td><td>18,82%</td><td>5-7%</td><td class="text-danger">+12,82 p.p.</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                <tr><td>Redditività Operativa</td><td>ROI: 3,74%</td><td>8-10%</td><td class="text-danger">-4,26 p.p.</td><td><span class="status-badge bg-warning">Insufficiente</span></td></tr>
+                                <tr><td>Redditività Netta</td><td>ROE: 0,65%</td><td>7-10%</td><td class="text-danger">-6,35 p.p.</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                <tr><td>Costo del Personale</td><td>19,4% dei ricavi</td><td>12-15% dei ricavi</td><td class="text-danger">+4,4 p.p.</td><td><span class="status-badge bg-warning">Elevato</span></td></tr>
+                                <tr><td>Liquidità</td><td>0,64% dei ricavi</td><td>3-5% dei ricavi</td><td class="text-danger">-2,36 p.p.</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                <tr><td>Ciclo del Circolante</td><td>220 giorni</td><td>90-110 giorni</td><td class="text-danger">+110 giorni</td><td><span class="status-badge bg-danger">Critico</span></td></tr>
+                                <tr><td>Copertura Immobilizzazioni</td><td>0,62</td><td>0,7-1,0</td><td class="text-danger">-0,08</td><td><span class="status-badge bg-warning">Insufficiente</span></td></tr>
+                             </tbody>
+                         </table>
+                     </div>
+                  </div>
+             </div>
+
+             <div class="card mb-4 report-section">
+                 <div class="card-header"><h5 class="mb-0">2.2.3 Azioni di Miglioramento Suggerite</h5></div>
+                  <div class="card-body">
+                      <h6 class="mt-4">Tabella 2.8: Piano di Azione Economico (Sintesi - EDILCALCESTRUZZO SRL)</h6>
+                      <div class="table-responsive">
+                          <table class="table table-sm table-hover action-table">
+                              <thead class="table-light"><tr><th><i class="fas fa-flag me-1"></i> Area</th><th><i class="fas fa-wrench me-1"></i> Azione Suggerita</th><th><i class="fas fa-chart-line me-1"></i> Effetti Previsti</th><th><i class="fas fa-coins me-1"></i> Net Benefit Stimato</th></tr></thead>
+                              <tbody>
+                                  <tr><td>Gestione Crediti</td><td>Implementazione sistema factoring pro-soluto selettivo e revisione policy credito</td><td>Riduzione DSO da 272 a 180 giorni</td><td class="text-success">Liberazione liquidità: €1.915.000</td></tr>
+                                  <tr><td>Oneri Finanziari</td><td>Rinegoziazione condizioni bancarie e diversificazione fonti</td><td>Riduzione costo medio del debito dal 18,82% al 7-8%</td><td class="text-success">Risparmio: €158.000/anno</td></tr>
+                                  <tr><td>Gestione Magazzino</td><td>Implementazione sistema MRP e gestione just-in-time</td><td>Riduzione DIO da 122 a 70 giorni</td><td class="text-success">Liberazione liquidità: €456.000</td></tr>
+                                  <tr><td>Copertura Immobilizzazioni</td><td>Riequilibrio fonti-impieghi con finanziamenti MLT</td><td>Incremento indice da 0,62 a 0,8</td><td class="text-success">Miglioramento stabilità finanziaria</td></tr>
+                                  <tr><td>Efficienza Operativa</td><td>Analisi marginalità per linea di prodotto/cliente</td><td>Incremento EBITDA margin dal 8,66% al 10%</td><td class="text-success">Incremento EBITDA: €101.000/anno</td></tr>
+                                  <tr><td>Controllo di Gestione</td><td>Implementazione sistema reporting integrato</td><td>Miglioramento capacità decisionale</td><td class="text-success">Ottimizzazione processi e riduzione costi</td></tr>
+                              </tbody>
+                          </table>
+                      </div>
+                       <p class="small mt-3 text-muted">L'implementazione di queste azioni consentirebbe di ottimizzare significativamente la struttura economico-finanziaria dell'azienda, con particolare focus sulla gestione del capitale circolante e sulla riduzione degli oneri finanziari. Il piano consentirebbe di liberare oltre €2.370.000 di risorse finanziarie attraverso l'ottimizzazione del capitale circolante, con un impatto positivo stimato sull'EBITDA di €101.000 annui e una riduzione degli oneri finanziari di €158.000 annui.</p>
+                  </div>
+             </div>
+
+            <div class="card summary-card mb-4 report-section">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-check-circle text-primary me-2"></i>Conclusioni Analisi Economica e Benchmark (EDILCALCESTRUZZO SRL)</h5>
+                     <p>EDILCALCESTRUZZO SRL presenta un <strong>profilo economico in significativo miglioramento</strong> ma ancora caratterizzato da rilevanti criticità strutturali. La crescita dei ricavi (+9,11%) e il radicale miglioramento dell'EBITDA (da -2,7% a +8,7%) evidenziano un'efficace ristrutturazione operativa, ma la redditività finale rimane compromessa da inefficienze nella gestione finanziaria e del capitale circolante.</p>
+                     <p>Le <strong>principali criticità</strong> riguardano: (1) la gestione del credito commerciale, con tempi di incasso anomali (272 giorni) che generano un eccessivo assorbimento di risorse finanziarie, (2) il costo del debito eccezionalmente elevato (18,82%), che erode la redditività operativa, (3) la scarsa remunerazione del capitale proprio (ROE 0,65%), significativamente inferiore ai benchmark settoriali, (4) la liquidità criticamente insufficiente (0,64% dei ricavi).</p>
+                     <p>Le <strong>azioni prioritarie</strong> devono concentrarsi sull'ottimizzazione del capitale circolante attraverso politiche incisive di credit management, sulla rinegoziazione delle condizioni di finanziamento per ridurre gli oneri finanziari, e sul riequilibrio della struttura patrimoniale. Il miglioramento della redditività operativa costituisce una base solida per il completamento del turnaround aziendale, a condizione che vengano risolte le criticità finanziarie e di gestione del circolante.</p>
+                </div>
+            </div>
+
+
+            <!-- ================================================================ -->
+            <!-- FINE CONTENUTO SPECIFICO PARTE 2 -->
+            <!-- ================================================================ -->
+
+        </div> <!-- /dashboard-container -->
+
+        <!-- Footer Standard V2 (Nessuna modifica necessaria) -->
+        <footer class="footer no-print"> <div class="container-fluid px-4"> <div class="row align-items-center"> <div class="col-md-6 text-center text-md-start mb-2 mb-md-0"> SCAN360 © <span id="currentYearFooterReport"></span> </div> <div class="col-md-6 text-center text-md-end"> Powered by <a href="http://www.kitzanos.com" target="_blank" class="text-white fw-bold">Kitzanos Lab</a> <img src="../assets/img/logo_kitzanos.png" alt="Kitzanos Logo" class="ms-2"> </div> </div> </div> </footer>
+
+    </div> <!-- /main-wrapper -->
+
+    <!-- Script JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/charts_config.js"></script>
+    <script src="../js/report_init.js"></script>
+     <script>
+        document.getElementById('currentYearSidebar').textContent = new Date().getFullYear();
+        document.getElementById('currentYearFooterReport').textContent = new Date().getFullYear();
+
+         // Script aggiornamento badge IRP header (Updated for EDILCALCESTRUZZO)
+         document.addEventListener('DOMContentLoaded', function() {
+             const irpScoreValue = 64.28; // Updated IRP Value from PARTE0_irp-report.md
+             const irpHeaderBadge = document.getElementById('irp-header-badge');
+             if(irpHeaderBadge) {
+                 let badgeClass = 'bg-warning text-dark';
+                 if (irpScoreValue >= 71) badgeClass = 'bg-success'; // Basso
+                 else if (irpScoreValue < 51) badgeClass = 'bg-danger'; // Alto
+                 irpHeaderBadge.className = `badge ${badgeClass} me-3`;
+                 irpHeaderBadge.textContent = `IRP: ${irpScoreValue.toFixed(1)}`;
+             }
+
+              // Ensure logout function is defined
+             if (typeof logout !== 'function') {
+                 window.logout = function() {
+                    console.log("Logout action triggered (placeholder)");
+                }
+             }
+             // Ensure print function is defined
+             if (typeof printDocument !== 'function') {
+                window.printDocument = function() {
+                    window.print();
+                }
+             }
+         });
+    </script>
+    <scan-chat data-bot-id="033a9b91-a72b-4704-aae2-04d0b1796bdd"></scan-chat>
+    <script src="../js/bundle.js"></script>
+// Inizializzazione grafici per Parte 2 - Analisi Economica
+// EDILCALCESTRUZZO SRL
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("Inizializzazione grafici Parte 2 - EDILCALCESTRUZZO SRL");
+    
+    // Funzioni di utilità per formattazione
+    function formatCurrency(value, decimals = 0) {
+        if (value === null || value === undefined) return 'N/D';
+        return new Intl.NumberFormat('it-IT', {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals
+        }).format(value);
+    }
+    
+    function formatPercentage(value) {
+        if (value === null || value === undefined) return 'N/D';
+        return value.toFixed(1) + '%';
+    }
+
+    // ===========================
+    // Grafico 2.1: Andamento Ricavi ed EBITDA
+    // ===========================
+    const ctxEconomicTrend = document.getElementById('economicTrendChart');
+    if (ctxEconomicTrend) {
+        try {
+            const economicTrendData = {
+                labels: ["2022", "2023", "2024"],
+                datasets: [
+                    {
+                        label: "Ricavi (€000)",
+                        data: [7127, 6928, 7560],
+                        borderColor: 'rgb(25, 25, 112)',
+                        backgroundColor: 'rgba(25, 25, 112, 0.1)',
+                        type: 'line',
+                        tension: 0.1,
+                        yAxisID: 'y',
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    },
+                    {
+                        label: "EBITDA (€000)",
+                        data: [-167, -185, 655],
+                        borderColor: 'rgb(77, 140, 87)',
+                        backgroundColor: 'rgba(77, 140, 87, 0.7)',
+                        type: 'bar',
+                        yAxisID: 'y',
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.7
+                    },
+                    {
+                        label: "EBITDA Margin (%)",
+                        data: [-2.3, -2.7, 8.66],
+                        borderColor: 'rgb(217, 140, 0)',
+                        backgroundColor: 'transparent',
+                        type: 'line',
+                        tension: 0.1,
+                        yAxisID: 'y1',
+                        fill: false,
+                        borderDash: [5, 5],
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }
+                ]
+            };
+
+            new Chart(ctxEconomicTrend, {
+                type: 'bar',
+                data: economicTrendData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                padding: 15,
+                                font: { size: 11 }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleFont: { weight: 'bold', size: 13 },
+                            bodyFont: { size: 12 },
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) label += ': ';
+                                    const value = context.parsed.y;
+                                    if (context.dataset.label.includes('%')) {
+                                        label += formatPercentage(value);
+                                    } else {
+                                        label += formatCurrency(value) + 'k';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { display: false }
+                        },
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            grid: { color: '#e0e0e0' },
+                            title: {
+                                display: true,
+                                text: 'Valore (€000)',
+                                font: { size: 10 }
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            grid: { display: false },
+                            title: {
+                                display: true,
+                                text: 'EBITDA Margin (%)',
+                                font: { size: 10 }
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            console.log("Grafico economicTrendChart inizializzato");
+        } catch (error) {
+            console.error("Errore inizializzazione economicTrendChart:", error);
+        }
+    }
+
+    // ===========================
+    // Grafico 2.2: Evoluzione delle Principali Marginalità
+    // ===========================
+    const ctxMarginality = document.getElementById('marginalityChart');
+    if (ctxMarginality) {
+        try {
+            const marginalityData = {
+                labels: ["2022", "2023", "2024"],
+                datasets: [
+                    {
+                        label: "Valore Aggiunto %",
+                        data: [50.8, 53.4, 66.0],
+                        borderColor: "rgba(25, 25, 112, 1)",
+                        backgroundColor: "rgba(25, 25, 112, 0.1)",
+                        fill: false,
+                        tension: 0.1
+                    },
+                    {
+                        label: "Margine di Contribuzione %",
+                        data: [22.3, 21.9, 32.5],
+                        borderColor: "rgba(42, 58, 128, 1)",
+                        backgroundColor: "rgba(42, 58, 128, 0.1)",
+                        fill: false,
+                        tension: 0.1
+                    },
+                    {
+                        label: "EBITDA %",
+                        data: [-2.3, -2.7, 8.7],
+                        borderColor: "rgba(77, 140, 87, 1)",
+                        backgroundColor: "rgba(77, 140, 87, 0.1)",
+                        fill: false,
+                        tension: 0.1
+                    },
+                    {
+                        label: "EBIT %",
+                        data: [-10.5, -9.0, 3.6],
+                        borderColor: "rgba(217, 140, 0, 1)",
+                        backgroundColor: "rgba(217, 140, 0, 0.1)",
+                        fill: false,
+                        tension: 0.1
+                    }
+                ]
+            };
+
+            new Chart(ctxMarginality, {
+                type: 'line',
+                data: marginalityData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                padding: 10,
+                                font: { size: 10 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatPercentage(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            grid: { color: '#e0e0e0' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+            console.log("Grafico marginalityChart inizializzato");
+        } catch (error) {
+            console.error("Errore inizializzazione marginalityChart:", error);
+        }
+    }
+
+    // ===========================
+    // Grafico 2.3: Andamento Redditività
+    // ===========================
+    const ctxProfitabilityIndices = document.getElementById('profitabilityIndicesChart');
+    if (ctxProfitabilityIndices) {
+        try {
+            const profitabilityData = {
+                labels: ["2022", "2023", "2024"],
+                datasets: [
+                    {
+                        label: "ROE %",
+                        data: [1.16, 0.50, 0.65],
+                        borderColor: "rgba(25, 25, 112, 1)",
+                        backgroundColor: "rgba(25, 25, 112, 0.2)",
+                        fill: true,
+                        tension: 0.1
+                    },
+                    {
+                        label: "ROI %",
+                        data: [-9.89, -8.21, 3.74],
+                        borderColor: "rgba(77, 140, 87, 1)",
+                        backgroundColor: "rgba(77, 140, 87, 0.2)",
+                        fill: true,
+                        tension: 0.1
+                    },
+                    {
+                        label: "ROS %",
+                        data: [-10.5, -9.0, 3.6],
+                        borderColor: "rgba(217, 140, 0, 1)",
+                        backgroundColor: "rgba(217, 140, 0, 0.2)",
+                        fill: true,
+                        tension: 0.1
+                    }
+                ]
+            };
+
+            new Chart(ctxProfitabilityIndices, {
+                type: 'line',
+                data: profitabilityData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                padding: 10,
+                                font: { size: 10 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatPercentage(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            grid: { color: '#e0e0e0' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+            console.log("Grafico profitabilityIndicesChart inizializzato");
+        } catch (error) {
+            console.error("Errore inizializzazione profitabilityIndicesChart:", error);
+        }
+    }
+
+    // ===========================
+    // Grafico 2.4: Evoluzione della Struttura Finanziaria (Leverage)
+    // ===========================
+    const ctxLeverage = document.getElementById('leverageChart');
+    if (ctxLeverage) {
+        try {
+            const leverageData = {
+                labels: ["2022", "2023", "2024"],
+                datasets: [
+                    {
+                        label: "ROI (%)",
+                        data: [-9.89, -8.21, 3.74],
+                        backgroundColor: "rgba(25, 25, 112, 0.7)",
+                        borderColor: "rgba(25, 25, 112, 1)",
+                        borderWidth: 1
+                    },
+                    {
+                        label: "Costo del debito (%)",
+                        data: [8.28, 17.18, 22.39],
+                        backgroundColor: "rgba(214, 34, 70, 0.7)",
+                        borderColor: "rgba(214, 34, 70, 1)",
+                        borderWidth: 1
+                    },
+                    {
+                        label: "ROE (%)",
+                        data: [1.16, 0.50, 0.65],
+                        backgroundColor: "rgba(77, 140, 87, 0.7)",
+                        borderColor: "rgba(77, 140, 87, 1)",
+                        borderWidth: 1
+                    }
+                ]
+            };
+
+            new Chart(ctxLeverage, {
+                type: 'bar',
+                data: leverageData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                boxWidth: 12,
+                                padding: 10,
+                                font: { size: 10 }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatPercentage(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            grid: { color: '#e0e0e0' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+            console.log("Grafico leverageChart inizializzato");
+        } catch (error) {
+            console.error("Errore inizializzazione leverageChart:", error);
+        }
+    }
+
+    // ===========================
+    // Grafico 2.5: Benchmark Radar (già presente nell'HTML inline)
+    // ===========================
+    // Il grafico benchmarkRadarChart è già implementato direttamente nell'HTML
+    // con script inline, quindi non necessita di inizializzazione qui
+
+    console.log("Inizializzazione grafici Parte 2 completata");
+});
+</script>
+
+</body>
+</html>

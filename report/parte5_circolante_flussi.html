@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circolante e Flussi di Cassa - EDILCALCESTRUZZO SRL | SCAN V12</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/print.css" rel="stylesheet" media="print">
+    <style>
+        /* Stili specifici V12 (possono andare in styles.css se usati altrove) */
+        .cycle-kpi { text-align: center; padding: 0.8rem; border-radius: 8px; border: 1px solid var(--card-border); background-color: var(--white); margin-bottom: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.04);}
+        .cycle-kpi .kpi-label { display: block; font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 3px; }
+        .cycle-kpi .kpi-value-days-lg { font-size: 2.1rem; font-weight: 700; line-height: 1.1; }
+        .card-header-primary { background-color: rgba(25, 25, 112, 0.05); border-bottom: 1px solid rgba(25, 25, 112, 0.2); color: var(--primary); }
+        .card-header-secondary { background-color: rgba(74, 105, 189, 0.05); border-bottom: 1px solid rgba(74, 105, 189, 0.2); color: var(--secondary); }
+        .strategy-card { background-color: var(--white); border-left: 4px solid #4f6d7a; padding: 1.25rem; border-radius: 8px; box-shadow: var(--shadow); margin-bottom: 1.5rem; }
+        .strategy-card h6 { color: #4f6d7a; margin-bottom: 0.75rem; font-weight: 600;}
+        .strategy-card ol { padding-left: 1.2rem; margin-bottom: 0; }
+        .strategy-card li { font-size: 0.85rem; margin-bottom: 0.3rem; }
+        .report-section + .report-section { margin-top: 2.5rem; }
+        .waterfall-label { font-size: 0.75rem; text-align: center; color: var(--text-secondary); margin-top: -5px; }
+        /* Altri stili V9/V11 */
+        :root {
+            --primary: #191970; --secondary: #4a69bd; --success: #4CAF50;
+            --warning: #FFC107; --danger: #F44336; --info: #0dcaf0;
+            --light: #f8f9fa; --dark: #343a40; --white: #ffffff;
+            --text-primary: #212529; --text-secondary: #6c757d;
+            --card-bg: var(--white); --card-border: #dee2e6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        html, body { height: 100%; overflow-x: hidden; font-family: 'Titillium Web', sans-serif; background-color: #f4f8fb; }
+        body { display: flex; }
+        .sidebar { width: 250px; background-color: var(--primary); color: #e0e0e0; position: fixed; top: 0; bottom: 0; left: 0; z-index: 1031; display: flex; flex-direction: column; box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); transition: width 0.3s ease; overflow-y: auto; }
+        .main-wrapper { margin-left: 250px; width: calc(100% - 250px); display: flex; flex-direction: column; min-height: 100vh; position: relative; padding-top: 70px; }
+        .dashboard-header { background-color: var(--white); padding: 15px 30px; border-bottom: 1px solid var(--card-border); box-shadow: 0 2px 5px rgba(0,0,0,0.05); min-height: 70px; display: flex; align-items: center; justify-content: space-between; position: fixed; top: 0; left: 250px; right: 0; z-index: 1030; }
+        .dashboard-container { padding: 30px; flex-grow: 1; width: 100%; }
+        .footer { background-color: var(--primary); color: rgba(255, 255, 255, 0.7); padding: 15px 30px; font-size: 0.85rem; margin-top: auto; flex-shrink: 0; width: 100%; }
+        .footer img { max-height: 20px; width: auto; filter: brightness(0) invert(1); opacity: 0.8; vertical-align: middle;}
+        .sidebar-header { padding: 10px 20px; margin-bottom: 20px; text-align: left; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .sidebar-header img { max-height: 40px; } .sidebar-header h5 { color: var(--white); margin-top: 10px; font-size: 1.1rem; font-weight: 600; }
+        .sidebar-nav { list-style: none; padding: 0; } .sidebar-nav .nav-item { margin: 0; }
+        .sidebar-nav .nav-link { color: #e0e0e0; padding: 12px 20px; display: flex; align-items: center; font-size: 0.95rem; font-weight: 500; border-left: 4px solid transparent; transition: all 0.2s ease; }
+        .sidebar-nav .nav-link:hover { background-color: rgba(255, 255, 255, 0.05); color: var(--white); border-left-color: var(--warning); }
+        .sidebar-nav .nav-link.active { background-color: rgba(255, 255, 255, 0.1); color: var(--white); font-weight: 600; border-left-color: var(--white); }
+        .sidebar-nav .nav-link i { margin-right: 15px; width: 20px; text-align: center; font-size: 1rem; }
+        .sidebar-nav .nav-title { padding: 10px 20px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; }
+        .sidebar-footer { margin-top: auto; padding: 15px 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.9rem; text-align: left; }
+        .section-title { color: var(--primary); font-weight: 600; margin-top: 2.5rem; margin-bottom: 1.5rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--secondary); font-size: 1.75rem; display: flex; align-items: center; } .section-title i { margin-right: 10px; }
+        .dashboard-card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: var(--shadow); transition: all 0.3s ease; height: 100%; }
+        .dashboard-card:hover { box-shadow: 0 8px 16px rgba(0,0,0,0.1); transform: translateY(-3px); }
+        .card-title-small { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .table { border: 1px solid var(--card-border); margin-bottom: 1rem; } .table thead th { background-color: var(--light); color: var(--primary); font-weight: 600; border-bottom: 2px solid var(--primary); font-size: 0.9rem; white-space: nowrap; } .table-hover tbody tr:hover { background-color: #eef2f7; } .table td, .table th { vertical-align: middle; padding: 0.6rem 0.75rem; font-size: 0.9rem;} .value-highlight { font-weight: 600; color: var(--primary); } .text-end { text-align: right !important;} .text-success { color: var(--success) !important; } .text-danger { color: var(--danger) !important; } .text-warning { color: var(--warning) !important; } .text-secondary { color: var(--text-secondary) !important; }
+        .alert-box { padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid; } .alert-box h5 { margin-bottom: 10px; font-size: 1.1rem; font-weight: 600;} .alert-box ul { padding-left: 20px; margin-bottom: 0; font-size: 0.9rem;} .alert-box.alert-success { background-color: #d1e7dd; border-color: #a3cfbb; color: #0a3622; } .alert-box.alert-warning { background-color: #fff3cd; border-color: #ffda6a; color: #664d03; } .alert-box.alert-danger { background-color: #f8d7da; border-color: #f1aeb5; color: #58151c; } .alert-box.alert-info { background-color: #cff4fc; border-color: #9eeaf9; color: #055160; }
+        .status-badge { font-size: .75em; font-weight: 700; line-height: 1; padding: .35em .65em; border-radius: .375rem; color: white; display: inline-block; } .status-badge.bg-success { background-color: var(--success) !important; } .status-badge.bg-warning { background-color: var(--warning) !important; color: var(--dark) !important;} .status-badge.bg-danger { background-color: var(--danger) !important; } .status-badge.bg-info { background-color: var(--info) !important; color: var(--dark) !important;}
+        .chart-container { height: 300px; margin-bottom: 20px; background-color: var(--white); padding: 15px; border-radius: 8px; border: 1px solid var(--card-border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); position: relative; }
+        .icon-circle { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; color: white; margin-right: 12px; font-size: 0.9rem; flex-shrink: 0; }
+        .bg-icon-success { background-color: var(--success); } .bg-icon-warning { background-color: var(--warning); } .bg-icon-danger { background-color: var(--danger); } .bg-icon-info { background-color: #4f6d7a; } .bg-icon-primary { background-color: var(--primary); } .bg-icon-secondary { background-color: var(--secondary); }
+        @media (max-width: 991.98px) { .sidebar { width: 0; border: none; box-shadow: none;} .main-wrapper { margin-left: 0; width: 100%; padding-top: 56px; } .dashboard-header { left: 0; width: 100%; min-height: 56px; padding: 5px 15px;} .header-title h5 { font-size: 1rem;} .header-title p { font-size: 0.75rem;} .dashboard-container { padding: 15px;} .footer { padding: 10px 15px;} }
+        @media print { body { display: block; } .main-wrapper { margin-left: 0; width: 100%; padding-top: 0; } .no-print { display: none !important; } .report-section { page-break-inside: avoid; } }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar no-print">
+        <div class="sidebar-header"> <img src="../assets/img/logo_scan.png" alt="SCAN Logo" style="max-height: 40px;"> <h5>EDILCALCESTRUZZO SRL</h5> </div>
+        <ul class="sidebar-nav flex-grow-1">
+            <li class="nav-item"> <a class="nav-link" href="../dashboard_v2.html"> <i class="fas fa-tachometer-alt fa-fw"></i> Dashboard </a> </li>
+            <li class="nav-title">Analisi Dettagliata</li>
+            <li class="nav-item"> <a class="nav-link" href="parte1_sintesi.html"> <i class="fas fa-file-alt fa-fw"></i> Sintesi e Profilo </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte2_economico.html"> <i class="fas fa-balance-scale fa-fw"></i> Analisi Economica </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte3_patrimoniale.html"> <i class="fas fa-landmark fa-fw"></i> Analisi Patrimoniale </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte4_bancabilita.html"> <i class="fas fa-university fa-fw"></i> Bancabilità </a> </li>
+            <li class="nav-item"> <a class="nav-link active" href="parte5_circolante_flussi.html"> <i class="fas fa-sync-alt fa-fw"></i> Circolante e Flussi </a> </li>
+            <li class="nav-item"> <a class="nav-link" href="parte6_rischi-raccomandazioni.html"> <i class="fas fa-exclamation-triangle fa-fw"></i> Rischi e Azioni </a> </li>
+            <li class="nav-title">Approfondimenti</li>
+            <li class="nav-item"> <a class="nav-link" href="irp_dettaglio.html"> <i class="fas fa-shield-alt fa-fw"></i> Dettaglio IRP </a> </li>
+        </ul>
+        <div class="sidebar-footer"> <small>SCAN360 © <span id="currentYearSidebar"></span> Kitzanos</small> </div>
+    </aside>
+
+    <!-- Contenuto Principale Wrapper -->
+    <div class="main-wrapper">
+        <!-- Header Orizzontale -->
+        <header class="dashboard-header no-print">
+            <div class="header-title">
+                <h5 class="mb-0">Report Dettagliato: Analisi Circolante e Flussi</h5>
+                <p class="mb-0">EDILCALCESTRUZZO SRL | <span class="report-date">11 Agosto 2025</span></p>
+            </div>
+            <div class="header-controls d-flex align-items-center">
+                <span id="irp-header-badge" class="badge me-3"></span> <!-- Badge IRP -->
+                <button class="btn btn-sm btn-outline-secondary me-2 print-button" onclick="printDocument()"> <i class="fas fa-print"></i> Stampa </button>
+                <div class="dropdown">
+                    <button class="btn btn-sm btn-light border dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fas fa-user-circle me-1"></i> EDILCALCESTRUZZO SRL </button>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenuButton"> <li><button class="dropdown-item" type="button" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</button></li> </ul>
+                </div>
+            </div>
+        </header>
+        <div class="container d-none d-print-block mt-4 mb-4">
+            <h1 class="text-center mb-0"><span class="company-name">EDILCALCESTRUZZO SRL</span></h1>
+            <p class="text-center mb-0">Report Dettagliato: Analisi Circolante e Flussi | <span class="report-date">11 Agosto 2025</span></p>
+            <hr>
+        </div>
+
+        <!-- Area Contenuto Specifico del Report -->
+        <div class="dashboard-container">
+
+            <!-- ================================================================ -->
+            <!-- CONTENUTO SPECIFICO PARTE 5 - V12 - Updated for EDILCALCESTRUZZO SRL -->
+            <!-- ================================================================ -->
+
+            <h2 class="section-title" id="capital"><i class="fas fa-sync-alt me-2"></i>5.1 ANALISI CAPITALE CIRCOLANTE</h2>
+
+            <div class="card mb-4 report-section">
+                 <div class="card-header card-header-primary"><h5 class="mb-0">Sintesi Ciclo Capitale Circolante</h5></div>
+                 <div class="card-body">
+                     <p>Il capitale circolante rappresenta un elemento cruciale nell'analisi finanziaria dell'azienda EDILCALCESTRUZZO SRL, operante nel settore "Estrazione di ghiaia, sabbia, argilla e caolino". In base ai dati riportati nel bilancio 2024, l'azienda presenta un ciclo del capitale circolante pari a <strong>220 giorni</strong>, risultante dalla configurazione di DSO, DIO e DPO. Questo valore estremamente elevato denota un significativo assorbimento di liquidità nel capitale circolante.</p>
+                     <div class="row gy-3 mt-4 mb-4">
+                         <div class="col-md-3 col-6"> <div class="cycle-kpi border-danger"> <span class="kpi-label">DSO (Clienti)</span> <span class="kpi-value-days-lg text-danger">272</span> </div> </div>
+                         <div class="col-md-3 col-6"> <div class="cycle-kpi border-warning"> <span class="kpi-label">DIO (Magazzino)</span> <span class="kpi-value-days-lg text-warning">122</span> </div> </div>
+                         <div class="col-md-3 col-6"> <div class="cycle-kpi border-warning"> <span class="kpi-label">DPO (Fornitori)</span> <span class="kpi-value-days-lg text-warning">174</span> </div> </div>
+                          <div class="col-md-3 col-6"> <div class="cycle-kpi border-danger bg-light"> <span class="kpi-label">Ciclo Circolante</span> <span class="kpi-value-days-lg text-danger">220</span> </div> </div>
+                     </div>
+                     <p class="small">Il ciclo del circolante (GG Crediti Clienti: 272 gg + GG Rimanenze: 122 gg - GG Debiti Fornitori: 174 gg) è pari a: 220 gg. Questo valore indica che l'azienda deve finanziare il proprio ciclo operativo per 220 giorni, comportando un importante assorbimento di risorse finanziarie.</p>
+
+                     <h6 class="mt-4 card-title-small">TREND CICLO CIRCOLANTE 2022-2024 (GIORNI - EDILCALCESTRUZZO SRL)</h6>
+                     <div class="table-responsive">
+                         <table class="table table-sm table-striped table-hover caption-top">
+                             <caption class="small text-muted"></caption>
+                             <thead class="table-light"><tr><th>Componente</th><th class="text-end">12/2022</th><th class="text-end">12/2023</th><th class="text-end">12/2024</th><th>Trend</th></tr></thead>
+                             <tbody>
+                                 <tr><td>DSO (giorni)</td><td class="text-end">228</td><td class="text-end">279</td><td class="text-end">272</td><td class="text-warning">Lieve miglioramento ↓</td></tr>
+                                 <tr><td>DIO (giorni)</td><td class="text-end">42</td><td class="text-end">97</td><td class="text-end">122</td><td class="text-danger">Peggioramento ↑</td></tr>
+                                 <tr><td>DPO (giorni)</td><td class="text-end">127</td><td class="text-end">159</td><td class="text-end">174</td><td class="text-success">Miglioramento ↑</td></tr>
+                                 <tr class="table-danger fw-bold"><td>Ciclo Circolante</td><td class="text-end">143</td><td class="text-end">217</td><td class="text-end">220</td><td class="text-danger">Peggioramento ↑</td></tr>
+                             </tbody>
+                         </table>
+                     </div>
+                 </div>
+            </div>
+
+            <div class="card mb-4 report-section">
+                 <div class="card-header card-header-secondary"><h5 class="mb-0">Analisi Dettagliata Giorni e Test di Congruità</h5></div>
+                 <div class="card-body">
+                      <div class="row mb-4">
+                          <div class="col-lg-7 mb-3 mb-lg-0">
+                              <h6 class="text-center small">Grafico 5.1: Ciclo Capitale Circolante vs Benchmark (Giorni - EDILCALCESTRUZZO SRL)</h6>
+                               <div class="chart-container" style="height: 320px;"> <canvas id="workingCapitalCycleChart"></canvas> </div>
+                          </div>
+                          <div class="col-lg-5 d-flex flex-column justify-content-center">
+                                <div class="alert-box alert-danger p-3 mb-3">
+                                     <h6 class="mb-1"><i class="fas fa-exclamation-circle me-2"></i>Analisi Ciclo (220 giorni)</h6>
+                                     <p class="small mb-0">Ciclo del circolante critico con lieve peggioramento rispetto al 2023 (+3gg). Il ciclo di 220 giorni comporta un fabbisogno finanziario di circa €1.571.460.</p>
+                                </div>
+                                 <div class="alert-box alert-info p-3 small">
+                                    <h6 class="mb-2"><i class="fas fa-info-circle me-2"></i>Componenti Chiave 2024:</h6>
+                                    <ul class="list-unstyled mb-0">
+                                        <li><strong class="text-danger">DSO (272gg):</strong> Estremamente critico, tempi di incasso quasi tripli rispetto ai benchmark di settore (90-100gg).</li>
+                                        <li><strong class="text-warning">DIO (122gg):</strong> In forte peggioramento, quasi triplicato dal 2022 (42gg).</li>
+                                        <li><strong class="text-success">DPO (174gg):</strong> Positivo, superiore ai benchmark (90-110gg), buon finanziamento spontaneo.</li>
+                                    </ul>
+                                </div>
+                          </div>
+                      </div>
+                      <hr class="my-4">
+                       <h6 class="mt-4 mb-3"><i class="fas fa-balance-scale me-1"></i> Test di Congruità Componenti (2024 - EDILCALCESTRUZZO SRL)</h6>
+                       <div class="row gy-4">
+                           <!-- Test Crediti -->
+                           <div class="col-lg-4 col-md-6">
+                               <div class="dashboard-card h-100 border-danger">
+                                   <h6 class="card-title-small text-danger"><i class="fas fa-file-invoice-dollar me-1"></i> Crediti (DSO)</h6>
+                                   <ul class="list-unstyled small mb-0">
+                                       <li>Valore: € 5.692.100</li>
+                                       <li>DSO Effettivo: <strong>272 gg</strong></li>
+                                       <li>DSO Standard: 90 gg</li>
+                                       <li class="mt-2 border-top pt-2">Eccesso giorni: <strong class="text-danger">+182 gg</strong></li>
+                                       <li>Liquidità immobilizzata: <strong class="text-danger">€3.821.818</strong></li>
+                                   </ul>
+                               </div>
+                           </div>
+                            <!-- Test Debiti -->
+                           <div class="col-lg-4 col-md-6">
+                               <div class="dashboard-card h-100 border-success">
+                                   <h6 class="card-title-small text-success"><i class="fas fa-truck me-1"></i> Debiti (DPO)</h6>
+                                    <ul class="list-unstyled small mb-0">
+                                       <li>Valore: € 2.605.093</li>
+                                       <li>DPO Effettivo: <strong>174 gg</strong></li>
+                                       <li>DPO Standard: 100 gg</li>
+                                       <li class="mt-2 border-top pt-2">Eccesso giorni: <strong class="text-success">+74 gg</strong></li>
+                                       <li>Finanziamento aggiuntivo: <strong class="text-success">€528.582</strong></li>
+                                   </ul>
+                               </div>
+                           </div>
+                            <!-- Test Magazzino -->
+                           <div class="col-lg-4 col-md-12">
+                               <div class="dashboard-card h-100 border-warning">
+                                    <h6 class="card-title-small text-warning"><i class="fas fa-boxes me-1"></i> Magazzino (DIO)</h6>
+                                     <ul class="list-unstyled small mb-0">
+                                       <li>Valore: € 864.542</li>
+                                       <li>DIO Effettivo: <strong>122 gg</strong></li>
+                                       <li>DIO Standard: 50 gg</li>
+                                       <li class="mt-2 border-top pt-2">Eccesso giorni: <strong class="text-warning">+72 gg</strong></li>
+                                       <li>Eccesso scorte: <strong class="text-warning">€514.296</strong></li>
+                                   </ul>
+                               </div>
+                           </div>
+                       </div>
+                        <div class="alert-box alert-warning small mt-4 p-2">
+                           <strong>Analisi Dettagliata:</strong> L'azienda presenta un eccesso di fabbisogno finanziario di circa €3.807.532 dovuto principalmente a: tempi di incasso clienti quasi tripli rispetto ai benchmark, tempi di rotazione magazzino in significativo aumento, parzialmente compensati da tempi di pagamento fornitori superiori ai benchmark di settore.
+                       </div>
+                       <hr class="my-4">
+                        <h6 class="mt-4 mb-3"><i class="fas fa-lightbulb me-1"></i> Strategie di Miglioramento e Impatto Finanziario Atteso (EDILCALCESTRUZZO SRL)</h6>
+                         <div class="row">
+                             <div class="col-md-4">
+                                 <div class="strategy-card h-100">
+                                    <h6><i class="fas fa-file-invoice-dollar me-1"></i> Crediti Clienti</h6>
+                                     <ol>
+                                        <li>Implementazione credit scoring</li>
+                                        <li>Programma strutturato di sollecito</li>
+                                        <li>Factoring pro-soluto selettivo</li>
+                                        <li>Incentivi pagamenti anticipati</li>
+                                     </ol>
+                                     <p class="fw-bold text-success mt-2 mb-0">Impatto: +€1.931.908</p>
+                                      <small class="text-muted">(Target DSO 180gg)</small>
+                                 </div>
+                             </div>
+                              <div class="col-md-4">
+                                  <div class="strategy-card h-100">
+                                     <h6><i class="fas fa-boxes me-1"></i> Gestione Magazzino</h6>
+                                      <ol>
+                                        <li>Analisi ABC delle scorte</li>
+                                        <li>Approccio lean e just-in-time</li>
+                                        <li>Rimodulazione scorte strategiche</li>
+                                        <li>Ottimizzazione logistica</li>
+                                      </ol>
+                                      <p class="fw-bold text-success mt-2 mb-0">Impatto: +€371.436</p>
+                                      <small class="text-muted">(Target DIO 70gg)</small>
+                                  </div>
+                              </div>
+                               <div class="col-md-4">
+                                  <div class="strategy-card h-100">
+                                      <h6><i class="fas fa-truck me-1"></i> Debiti Fornitori</h6>
+                                       <ol>
+                                        <li>Riequilibrio condizioni sostenibili</li>
+                                        <li>Vendor rating integrato</li>
+                                        <li>Programmazione pagamenti</li>
+                                        <li>Partnership strategiche</li>
+                                       </ol>
+                                       <p class="fw-bold text-danger mt-2 mb-0">Impatto: -€314.292</p>
+                                       <small class="text-muted">(Target DPO 130gg)</small>
+                                  </div>
+                              </div>
+                         </div>
+                         <div class="alert-box alert-info text-center mt-4">
+                              <strong>Impatto totale stimato: liberazione liquidità di €1.989.052 con ciclo circolante target di 120 giorni</strong>
+                         </div>
+                 </div>
+            </div>
+
+            <h2 class="section-title mt-5" id="cashflow"><i class="fas fa-stream me-2"></i>5.2 ANALISI FLUSSI DI CASSA</h2>
+
+            <div class="card mb-4 report-section">
+                 <div class="card-header card-header-primary"><h5 class="mb-0">Analisi Flussi di Cassa (da EBITDA a Variazione Netta Cassa) - 2024</h5></div>
+                 <div class="card-body">
+                     <p>L'analisi dei flussi di cassa evidenzia un'eccellente capacità di EDILCALCESTRUZZO SRL di generare cash flow operativo, nonostante l'elevato assorbimento di risorse da parte del capitale circolante. Si evidenzia un significativo scostamento tra l'EBITDA (positivo per €654.579) e il Cash Flow Operativo (positivo per €3.579.187).</p>
+                     <div class="row">
+                        <div class="col-lg-7 mb-3 mb-lg-0">
+                             <h6 class="text-center small">Grafico 5.2: Composizione Flussi di Cassa 2024 (Waterfall Semplificato - EDILCALCESTRUZZO SRL)</h6>
+                            <div class="chart-container" style="height: 400px;"> <canvas id="cashFlowWaterfallChart"></canvas> </div>
+                        </div>
+                        <div class="col-lg-5">
+                             <h6 class="mt-1">Tabella 5.1: Dettaglio Flussi 2024 (€ - EDILCALCESTRUZZO SRL)</h6>
+                             <div class="table-responsive">
+                                 <table class="table table-sm table-striped table-hover">
+                                      <thead class="table-light"><tr><th>Voce</th><th class="text-end">Valore</th><th class="text-end">% Ricavi</th></tr></thead>
+                                      <tbody>
+                                          <tr><td>EBITDA</td><td class="text-end text-success">654.579</td><td class="text-end">8,66%</td></tr>
+                                          <tr><td><i class="fas fa-plus-circle text-success fa-fw me-1"></i> Cash Flow CCN Operativo</td><td class="text-end text-success">564</td><td class="text-end">0,01%</td></tr>
+                                          <tr class="table-success fw-bold"><td><i class="fas fa-equals fa-fw me-1"></i> Cash Flow Operativo</td><td class="text-end text-success">3.579.187</td><td class="text-end">47,35%</td></tr>
+                                          <tr><td><i class="fas fa-minus-circle text-danger fa-fw me-1"></i> Cash Flow Investimenti</td><td class="text-end text-danger">-3.330.217</td><td class="text-end">-44,05%</td></tr>
+                                          <tr class="table-success fw-bold"><td><i class="fas fa-equals fa-fw me-1"></i> Free Cash Flow (FCF)</td><td class="text-end text-success">248.970</td><td class="text-end">3,29%</td></tr>
+                                          <tr><td><i class="fas fa-minus-circle text-danger fa-fw me-1"></i> Variazione Debiti Fin.</td><td class="text-end text-danger">-462.006</td><td class="text-end">-6,11%</td></tr>
+                                          <tr><td><i class="fas fa-plus-circle text-success fa-fw me-1"></i> Variazione Patrimonio Netto</td><td class="text-end text-success">227.980</td><td class="text-end">3,02%</td></tr>
+                                          <tr class="table-success fw-bold"><td><i class="fas fa-equals fa-fw me-1"></i> Variazione Netta Cassa</td><td class="text-end text-success">14.944</td><td class="text-end">0,20%</td></tr>
+                                      </tbody>
+                                 </table>
+                                 <p class="small text-muted mt-1 mb-0">*Fonte: Report Leanus 11/08/2025</p>
+                             </div>
+                        </div>
+                     </div>
+                     <h6 class="mt-4">Analisi Flussi di Cassa 2024 (EDILCALCESTRUZZO SRL):</h6>
+                      <div class="alert-box alert-success small">
+                         <ul class="mb-0">
+                            <li><strong>EBITDA positivo (€654.579):</strong> Buona marginalità operativa dell'8,66% sui ricavi.</li>
+                            <li><strong>Cash Flow CCN stabile (+€564):</strong> Il capitale circolante ha mantenuto un equilibrio nel periodo.</li>
+                            <li><strong>Cash Flow Operativo eccezionale (+€3.579.187):</strong> 47,35% dei ricavi, straordinaria capacità di generazione di cassa.</li>
+                            <li><strong>Investimenti significativi (-€3.330.217):</strong> Importante piano di investimenti che ha assorbito gran parte del cash flow operativo.</li>
+                            <li><strong>Riduzione indebitamento (-€462.006):</strong> Utilizzo della liquidità per ridurre l'esposizione finanziaria.</li>
+                            <li><strong>Apporto di capitale (+€227.980):</strong> Rafforzamento patrimoniale attraverso nuovi apporti.</li>
+                            <li><strong>Incremento liquidità (+€14.944):</strong> Lieve aumento delle disponibilità liquide.</li>
+                        </ul>
+                      </div>
+                 </div>
+            </div>
+
+            <div class="card mb-4 report-section">
+                 <div class="card-header card-header-secondary"><h5 class="mb-0">Trend Triennale e Proiezioni dei Flussi di Cassa</h5></div>
+                 <div class="card-body">
+                      <div class="row">
+                          <div class="col-lg-7 mb-3 mb-lg-0">
+                               <h6 class="text-center small">Grafico 5.3: Evoluzione Flussi di Cassa 2022-2024 (€ - EDILCALCESTRUZZO SRL)</h6>
+                               <div class="chart-container" style="height: 320px;"> <canvas id="cashFlowTrendChart"></canvas> </div>
+                          </div>
+                           <div class="col-lg-5">
+                              <h6 class="mt-1">Interpretazione Trend (EDILCALCESTRUZZO SRL):</h6>
+                               <ul class="small list-unstyled">
+                                  <li><i class="fas fa-chart-line text-success me-1"></i> <strong>Incremento Cash Flow:</strong> Da €188.792 (2023) a €3.579.187 (2024).</li>
+                                  <li><i class="fas fa-exclamation text-success me-1"></i> <strong>Miglioramento straordinario:</strong> +€3.390.395 vs periodo precedente (+1.795%).</li>
+                                  <li><i class="fas fa-exchange-alt text-success me-1"></i> <strong>EBITDA in forte crescita:</strong> Da -€185.211 (2023) a €654.579 (2024), +453,42%.</li>
+                                  <li><i class="fas fa-building text-success me-1"></i> <strong>Inversione debiti:</strong> Da riduzione -€23.575 (2023) a riduzione più significativa -€462.006 (2024).</li>
+                               </ul>
+                          </div>
+                      </div>
+                       <hr class="my-4">
+                       <div class="row">
+                           <div class="col-lg-7 mb-3 mb-lg-0">
+                               <h6 class="text-center small">Grafico 5.4: Proiezioni Finanziarie 2025-2028 (€ - EDILCALCESTRUZZO SRL)</h6>
+                                <div class="chart-container" style="height: 320px;"> <canvas id="cashFlowProjectionChart"></canvas> </div>
+                           </div>
+                            <div class="col-lg-5">
+                                <h6 class="mt-1">Analisi Proiezioni (Piano Inerziale 2025-2028):</h6>
+                                <ul class="small list-unstyled">
+                                   <li><i class="fas fa-arrow-up text-success me-1"></i> <strong>CF Operativo positivo:</strong> €540.258/anno medio previsto.</li>
+                                   <li><i class="fas fa-ban text-info me-1"></i> <strong>Ricavi stabili:</strong> €7.559.559/anno (ipotesi conservativa).</li>
+                                   <li><i class="fas fa-piggy-bank text-success me-1"></i> <strong>Accumulo liquidità:</strong> Da €48.714 (2024) a €2.085.881 (2028).</li>
+                                   <li><i class="fas fa-shield-alt text-success me-1"></i> <strong>Riduzione debiti:</strong> Progressiva riduzione dell'indebitamento.</li>
+                                   <li><i class="fas fa-exclamation-triangle text-warning me-1"></i> <strong>Criticità metodologiche:</strong> Normalizzazione del Cash Flow Operativo rispetto al valore anomalo del 2024.</li>
+                                </ul>
+                                 <div class="alert alert-warning small p-2 mt-2">Le proiezioni appaiono conservative considerando il Cash Flow Operativo eccezionale del 2024 (€3.579.187) e l'assenza di nuovi investimenti pianificati, che potrebbe portare a un'allocazione sub-ottimale del capitale.</div>
+                            </div>
+                       </div>
+                         <h6 class="mt-4">Suggerimenti Operativi per Miglioramento Flussi (EDILCALCESTRUZZO SRL)</h6>
+                          <div class="table-responsive small">
+                            <table class="table table-sm table-striped table-hover">
+                               <thead class="table-light"><tr><th>Area</th><th>Azione Suggerita</th><th>Impatto Quantitativo Annuo</th></tr></thead>
+                               <tbody>
+                                   <tr><td>Gestione operativa</td><td>Ottimizzazione mix produttivo e revisione costi fissi</td><td class="text-success">+€249.465 (EBITDA)</td></tr>
+                                   <tr><td>Piano investimenti</td><td>Sviluppo piano investimenti selettivi con ROI 18%</td><td class="text-success">+€180.000 (dal 2026)</td></tr>
+                                   <tr><td>Struttura finanziaria</td><td>Ristrutturazione debito e rinegoziazione condizioni</td><td class="text-success">+€119.632 (oneri finanziari)</td></tr>
+                                   <tr><td>Politica circolante</td><td>Working capital optimization program</td><td class="text-success">+€571.440 (una tantum)</td></tr>
+                                   <tr><td>Pianificazione tesoreria</td><td>Cash pooling e forecasting rolling</td><td class="text-success">+€43.781 (ottimizzazione)</td></tr>
+                                   <tr class="table-primary fw-bold"><td>Complessivo</td><td>Piano integrato ottimizzazione</td><td class="text-success">+€592.878/anno + €571.440 una tantum</td></tr>
+                               </tbody>
+                            </table>
+                        </div>
+                        <div class="alert-box alert-info small mt-3">
+                            <strong>CONCLUSIONI:</strong> L'analisi del capitale circolante e dei flussi di cassa di EDILCALCESTRUZZO SRL evidenzia un quadro contrastante. Da un lato, l'azienda mostra un'eccezionale capacità di generazione di cash flow operativo (47,35% dei ricavi), dall'altro presenta un ciclo del circolante estremamente critico (220 giorni) che immobilizza risorse significative. Le priorità includono: 1) Riduzione DSO da 272 a 180 giorni, 2) Ottimizzazione DIO da 122 a 70 giorni, 3) Riequilibrio sostenibile DPO da 174 a 130 giorni. L'implementazione del piano permetterebbe di liberare €1.989.052 di liquidità dal circolante e generare un miglioramento di cassa complessivo di €592.878 annui più €571.440 una tantum.
+                        </div>
+                 </div>
+            </div>
+
+            <!-- ================================================================ -->
+            <!-- FINE CONTENUTO SPECIFICO PARTE 5 -->
+            <!-- ================================================================ -->
+
+        </div> <!-- /dashboard-container -->
+
+        <!-- Footer Standard V2 (Corretto) -->
+        <footer class="footer no-print"> <div class="container-fluid px-4"> <div class="row align-items-center"> <div class="col-md-6 text-center text-md-start mb-2 mb-md-0"> SCAN360 © <span id="currentYearFooterReport"></span> </div> <div class="col-md-6 text-center text-md-end"> Powered by <a href="http://www.kitzanos.com" target="_blank" class="text-white fw-bold">Kitzanos Lab</a> <img src="../assets/img/logo_kitzanos.png" alt="Kitzanos Logo" class="ms-2"> </div> </div> </div> </footer>
+
+    </div> <!-- /main-wrapper -->
+
+
+    <!-- Script JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/charts_config.js"></script>
+    <script src="../js/report_init.js"></script>
+     <script>
+        document.getElementById('currentYearSidebar').textContent = new Date().getFullYear();
+        document.getElementById('currentYearFooterReport').textContent = new Date().getFullYear();
+
+         // Script aggiornamento badge IRP header (Updated for EDILCALCESTRUZZO SRL)
+         document.addEventListener('DOMContentLoaded', function() {
+             const irpScoreValue = 64.28; // IRP Score from IRP Analysis
+             const irpHeaderBadge = document.getElementById('irp-header-badge');
+             if(irpHeaderBadge) {
+                 let badgeClass = 'bg-success';
+                 if (irpScoreValue < 51) badgeClass = 'bg-danger'; // Alto
+                 else if (irpScoreValue < 71) badgeClass = 'bg-warning text-dark'; // Medio
+                 irpHeaderBadge.className = `badge ${badgeClass} me-3`;
+                 irpHeaderBadge.textContent = `IRP: ${irpScoreValue.toFixed(1)}`;
+             }
+
+              // Ensure logout function is defined
+             if (typeof logout !== 'function') {
+                 window.logout = function() {
+                    console.log("Logout action triggered (placeholder)");
+                }
+             }
+             // Ensure print function is defined
+             if (typeof printDocument !== 'function') {
+                window.printDocument = function() {
+                    window.print();
+                }
+             }
+
+             // Initialize Working Capital Cycle Chart
+             const ctxWCC = document.getElementById('workingCapitalCycleChart');
+             if(ctxWCC) {
+                 new Chart(ctxWCC, {
+                     type: 'bar',
+                     data: {
+                         labels: ['DSO', 'DIO', 'DPO', 'Ciclo Totale'],
+                         datasets: [{
+                             label: 'EDILCALCESTRUZZO 2024',
+                             data: [272, 122, -174, 220],
+                             backgroundColor: ['#F44336', '#FFC107', '#4CAF50', '#F44336'],
+                             borderColor: ['#D32F2F', '#FFA000', '#388E3C', '#D32F2F'],
+                             borderWidth: 1
+                         }, {
+                             label: 'Benchmark Settore',
+                             data: [90, 50, -100, 40],
+                             backgroundColor: 'rgba(76, 175, 80, 0.6)',
+                             borderColor: '#388E3C',
+                             borderWidth: 1
+                         }]
+                     },
+                     options: {
+                         responsive: true,
+                         maintainAspectRatio: false,
+                         plugins: {
+                             legend: { position: 'top' },
+                             title: { display: false }
+                         },
+                         scales: {
+                             y: {
+                                 beginAtZero: true,
+                                 title: { display: true, text: 'Giorni' }
+                             }
+                         }
+                     }
+                 });
+             }
+
+             // Initialize Cash Flow Waterfall Chart
+             const ctxCFW = document.getElementById('cashFlowWaterfallChart');
+             if(ctxCFW) {
+                 new Chart(ctxCFW, {
+                     type: 'bar',
+                     data: {
+                         labels: ['EBITDA', 'Var. CCN', 'CF Operativo', 'CF Investimenti', 'FCF', 'Var. Debiti', 'Var. PN', 'Var. Cassa'],
+                         datasets: [{
+                             label: 'Flussi di Cassa 2024',
+                             data: [654579, 564, 3579187, -3330217, 248970, -462006, 227980, 14944],
+                             backgroundColor: [
+                                 '#4CAF50', '#4CAF50', '#4CAF50', 
+                                 '#F44336', '#4CAF50', '#F44336', '#4CAF50', '#4CAF50'
+                             ],
+                             borderColor: [
+                                 '#388E3C', '#388E3C', '#388E3C',
+                                 '#D32F2F', '#388E3C', '#D32F2F', '#388E3C', '#388E3C'
+                             ],
+                             borderWidth: 1
+                         }]
+                     },
+                     options: {
+                         responsive: true,
+                         maintainAspectRatio: false,
+                         plugins: {
+                             legend: { display: false },
+                             title: { display: false }
+                         },
+                         scales: {
+                             y: {
+                                 beginAtZero: true,
+                                 title: { display: true, text: 'Euro (€)' },
+                                 ticks: {
+                                     callback: function(value) {
+                                         return value.toLocaleString('it-IT');
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 });
+             }
+
+             // Initialize Cash Flow Trend Chart
+             const ctxCFT = document.getElementById('cashFlowTrendChart');
+             if(ctxCFT) {
+                 new Chart(ctxCFT, {
+                     type: 'line',
+                     data: {
+                         labels: ['2022', '2023', '2024'],
+                         datasets: [{
+                             label: 'Cash Flow Operativo',
+                             data: [1160112, 188792, 3579187],
+                             borderColor: '#2196F3',
+                             backgroundColor: 'rgba(33, 150, 243, 0.1)',
+                             tension: 0.3
+                         }, {
+                             label: 'EBITDA',
+                             data: [-166822, -185211, 654579],
+                             borderColor: '#4CAF50',
+                             backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                             tension: 0.3
+                         }, {
+                             label: 'Variazione Netta Cassa',
+                             data: [-8964, 3399, 14944],
+                             borderColor: '#F44336',
+                             backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                             tension: 0.3
+                         }]
+                     },
+                     options: {
+                         responsive: true,
+                         maintainAspectRatio: false,
+                         plugins: {
+                             legend: { position: 'top' },
+                             title: { display: false }
+                         },
+                         scales: {
+                             y: {
+                                 beginAtZero: true,
+                                 title: { display: true, text: 'Euro (€)' },
+                                 ticks: {
+                                     callback: function(value) {
+                                         return value.toLocaleString('it-IT');
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 });
+             }
+
+             // Initialize Projection Chart
+             const ctxProj = document.getElementById('cashFlowProjectionChart');
+             if(ctxProj) {
+                 new Chart(ctxProj, {
+                     type: 'line',
+                     data: {
+                         labels: ['2024', '2025', '2026', '2027', '2028'],
+                         datasets: [{
+                             label: 'Liquidità Prevista',
+                             data: [48714, 547259, 1046336, 1560934, 2085881],
+                             borderColor: '#4CAF50',
+                             backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                             tension: 0.3,
+                             yAxisID: 'y'
+                         }, {
+                             label: 'Debiti Finanziari',
+                             data: [1217809, 1166359, 1132059, 1109192, 1093947],
+                             borderColor: '#F44336',
+                             backgroundColor: 'rgba(244, 67, 54, 0.1)',
+                             tension: 0.3,
+                             yAxisID: 'y1'
+                         }]
+                     },
+                     options: {
+                         responsive: true,
+                         maintainAspectRatio: false,
+                         plugins: {
+                             legend: { position: 'top' },
+                             title: { display: false }
+                         },
+                         scales: {
+                             y: {
+                                 type: 'linear',
+                                 display: true,
+                                 position: 'left',
+                                 title: { display: true, text: 'Liquidità (€)' },
+                                 ticks: {
+                                     callback: function(value) {
+                                         return value.toLocaleString('it-IT');
+                                     }
+                                 }
+                             },
+                             y1: {
+                                 type: 'linear',
+                                 display: true,
+                                 position: 'right',
+                                 title: { display: true, text: 'Debiti Finanziari (€)' },
+                                 ticks: {
+                                     callback: function(value) {
+                                         return value.toLocaleString('it-IT');
+                                     }
+                                 },
+                                 grid: { drawOnChartArea: false }
+                             }
+                         }
+                     }
+                 });
+             }
+         });
+    </script>
+<scan-chat data-bot-id="033a9b91-a72b-4704-aae2-04d0b1796bdd"></scan-chat>
+<script src="../js/bundle.js"></script>
+</body>
+</html>
