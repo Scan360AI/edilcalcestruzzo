@@ -23,7 +23,7 @@ function handleLogin(event) {
     const password = passwordInput.value;
 
     // Validazione credenziali - Aggiornate per Calcidrata
-    if (username === 'Admin' && password === 'Admin2025') {
+    if (username === 'Admin' && password === 'Edilcalcestruzzo2025') {
         console.log('Login successful per', username);
         try {
             localStorage.setItem('scanUserLoggedIn', 'true');
