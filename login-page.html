@@ -26,15 +26,15 @@
             width: 90%;
         }
         .login-card-header { 
-            background-color: var(--primary); 
+            background-color: var(--primary, #1a1a5e); 
             color: white; 
             border-radius: 8px 8px 0 0 !important; 
             padding: 1rem 1.5rem; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         .login-btn { 
-            background-color: var(--primary); 
-            border-color: var(--primary); 
+            background-color: var(--primary, #1a1a5e); 
+            border-color: var(--primary, #1a1a5e); 
             padding: 0.75rem 1.5rem; 
             font-weight: 600; 
             color: white !important;
@@ -48,6 +48,10 @@
         }
         .login-btn:active {
             transform: translateY(0);
+        }
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
         }
         .powered-by img { 
             max-height: 25px; 
@@ -92,6 +96,9 @@
         .logo-container img {
             max-height: 50px;
         }
+        #error-message {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -104,49 +111,64 @@
             <div class="card-body p-4 p-md-5">
                 <div class="text-center mb-4">
                     <div class="logo-container">
-                   
+                        <!-- Logo placeholder -->
                     </div>
                     <h5 class="fw-bold">Accesso Riservato</h5>
                     <p class="text-muted small mb-0">Analisi Finanziaria EDILCALCESTRUZZO SRL</p>
                     <p class="text-muted small">Estrazione di ghiaia, sabbia, argilla e caolino</p>
                 </div>
                 
-                <div class="alert alert-danger alert-login" id="loginAlert" role="alert">
+                <!-- Messaggio di errore -->
+                <div class="alert alert-danger alert-login" id="error-message" role="alert">
                     <i class="fas fa-exclamation-circle me-2"></i>
-                    <span id="loginAlertMessage">Credenziali non valide. Riprova.</span>
+                    <span id="error-message-text">Credenziali non valide. Riprova.</span>
                 </div>
                 
-                <form id="loginForm" onsubmit="return handleLogin(event)">
+                <form id="loginForm">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
-                            <input type="text" class="form-control" id="username" placeholder="Inserisci username" required autocomplete="username">
+                            <input 
+                                type="text" 
+                                class="form-control" 
+                                id="username" 
+                                name="username"
+                                placeholder="Inserisci username" 
+                                required 
+                                autocomplete="username"
+                            >
                         </div>
                     </div>
                     <div class="mb-4">
                         <label for="password" class="form-label">Password</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                            <input type="password" class="form-control" id="password" placeholder="Inserisci password" required autocomplete="current-password">
+                            <input 
+                                type="password" 
+                                class="form-control" 
+                                id="password" 
+                                name="password"
+                                placeholder="Inserisci password" 
+                                required 
+                                autocomplete="current-password"
+                            >
                             <button class="btn btn-outline-secondary" type="button" id="togglePassword" tabindex="-1">
                                 <i class="far fa-eye"></i>
                             </button>
                         </div>
                     </div>
                     <div class="d-grid mt-4">
-                        <button type="submit" class="btn login-btn">
+                        <button type="submit" class="btn login-btn" id="loginButton">
                             <span id="loginBtnText">Accedi</span>
-                            <i class="fas fa-sign-in-alt ms-1"></i>
+                            <i class="fas fa-sign-in-alt ms-1" id="loginIcon"></i>
                             <span class="spinner-border spinner-border-sm ms-1 d-none" id="loginSpinner" role="status" aria-hidden="true"></span>
                         </button>
                     </div>
                 </form>
+                
                 <div class="powered-by d-flex justify-content-center align-items-center mt-4 pt-3 border-top">
-                    <span class="me-2 text-muted small">Powered by</span>
-                    <a href="https://www.kitzanos.com" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                        <img src="assets/img/kitzanos_logo_scuro.png" alt="Kitzanos Logo">
-                    </a>
+                    <span class="text-muted small">Powered by <a href="https://www.kitzanos.com" target="_blank" rel="noopener noreferrer" class="text-decoration-none fw-semibold text-primary">Kitzanos Lab</a></span>
                 </div>
             </div>
         </div>
@@ -155,27 +177,14 @@
         </div>
     </div>
 
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- IMPORTANTE: Prima carichiamo common.js con le funzioni di login -->
     <script src="js/common.js"></script>
+    
+    <!-- Script aggiuntivo per questa pagina -->
     <script>
-        // Previeni il loop di reindirizzamento sulla pagina di login
-        // Rimuovi eventuali stati di login corrotti
-        if (window.location.pathname.endsWith('login-page.html')) {
-            try {
-                // Se siamo sulla pagina di login, assicuriamoci che l'utente non sia "loggato"
-                const isLoggedIn = localStorage.getItem('scanUserLoggedIn');
-                if (isLoggedIn === 'true') {
-                    // Se l'utente risulta loggato ma è sulla pagina di login, 
-                    // probabilmente c'è un problema, quindi facciamo un clean
-                    console.log('Pulizia stato login sulla pagina di login');
-                    localStorage.removeItem('scanUserLoggedIn');
-                    localStorage.removeItem('scanUserData');
-                }
-            } catch (e) {
-                console.error('Errore controllo stato login:', e);
-            }
-        }
-        
         // Toggle password visibility
         document.getElementById('togglePassword').addEventListener('click', function() {
             const passwordInput = document.getElementById('password');
@@ -192,59 +201,127 @@
             }
         });
         
-        // Funzione di gestione login migliorata
-        function handleLogin(event) {
-            event.preventDefault();
+        // Override della funzione handleLogin per aggiungere animazioni
+        const originalHandleLogin = window.handleLogin;
+        
+        window.handleLogin = function(event) {
+            if (event) event.preventDefault();
             
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const loginAlert = document.getElementById('loginAlert');
-            const loginAlertMessage = document.getElementById('loginAlertMessage');
-            const loginBtn = document.querySelector('.login-btn');
+            const loginButton = document.getElementById('loginButton');
             const loginBtnText = document.getElementById('loginBtnText');
             const loginSpinner = document.getElementById('loginSpinner');
+            const loginIcon = document.getElementById('loginIcon');
+            const errorDiv = document.getElementById('error-message');
             
-            // Nascondi eventuali messaggi di errore precedenti
-            loginAlert.style.display = 'none';
-            
-            // Mostra spinner e disabilita pulsante
-            loginBtn.disabled = true;
+            // Mostra spinner
+            loginButton.disabled = true;
             loginBtnText.textContent = 'Accesso in corso';
             loginSpinner.classList.remove('d-none');
+            loginIcon.classList.add('d-none');
             
-            // Simula una richiesta di login (da sostituire con la vera implementazione)
+            // Nascondi messaggi di errore precedenti
+            errorDiv.style.display = 'none';
+            
+            // Simula un piccolo delay per l'effetto visivo
             setTimeout(() => {
-                // Esempio di credenziali valide (da sostituire con la vera implementazione)
-                if (username === 'admin' && password === 'password') {
-                    // Login riuscito
-                    localStorage.setItem('scanUserLoggedIn', 'true');
-                    localStorage.setItem('scanUserData', JSON.stringify({
-                        username: username,
-                        role: 'admin',
-                        lastLogin: new Date().toISOString()
-                    }));
-                    
-                    // Reindirizza alla dashboard
-                    window.location.href = 'dashboard.html';
-                } else {
-                    // Login fallito
-                    loginAlert.style.display = 'block';
-                    loginAlertMessage.textContent = 'Credenziali non valide. Riprova.';
-                    
-                    // Ripristina pulsante
-                    loginBtn.disabled = false;
-                    loginBtnText.textContent = 'Accedi';
-                    loginSpinner.classList.add('d-none');
-                    
-                    // Focus sul campo username
-                    document.getElementById('username').focus();
-                }
-            }, 1000); // Simula un ritardo di rete
+                // Chiama la funzione originale dal common.js
+                const result = originalHandleLogin.call(this, event);
+                
+                // Se il login fallisce, ripristina il pulsante
+                setTimeout(() => {
+                    const isLoggedIn = localStorage.getItem('scanUserLoggedIn') === 'true';
+                    if (!isLoggedIn) {
+                        loginButton.disabled = false;
+                        loginBtnText.textContent = 'Accedi';
+                        loginSpinner.classList.add('d-none');
+                        loginIcon.classList.remove('d-none');
+                        
+                        // Mostra messaggio di errore
+                        errorDiv.style.display = 'block';
+                        document.getElementById('error-message-text').textContent = 'Credenziali non valide. Riprova.';
+                        
+                        // Focus sul campo username
+                        document.getElementById('username').focus();
+                        document.getElementById('username').select();
+                    }
+                }, 500);
+                
+                return result;
+            }, 300);
             
             return false;
+        };
+        
+        // Se handleLogin non esiste in common.js, usa questa versione locale
+        if (typeof window.handleLogin === 'undefined') {
+            window.handleLogin = function(event) {
+                if (event) event.preventDefault();
+                
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value;
+                const loginButton = document.getElementById('loginButton');
+                const loginBtnText = document.getElementById('loginBtnText');
+                const loginSpinner = document.getElementById('loginSpinner');
+                const loginIcon = document.getElementById('loginIcon');
+                const errorDiv = document.getElementById('error-message');
+                
+                // Mostra spinner
+                loginButton.disabled = true;
+                loginBtnText.textContent = 'Accesso in corso';
+                loginSpinner.classList.remove('d-none');
+                loginIcon.classList.add('d-none');
+                
+                // Nascondi errori precedenti
+                errorDiv.style.display = 'none';
+                
+                setTimeout(() => {
+                    // Validazione credenziali
+                    if (username === 'Admin' && password === 'Edilcalcestruzzo2025') {
+                        // Salva stato login
+                        try {
+                            localStorage.setItem('scanUserLoggedIn', 'true');
+                            localStorage.setItem('scanUsername', username);
+                            localStorage.setItem('scanLoginTime', new Date().toISOString());
+                            
+                            // Reindirizza
+                            window.location.href = 'index.html';
+                        } catch (e) {
+                            console.error('Errore storage:', e);
+                            errorDiv.style.display = 'block';
+                            document.getElementById('error-message-text').textContent = 'Errore di sistema. Riprova.';
+                        }
+                    } else {
+                        // Login fallito
+                        loginButton.disabled = false;
+                        loginBtnText.textContent = 'Accedi';
+                        loginSpinner.classList.add('d-none');
+                        loginIcon.classList.remove('d-none');
+                        
+                        errorDiv.style.display = 'block';
+                        document.getElementById('error-message-text').textContent = 'Credenziali non valide. Riprova.';
+                        
+                        // Pulisci password
+                        document.getElementById('password').value = '';
+                        document.getElementById('username').focus();
+                        document.getElementById('username').select();
+                    }
+                }, 500);
+                
+                return false;
+            };
         }
+        
+        // Aggiungi listener al form
+        document.getElementById('loginForm').addEventListener('submit', handleLogin);
+        
+        // Focus automatico sul campo username
+        window.addEventListener('load', function() {
+            document.getElementById('username').focus();
+        });
     </script>
-    <scan-chat data-bot-id="033a9b91-a72b-4704-aae2-04d0b1796bdd"></scan-chat>
-    <script src="./js/bundle.js"></script>
+    
+    <!-- Altri script opzionali -->
+    <!-- <scan-chat data-bot-id="033a9b91-a72b-4704-aae2-04d0b1796bdd"></scan-chat> -->
+    <!-- <script src="./js/bundle.js"></script> -->
 </body>
 </html>
